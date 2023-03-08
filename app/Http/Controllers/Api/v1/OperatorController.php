@@ -3,12 +3,19 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\api\CountryResource;
-use App\Models\Activate\SmsCountry;
+use App\Http\Resources\api\OperatorResource;
+use App\Services\Activate\OperatorService;
 use Illuminate\Http\Request;
 
-class CountryController extends Controller
+class OperatorController extends Controller
 {
+    private OperatorService $operatorService;
+
+    public function __construct()
+    {
+        $this->operatorService = new OperatorService();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        return CountryResource::collection(SmsCountry::all());
+        //
     }
 
     /**
@@ -33,12 +40,12 @@ class CountryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $org_id
+     * @param  string  $country_id
      * @return \Illuminate\Http\Response
      */
-    public function show($org_id)
+    public function show($country_id)
     {
-        return new CountryResource(SmsCountry::findOrFail($org_id));
+        return new OperatorResource($this->operatorService->getOperatorsByCountry($country_id));
     }
 
     /**
