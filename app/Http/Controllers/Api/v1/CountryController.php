@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Helpers\ApiHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\api\CountryResource;
 use App\Models\Activate\SmsCountry;
@@ -16,7 +17,8 @@ class CountryController extends Controller
      */
     public function index()
     {
-        return CountryResource::collection(SmsCountry::all());
+        $result = CountryResource::collection(SmsCountry::all());
+        return ApiHelpers::success($result);
     }
 
     /**

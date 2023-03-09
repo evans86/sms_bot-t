@@ -20,7 +20,7 @@
                     <td>{{ $country->org_id }}</td>
                     <td>{{ $country->name_ru }}</td>
                     <td>{{ $country->name_en }}</td>
-                    <td> <span class="flag-icon flag-icon-{{$country->image}}"></span></td>
+                    <td> <img src="https://sms-activate.org/assets/ico/country/{{ $country->org_id }}.png" width="24"></td>
                     <td>{{ $country->created_at }}</td>
                     <td>
                         <a class="btn btn-success" href="{{ route('activate.operators.index', $country->org_id) }}" role="button">Операторы</a>
