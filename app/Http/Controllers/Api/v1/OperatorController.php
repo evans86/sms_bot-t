@@ -47,7 +47,7 @@ class OperatorController extends Controller
      */
     public function show($request)
     {
-        $country = SmsCountry::query()->where(['id' => $request->country])->first();
+        $country = SmsCountry::query()->where(['org_id' => $request->country])->first();
         return new OperatorResource($this->operatorService->getOperatorsByCountry($country->org_id));
 
     }
