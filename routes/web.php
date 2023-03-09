@@ -25,7 +25,7 @@ Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
     Route::get('product', 'ProductController@index')->name('activate.product.index');
 });
 
+Route::group(['namespace' => 'User', 'prefix' => ''], function () {
+    Route::get('users', 'UserController@index')->name('users.index');
+});
 
-//Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
-//    Route::resource('countries', 'CountryController')->names('activate.country');
-//});

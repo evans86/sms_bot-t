@@ -23,7 +23,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link" href="{{ route('activate.product.index') }}">Список сервисов</a>
-                        <a class="nav-link" href="#">Name</a>
+                        <a class="nav-link" href="{{ route('users.index') }}">Пользователи</a>
                         <a class="nav-link" href="#">Name</a>
                     </div>
                 </div>
