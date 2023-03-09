@@ -30,4 +30,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'key_activate' => [
+        'key' => env('SIM_ACTIVATE_KEY'),
+    ],
+
 ];

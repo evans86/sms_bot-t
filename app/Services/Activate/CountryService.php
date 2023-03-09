@@ -11,7 +11,7 @@ class CountryService extends MainService
 {
     public function getApiCountries()
     {
-        $smsActivate = new SmsActivateApi(env('SIM_ACTIVATE_KEY'));
+        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $countries = $smsActivate->getCountries();
 

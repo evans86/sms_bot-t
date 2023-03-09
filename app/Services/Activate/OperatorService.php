@@ -15,7 +15,7 @@ class OperatorService extends MainService
      */
     public function getOperatorsByCountry($country_org)
     {
-        $smsActivate = new SmsActivateApi(env('SIM_ACTIVATE_KEY'));
+        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $operators = $smsActivate->getOperators($country_org);
 
