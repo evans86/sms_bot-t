@@ -45,7 +45,7 @@ class ProductController extends Controller
      */
     public function show($user_id)
     {
-        //по полученному user_id взять у пользователя country и оператора
+        //по полученному user_id взять у пользователя country и operator
         return new ProductResource($this->productService->getConcreteProduct(1, 'mts'));
     }
 
