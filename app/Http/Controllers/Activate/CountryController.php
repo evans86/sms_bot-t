@@ -19,13 +19,27 @@ class CountryController extends Controller
 
     public function index()
     {
-        $this->countryService->getApiCountries();
-
         $countries = SmsCountry::paginate(10);
 
         return view('activate.country.index', compact(
             'countries',
         ));
+    }
 
+    public function update()
+    {
+        $this->countryService->getApiCountries();
+
+        return redirect()->route('activate.countries.index');
+    }
+
+    public function delete()
+    {
+        $countries = SmsCountry::all();
+
+        foreach ($countries as $country) {
+            $country->delete();
+        }
+        return redirect()->route('activate.countries.index');
     }
 }

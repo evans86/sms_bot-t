@@ -1,6 +1,10 @@
 @extends('layouts.main')
 @section('content')
-    <div class="container mt-5">
+    <div class="container mt-2">
+        <div class="d-grid gap-2 d-md-block mb-2">
+            <a href="{{ route('activate.countries.update') }}" class="btn btn-success">Добавить/Обновить</a>
+            <a href="{{ route('activate.countries.delete') }}" class="btn btn-danger">Удалить все</a>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -20,10 +24,12 @@
                     <td>{{ $country->org_id }}</td>
                     <td>{{ $country->name_ru }}</td>
                     <td>{{ $country->name_en }}</td>
-                    <td> <img src="https://sms-activate.org/assets/ico/country/{{ $country->org_id }}.png" width="24"></td>
+                    <td><img src="https://sms-activate.org/assets/ico/country/{{ $country->org_id }}.png" width="24">
+                    </td>
                     <td>{{ $country->created_at }}</td>
                     <td>
-                        <a class="btn btn-success" href="{{ route('activate.operators.index', $country->org_id) }}" role="button">Операторы</a>
+                        <a class="btn btn-success" href="{{ route('activate.operators.index', $country->org_id) }}"
+                           role="button">Операторы</a>
                     </td>
                 </tr>
             @endforeach
