@@ -17,9 +17,9 @@ class OperatorController extends Controller
         $this->operatorService = new OperatorService();
     }
 
-    public function index($org_id)
+    public function index($country_id)
     {
-        $countryOperators = $this->operatorService->getOperatorsByCountry($org_id);
+        $countryOperators = SmsOperator::query()->where(['country_id' => $country_id])->get();
 
         return view('activate.operator.index', compact(
             'countryOperators',

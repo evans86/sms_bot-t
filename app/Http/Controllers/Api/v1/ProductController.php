@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Helpers\ApiHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\api\ProductResource;
+use App\Models\Activate\SmsCountry;
+use App\Models\Activate\SmsOperator;
+use App\Models\User\SmsUser;
 use App\Services\Activate\ProductService;
+use App\Services\External\SmsActivateApi;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -19,11 +24,28 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if(is_null($request->user_id))
+            return ApiHelpers::error('Not found params: user_id');
+        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
+        if(is_null($user))
+            return ApiHelpers::error('Not found: user');
+        $user->language = $request->language;
+
+        $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
+        $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
+
+        $products = $this->productService->getConcreteProduct($country->org_id, $operator->title);
+        $result = [];
+        foreach ($products as $key => $product) {
+            array_push($result, [
+                'name' => $key,
+                'count' => $product,
+            ]);
+        }
+        return ApiHelpers::success($result);
     }
 
     /**
@@ -46,7 +68,7 @@ class ProductController extends Controller
     public function show($user_id)
     {
         //по полученному user_id взять у пользователя country и operator
-        return new ProductResource($this->productService->getConcreteProduct(1, 'mts'));
+//        return new ProductResource($this->productService->getConcreteProduct(1, 'mts'));
     }
 
     /**

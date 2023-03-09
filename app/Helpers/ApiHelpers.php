@@ -16,4 +16,16 @@ class ApiHelpers
         ];
     }
 
+    /**
+     * @param string $message
+     * @return string
+     */
+    public static function error(string $message): string
+    {
+        $result = [
+            'result' => false,
+            'message' => $message
+        ];
+        return json_encode($result);
+    }
 }

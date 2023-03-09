@@ -2,7 +2,6 @@
 
 namespace App\Services\Activate;
 
-use App\Models\Activate\SmsCountry;
 use App\Models\Activate\SmsOperator;
 use App\Services\External\SmsActivateApi;
 use App\Services\MainService;
@@ -10,18 +9,28 @@ use App\Services\MainService;
 class OperatorService extends MainService
 {
     /**
-     * @param $country_org
+     * @param $country_id
+     * @param $country_org_id
      * @return mixed|null
      */
-    public function getOperatorsByCountry($country_org)
+    public function getOperatorsByCountry($country_id, $country_org_id)
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
-        $operators = $smsActivate->getOperators($country_org);
+        $operators = $smsActivate->getOperators($country_org_id);
+        if (key_exists('countryOperators', $operators)) {
+            $operators = $operators['countryOperators'][$country_org_id];
 
-        if(array_key_exists('countryOperators', $operators))
-            return $operators['countryOperators'][$country_org];
-        else
-            return null;
+            foreach ($operators as $key => $operator) {
+
+                $dataOperator = [
+                    'org_id' => $key,
+                    'title' => $operator,
+                    'country_id' => $country_id,
+                ];
+
+                SmsOperator::create($dataOperator);
+            }
+        }
     }
 }

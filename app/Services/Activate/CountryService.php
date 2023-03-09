@@ -9,6 +9,13 @@ use League\ISO3166\ISO3166;
 
 class CountryService extends MainService
 {
+    private OperatorService $operatorService;
+
+    public function __construct()
+    {
+        $this->operatorService = new OperatorService();
+    }
+
     public function getApiCountries()
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
@@ -31,7 +38,10 @@ class CountryService extends MainService
                 'image' => $country_code
             ];
 
-            SmsCountry::updateOrCreate($data);
+            $country = SmsCountry::updateOrCreate($data);
+            $country->save();
+
+            $this->operatorService->getOperatorsByCountry($country->id, $country->org_id);
         }
     }
 }

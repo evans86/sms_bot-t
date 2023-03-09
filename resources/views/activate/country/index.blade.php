@@ -2,7 +2,7 @@
 @section('content')
     <div class="container mt-2">
         <div class="d-grid gap-2 d-md-block mb-2">
-            <a href="{{ route('activate.countries.update') }}" class="btn btn-success">Добавить/Обновить</a>
+            <a href="{{ route('activate.countries.update') }}" class="btn btn-success">Добавить/Обновить данные</a>
             <a href="{{ route('activate.countries.delete') }}" class="btn btn-danger">Удалить все</a>
         </div>
         <table class="table table-striped">
@@ -28,7 +28,7 @@
                     </td>
                     <td>{{ $country->created_at }}</td>
                     <td>
-                        <a class="btn btn-success" href="{{ route('activate.operators.index', $country->org_id) }}"
+                        <a class="btn btn-success" href="{{ route('activate.operators.index', $country->id) }}"
                            role="button">Операторы</a>
                     </td>
                 </tr>
