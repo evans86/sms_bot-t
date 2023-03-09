@@ -4,7 +4,7 @@ use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
-
+// Allow from any origin
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
     // you want to allow, and if so:
@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     exit(0);
 }
+
 
 /*
 |--------------------------------------------------------------------------
