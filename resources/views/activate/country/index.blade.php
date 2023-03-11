@@ -24,7 +24,7 @@
                     <td>{{ $country->org_id }}</td>
                     <td>{{ $country->name_ru }}</td>
                     <td>{{ $country->name_en }}</td>
-                    <td><img src="https://sms-activate.org/assets/ico/country/{{ $country->org_id }}.png" width="24">
+                    <td><img src={{ $country->image }} width="24">
                     </td>
                     <td>{{ $country->created_at }}</td>
                     <td>

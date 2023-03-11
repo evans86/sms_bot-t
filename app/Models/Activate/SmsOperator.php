@@ -11,4 +11,5 @@ class SmsOperator extends Model
 
     protected $guarded = false;
     protected $table = 'sms_operators';
+
 }

@@ -29,10 +29,9 @@ class OperatorController extends Controller
     public function index(Request $request)
     {
         $country = SmsCountry::query()->where(['org_id' => $request->country])->first();
-        $result = new OperatorResource($this->operatorService->getOperatorsByCountry($country->org_id));
+        $result = OperatorResource::collection($country->operators);
         return ApiHelpers::success($result);
     }
-
 
     public function setOperator(Request $request)
     {

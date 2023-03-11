@@ -108,7 +108,7 @@ class UserController extends Controller
     private function generateUserArray(SmsUser $user, SmsCountry $country, SmsOperator $operator): array
     {
         $result = [
-            'telegram_id' => $user->telegram_id,
+            'telegram_id' => (integer) $user->telegram_id,
             'country' => $country->org_id,
             'operator' => $operator->title,
             'language' => $user->language

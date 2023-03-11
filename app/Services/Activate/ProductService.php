@@ -7,17 +7,46 @@ use App\Services\MainService;
 
 class ProductService extends MainService
 {
-    public function getAllProducts()
+    //переделать
+    public function getAllProducts($country = null, $operator = null)
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
-        return $smsActivate->getNumbersStatus();
-    }
-
-    public function getConcreteProduct($country = null, $operator = null)
-    {
-        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+//        $services = $smsActivate->getPrices(0);
+//        $services = $services[0];
+//
+//        $result = [];
+//        foreach ($services as $key => $service){
+//            array_push($result, [
+//                'name' => $key,
+//                'image' => 'https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/' . $key . '0.webp',
+//                'count' => $service['count'],
+//                'cost' => $service['cost'],
+//            ]);
+//        }
+//
+//        dd($services);
 
         return $smsActivate->getNumbersStatus($country, $operator);
+    }
+
+    public function getPricesCountry($country = null)
+    {
+        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+
+        $services = $smsActivate->getPrices($country);
+        $services = $services[0];
+
+        $result = [];
+        foreach ($services as $key => $service){
+            array_push($result, [
+                'name' => $key,
+                'image' => 'https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/' . $key . '0.webp',
+                'count' => $service['count'],
+                'cost' => $service['cost'],
+            ]);
+        }
+
+        return $result;
     }
 }
