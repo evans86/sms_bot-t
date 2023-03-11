@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Activate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Activate\SmsCountry;
+use App\Models\Activate\SmsOperator;
 use Illuminate\Http\Request;
 use App\Services\Activate\CountryService;
 
@@ -36,6 +37,11 @@ class CountryController extends Controller
     public function delete()
     {
         $countries = SmsCountry::all();
+
+//        $operators = SmsOperator::all();
+//        foreach ($operators as $operator) {
+//            $operator->delete();
+//        }
 
         foreach ($countries as $country) {
             $country->delete();
