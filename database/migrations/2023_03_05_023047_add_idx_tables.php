@@ -15,17 +15,17 @@ class AddIdxTables extends Migration
     {
         Schema::table('sms_users', function (Blueprint $table) {
             $table->index('country_id', 'user_country_idx');
-            $table->foreign('country_id', 'user_country_fk')->on('sms_countries')->references('id');
+            $table->foreign('country_id', 'user_country_fk')->on('sms_countries')->references('id')->nullOnDelete();
         });
 
         Schema::table('sms_users', function (Blueprint $table) {
             $table->index('operator_id', 'user_operator_idx');
-            $table->foreign('operator_id', 'user_operator_fk')->on('sms_operators')->references('id');
+            $table->foreign('operator_id', 'user_operator_fk')->on('sms_operators')->references('id')->nullOnDelete();
         });
 
         Schema::table('sms_operators', function (Blueprint $table) {
             $table->index('country_id', 'operator_country_idx');
-            $table->foreign('country_id', 'operator_country_fk')->on('sms_countries')->references('id');
+            $table->foreign('country_id', 'operator_country_fk')->on('sms_countries')->references('id')->cascadeOnDelete();
         });
 
         Schema::table('sms_orders', function (Blueprint $table) {
