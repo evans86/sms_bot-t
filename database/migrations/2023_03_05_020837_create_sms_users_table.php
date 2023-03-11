@@ -15,7 +15,7 @@ class CreateSmsUsersTable extends Migration
     {
         Schema::create('sms_users', function (Blueprint $table) {
             $table->id();
-            $table->string('telegram_id')->nullable();
+            $table->integer('telegram_id')->nullable();
             $table->unsignedBigInteger('country_id')->nullable();
             $table->unsignedBigInteger('operator_id')->nullable();
             $table->string('language')->nullable();
