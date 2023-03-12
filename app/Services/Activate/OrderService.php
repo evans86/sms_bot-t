@@ -32,14 +32,13 @@ class OrderService extends MainService
 
             $id = intval($serviceResult['activationId']);
 
-            $result = [];
-            array_push($result, [
+            $result = [
                 'id' => $id,
                 'phone' => $serviceResult['phoneNumber'],
                 'text' => 'sms',
                 'time' => $endTime, //посмотреть время для сервисов?
                 'status' => 'status',
-            ]);
+            ];
             return $result;
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
