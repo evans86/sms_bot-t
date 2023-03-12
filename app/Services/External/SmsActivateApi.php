@@ -2,6 +2,7 @@
 
 namespace App\Services\External;
 
+use App\Helpers\OrdersHelper;
 use http\Exception\InvalidArgumentException;
 
 class SmsActivateApi
@@ -42,6 +43,7 @@ class SmsActivateApi
         }
         $response = array();
         $changeKeys = $this->request($requestParam, 'GET', true);
+//        $changeKeys = json_decode($changeKeys, true);
         foreach ($changeKeys as $services => $count) {
             $services = trim($services, "_01");
             $response[$services] = $count;
@@ -51,6 +53,21 @@ class SmsActivateApi
     }
 
     public function getNumber($service, $country = null, $forward = 0, $operator = null, $ref = null)
+    {
+        $requestParam = array('api_key' => $this->apiKey, 'action' => __FUNCTION__, 'service' => $service, 'forward' => $forward);
+        if ($country) {
+            $requestParam['country'] = $country;
+        }
+        if ($operator && ($country == 0 || $country == 1 || $country == 2)) {
+            $requestParam['operator'] = $operator;
+        }
+        if ($ref) {
+            $requestParam['ref'] = $ref;
+        }
+        return $this->request($requestParam, 'POST', null, 1);
+    }
+
+    public function getNumberV2($service, $country = null, $forward = 0, $operator = null, $ref = null)
     {
         $requestParam = array('api_key' => $this->apiKey, 'action' => __FUNCTION__, 'service' => $service, 'forward' => $forward);
         if ($country) {
@@ -195,12 +212,10 @@ class SmsActivateApi
 
         $serializedData = http_build_query($data);
 
-        $result = file_get_contents("$this->url?$serializedData");
-        return json_decode($result, true);
-
         if ($method === 'GET') {
             $result = file_get_contents("$this->url?$serializedData");
-            return json_decode($result, true);
+            $result = json_decode($result, true);
+            return $result;
         } else {
             $options = array(
                 'http' => array(
@@ -211,35 +226,47 @@ class SmsActivateApi
             );
             $context = stream_context_create($options);
             $result = file_get_contents($this->url, false, $context);
-        }
 
-        $responseError = new SmsActivateErrors($result);
-        $check = $responseError->checkExist($result);
-
-        try {
-            if ($check) {
-                throw new \Exception($result);
+            if (OrdersHelper::requestArray($result) == false) {
+                $parsedResult = json_decode($result, true);
+                return $parsedResult;
+            }else{
+                throw new \Exception(OrdersHelper::requestArray($result));
+//                return OrdersHelper::requestArray($result);
             }
-        } catch (\Exception $e) {
-            return $e->getResponseCode();
+
+
+
+//            return $result;
         }
 
-        if ($parseAsJSON) {
-            return json_decode($result, true);
-        }
+//        $responseError = new SmsActivateErrors($result);
+//        $check = $responseError->checkExist($result);
+//
+//        try {
+//            if ($check) {
+//                throw new \Exception($result);
+//            }
+//        } catch (\Exception $e) {
+//            return $e->getResponseCode();
+//        }
+//
+//        if ($parseAsJSON) {
+//            return json_decode($result, true);
+//        }
 
-        $parsedResponse = explode(':', $result);
+//        $parsedResponse = explode(':', $result);
 
-        if ($getNumber == 1) {
-            return array('id' => $parsedResponse[1], 'number' => $parsedResponse[2]);
-        }
-        if ($getNumber == 2) {
-            return array('status' => $parsedResponse[0], 'code' => $parsedResponse[1]);
-        }
-        if ($getNumber == 3) {
-            return array('status' => $parsedResponse[0]);
-        }
-        return $parsedResponse[1];
+//        if ($getNumber == 1) {
+//            return array('id' => $parsedResponse[1], 'number' => $parsedResponse[2]);
+//        }
+//        if ($getNumber == 2) {
+//            return array('status' => $parsedResponse[0], 'code' => $parsedResponse[1]);
+//        }
+//        if ($getNumber == 3) {
+//            return array('status' => $parsedResponse[0]);
+//        }
+//        return $parsedResponse[1];
     }
 
     private function requestRent($data, $method, $parseAsJSON = null, $getNumber = null)

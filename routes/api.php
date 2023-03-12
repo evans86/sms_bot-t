@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\v1\OperatorController;
 use App\Http\Controllers\Api\v1\UserController;
 use App\Http\Controllers\Api\v1\ProductController;
 use App\Http\Controllers\Api\v1\BotController;
+use App\Http\Controllers\Api\v1\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ Route::get('setCountry', [CountryController::class, 'setCountry']);
 Route::get('setOperator', [OperatorController::class, 'setOperator']);
 Route::get('setLanguage', [UserController::class, 'setLanguage']);
 Route::get('getUser', [UserController::class, 'getUser']);
-Route::get('getBalance', [UserController::class, 'getBalance']);
+Route::get('balance', [UserController::class, 'balance']);
 
 //api bot
 Route::get('ping', [BotController::class, 'ping']);
@@ -41,6 +42,9 @@ Route::get('create', [BotController::class, 'create']);
 Route::get('error', [BotController::class, 'error']);
 Route::get('get', [BotController::class, 'get']);
 Route::get('update', [BotController::class, 'update']);
+
+//api order
+Route::get('createOrder', [OrderController::class, 'createOrder']);
 
 
 //Route::get('getUser', [\App\Http\Controllers\ApiController::class, 'getUser']);

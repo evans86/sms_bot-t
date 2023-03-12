@@ -26,7 +26,7 @@ class ProductService extends MainService
 //        }
 //
 //        dd($services);
-
+//        $countries = json_decode($countries, true);
         return $smsActivate->getNumbersStatus($country, $operator);
     }
 
@@ -35,6 +35,7 @@ class ProductService extends MainService
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $services = $smsActivate->getPrices($country);
+//        $services = json_decode($services, true);
         $services = $services[$country];
 
         $result = [];

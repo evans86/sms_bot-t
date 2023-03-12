@@ -7,10 +7,11 @@ use App\Services\External\SmsActivateApi;
 
 class UserService extends MainService
 {
-    public function getBalance()
+    public function balance()
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+        $balance = $smsActivate->getBalance();
 
-        return $smsActivate->getBalance();
+        return $balance;
     }
 }

@@ -19,11 +19,11 @@ class UserController extends Controller
         $this->userService = new UserService();
     }
 
-    public function getBalance()
+    public function balance()
     {
-        $result = $this->userService->getBalance();
+        $result = $this->userService->balance();
 
-        return ApiHelpers::success($result);
+        return $result;
     }
 
     public function getUser(Request $request)
