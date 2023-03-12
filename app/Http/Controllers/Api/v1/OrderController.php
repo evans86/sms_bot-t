@@ -88,6 +88,8 @@ class OrderController extends Controller
         return ApiHelpers::success($result);
     }
 
+        //?user_id=1028741753&order_id=
+
     //3 - Запросить еще одну смс
     public function secondSms(Request $request)
     {
