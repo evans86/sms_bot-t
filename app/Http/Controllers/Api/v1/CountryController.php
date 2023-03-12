@@ -35,7 +35,7 @@ class CountryController extends Controller
         $country = SmsCountry::query()->where(['org_id' => $request->country])->first();
         if(is_null($country))
             return ApiHelpers::error('Not found: country');
-        $operator = SmsOperator::query()->where(['title' => $user->operator_id])->first();
+        $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
         $user->country_id = $country->id;
         $user->operator_id = $operator->id;
         $user->save();
@@ -45,7 +45,7 @@ class CountryController extends Controller
     private function generateUserArray(SmsUser $user, SmsCountry $country, SmsOperator $operator): array
     {
         $result = [
-            'telegram_id' => $user->telegram_id,
+            'id' => $user->telegram_id,
             'country' => $country->org_id,
             'operator' => $operator->title,
             'language' => $user->language
