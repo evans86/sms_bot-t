@@ -70,14 +70,18 @@ class OrderService extends MainService
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
-        $serviceResult = $smsActivate->getActiveActivations();
+        $serviceResults = $smsActivate->getActiveActivations();
 
-        $serviceResult = $serviceResult['activeActivations'];
-        $serviceResult = json_decode($serviceResult);
-        $serviceCode = $serviceResult['smsCode'];
-        $serviceText = $serviceResult['smsText'];
+        $serviceResults = $serviceResults['activeActivations'];
 
-        return $serviceResult;
+//        foreach ($serviceResults as $key => $serviceResult){
+//
+//        }
+//        $serviceResult = json_decode($serviceResult);
+//        $serviceCode = $serviceResult['smsCode'];
+//        $serviceText = $serviceResult['smsText'];
+
+        return $serviceResults;
     }
 
     public function getStatus($id)
