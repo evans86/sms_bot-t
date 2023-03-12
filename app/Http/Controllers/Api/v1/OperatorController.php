@@ -29,7 +29,11 @@ class OperatorController extends Controller
     public function index(Request $request)
     {
         $country = SmsCountry::query()->where(['org_id' => $request->country])->first();
-        $result = OperatorResource::collection($country->operators);
+        $operators = $country->operators;
+        $result = [];
+        foreach ($operators as $operator){
+            $result[] = $operator->title;
+        }
         return ApiHelpers::success($result);
     }
 

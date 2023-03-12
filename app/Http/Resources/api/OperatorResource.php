@@ -14,8 +14,6 @@ class OperatorResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'name' => $this->title,
-        ];
+        return parent::toArray($request);
     }
 }
