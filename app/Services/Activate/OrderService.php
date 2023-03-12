@@ -74,14 +74,17 @@ class OrderService extends MainService
 
         $serviceResults = $serviceResults['activeActivations'];
 
-//        foreach ($serviceResults as $key => $serviceResult){
-//
-//        }
+        $result = [];
+        foreach ($serviceResults as $serviceResult){
+            $order_id = $serviceResult['activationId'];
+            if ($order_id == $order->org_id)
+                $result = $serviceResult;
+        }
 //        $serviceResult = json_decode($serviceResult);
 //        $serviceCode = $serviceResult['smsCode'];
 //        $serviceText = $serviceResult['smsText'];
 
-        return $serviceResults;
+        return $result;
     }
 
     public function getStatus($id)
