@@ -110,7 +110,7 @@ class SmsActivateApi
 
     public function getStatus($id)
     {
-        return $this->request(array('api_key' => $this->apiKey, 'action' => __FUNCTION__, 'id' => $id), 'GET', false, 2);
+        return $this->request(array('api_key' => $this->apiKey, 'action' => __FUNCTION__, 'id' => $id), 'GET', false, 1);
     }
 
     public function getCountries()
@@ -219,6 +219,9 @@ class SmsActivateApi
 
         if ($method === 'GET') {
             $result = file_get_contents("$this->url?$serializedData");
+            if ($getNumber == 1) {
+                return OrdersHelper::requestArray($result);
+            }
             $result = json_decode($result, true);
             return $result;
         } else {
@@ -235,11 +238,10 @@ class SmsActivateApi
             if (OrdersHelper::requestArray($result) == false) {
                 $parsedResult = json_decode($result, true);
                 return $parsedResult;
-            }else{
+            } else {
                 throw new \Exception(OrdersHelper::requestArray($result));
 //                return OrdersHelper::requestArray($result);
             }
-
 
 
 //            return $result;

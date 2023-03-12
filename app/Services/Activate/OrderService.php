@@ -33,7 +33,7 @@ class OrderService extends MainService
                 'phone' => $serviceResult['phoneNumber'],
                 'text' => '',
                 'time' => $endTime, //посмотреть время для сервисов?
-                'status' => 'status',
+                'status' => $this->getStatus($id),
             ];
             return $result;
         } catch (\Exception $e) {
@@ -47,6 +47,15 @@ class OrderService extends MainService
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $serviceResult = $smsActivate->getActiveActivations();
+
+        return $serviceResult;
+    }
+
+    public function getStatus($id)
+    {
+        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+
+        $serviceResult = $smsActivate->getStatus($id);
 
         return $serviceResult;
     }

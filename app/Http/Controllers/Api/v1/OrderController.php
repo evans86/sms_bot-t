@@ -52,4 +52,14 @@ class OrderController extends Controller
 
         return ApiHelpers::success($result);
     }
+
+    public function getStatus(Request $request)
+    {
+        if (is_null($request->id))
+            return ApiHelpers::error('Not found params: user_id');
+
+        $result = $this->orderService->getStatus($request->id);
+
+        return ApiHelpers::success($result);
+    }
 }
