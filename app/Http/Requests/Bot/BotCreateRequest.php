@@ -13,9 +13,9 @@ class BotCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'bot_id' => 'required|integer|unique:bots',
-            'public_key' => 'required|string|unique:bots',
-            'private_key' => 'required|string|unique:bots',
+            'bot_id' => 'required|integer|unique:sms_bots',
+            'public_key' => 'required|string|unique:sms_bots',
+            'private_key' => 'required|string|unique:sms_bots',
         ];
     }
     /**
