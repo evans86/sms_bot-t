@@ -37,7 +37,7 @@ class OrderController extends Controller
             $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
             $service = $request->service;
 
-            $result = $this->orderService->createOrder($service, $operator->title, $country->org_id);
+            $result = $this->orderService->createOrder($service, $operator->title, $country->org_id, $user->id);
 
             return ApiHelpers::success($result);
         } catch (\Exception $e) {
