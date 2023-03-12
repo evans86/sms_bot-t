@@ -42,7 +42,8 @@ class OrderService extends MainService
             ]);
             return $result;
         } catch (\Exception $e) {
-            return $e->getMessage();
+            throw new \Exception($e->getMessage());
+//            return $e->getMessage();
         }
     }
 }

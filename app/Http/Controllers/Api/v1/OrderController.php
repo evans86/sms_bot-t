@@ -19,24 +19,30 @@ class OrderController extends Controller
     {
         $this->orderService = new OrderService();
     }
+
     public function createOrder(Request $request)
     {
-        if(is_null($request->user_id))
-            return ApiHelpers::error('Not found params: user_id');
-        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
-        if(is_null($request->service))
-            return ApiHelpers::error('Not found params: service');
+        try {
+            if (is_null($request->user_id))
+                return ApiHelpers::error('Not found params: user_id');
+            $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
+            if (is_null($request->service))
+                return ApiHelpers::error('Not found params: service');
 //        if(is_null($request->user_secret_key))
 //            return ApiHelpers::error('Not found params: user_secret_key');
 //        if(is_null($request->public_key))
 //            return ApiHelpers::error('Not found params: public_key');
 
-        $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
-        $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
-        $service = $request->service;
+            $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
+            $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
+            $service = $request->service;
 
-        $result = $this->orderService->createOrder($service, $operator->title, $country->org_id);
+            $result = $this->orderService->createOrder($service, $operator->title, $country->org_id);
 
-        return ApiHelpers::success($result);
+            return ApiHelpers::success($result);
+        } catch (\Exception $e) {
+            return ApiHelpers::error($e->getMessage());
+        }
+
     }
 }
