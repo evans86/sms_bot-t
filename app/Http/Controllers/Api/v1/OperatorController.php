@@ -46,7 +46,7 @@ class OperatorController extends Controller
         $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
         if(is_null($user))
             return ApiHelpers::error('Not found: user');
-        $country = SmsCountry::query()->where(['org_id' => $user->country_id])->first();
+        $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
         $operator = SmsOperator::query()->where([
             'name' => $request->operator,
             'country_id' => $country->id
