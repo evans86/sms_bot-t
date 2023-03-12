@@ -6,6 +6,7 @@ use App\Helpers\ApiHelpers;
 use App\Http\Controllers\Controller;
 use App\Models\Activate\SmsCountry;
 use App\Models\Activate\SmsOperator;
+use App\Models\Order\SmsOrder;
 use App\Models\User\SmsUser;
 use App\Services\Activate\OrderService;
 use App\Services\Activate\UserService;
@@ -43,7 +44,32 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             return ApiHelpers::error($e->getMessage());
         }
+    }
 
+    public function getOrder(Request $request)
+    {
+        if (is_null($request->user_id))
+            return ApiHelpers::error('Not found params: user_id');
+        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
+        if (is_null($request->order_id))
+            return ApiHelpers::error('Not found params: order_id');
+        $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
+
+        return ApiHelpers::success($this->generateOrderArray($order));
+    }
+
+    public function closeOrder(Request $request)
+    {
+        if (is_null($request->user_id))
+            return ApiHelpers::error('Not found params: user_id');
+        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
+        if (is_null($request->order_id))
+            return ApiHelpers::error('Not found params: order_id');
+        $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
+
+        $result = $this->orderService->setStatus($order, 8);
+
+        return ApiHelpers::success($result);
     }
 
     public function getActive()
@@ -61,5 +87,17 @@ class OrderController extends Controller
         $result = $this->orderService->getStatus($request->id);
 
         return ApiHelpers::success($result);
+    }
+
+    private function generateOrderArray(SmsOrder $order): array
+    {
+        $result = [
+            'id' => (integer) $order->org_id,
+            'phone' => $order->phone,
+            'text' => 'сюда текст смс',
+            'time' => $order->time,
+            'status' => $order->status
+        ];
+        return $result;
     }
 }

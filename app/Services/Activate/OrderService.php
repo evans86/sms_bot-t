@@ -15,12 +15,6 @@ class OrderService extends MainService
             $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
             $serviceResult = $smsActivate->getNumberV2($service, $country);
-//            $activeActivation = $smsActivate->getStatus($serviceResult['activationId']);
-
-//            dd($serviceResult);
-
-//            $serviceResult = json_decode($serviceResult);
-//            return $serviceResult;
 
             $dateTime = new \DateTime($serviceResult['activationTime']);
             $dateTime = $dateTime->format('U');
@@ -33,7 +27,7 @@ class OrderService extends MainService
                 'id' => $id,
                 'phone' => $serviceResult['phoneNumber'],
                 'text' => '',
-                'time' => $endTime, //посмотреть время для сервисов?
+                'time' => $endTime,
                 'status' => $this->getStatus($id),
             ];
 
@@ -43,7 +37,8 @@ class OrderService extends MainService
                 'phone' => $serviceResult['phoneNumber'],
                 'country' => $country,
                 'operator' => $serviceResult['activationOperator'],
-                'status' => $this->getStatus($id)
+                'status' => $this->getStatus($id),
+                'time' => $endTime
             ];
 
             $order = SmsOrder::create($data);
@@ -53,6 +48,22 @@ class OrderService extends MainService
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
+    }
+
+    public function setStatus($order, $status)
+    {
+        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+
+        $serviceResult = $smsActivate->setStatus($order->org_id, $status);
+
+        $data = [
+            'status' => $serviceResult,
+        ];
+
+        $order->update($data);
+        $order->save();
+
+        return $serviceResult;
     }
 
     public function getActive()

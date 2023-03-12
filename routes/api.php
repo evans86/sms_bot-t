@@ -45,6 +45,8 @@ Route::get('update', [BotController::class, 'update']);
 
 //api order
 Route::get('createOrder', [OrderController::class, 'createOrder']);
+Route::get('getOrder', [OrderController::class, 'getOrder']);
+Route::get('closeOrder', [OrderController::class, 'closeOrder']);
 Route::get('getActive', [OrderController::class, 'getActive']);
 Route::get('getStatus', [OrderController::class, 'getStatus']);
 

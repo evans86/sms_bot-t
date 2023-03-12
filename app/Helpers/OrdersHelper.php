@@ -8,7 +8,7 @@ class OrdersHelper
     {
         $errorCodes = [
             'ACCESS_ACTIVATION' => 'Сервис успешно активирован',
-            'ACCESS_CANCEL' => 'активация отменена',
+            'ACCESS_CANCEL' => 'Активация отменена',
             'ACCESS_READY' => 'Ожидание нового смс',
             'ACCESS_RETRY_GET' => 'Готовность номера подтверждена',
             'ACCOUNT_INACTIVE' => 'Свободных номеров нет',
@@ -30,7 +30,7 @@ class OrdersHelper
             'STATUS_CANCEL' => 'Активация/аренда отменена',
             'STATUS_FINISH' => 'Аренда оплачена и завершена',
             'STATUS_WAIT_CODE' => 'Ожидание первой смс',
-            'STATUS_WAIT_RETRY' => 'ожидание уточнения кода',
+            'STATUS_WAIT_RETRY' => 'Ожидание уточнения кода',
             'SQL_ERROR' => 'Один из параметров имеет недопустимое значение',
             'INVALID_PHONE' => 'Номер арендован не вами (неправильный id аренды)',
             'INCORECT_STATUS' => 'Отсутствует или неправильно указан статус',
