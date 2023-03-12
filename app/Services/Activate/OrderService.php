@@ -72,7 +72,8 @@ class OrderService extends MainService
 
         $serviceResult = $smsActivate->getActiveActivations();
 
-        $serviceResult = $serviceResult['activeActivations']['smsCode'];
+        $serviceResult = $serviceResult['activeActivations'];
+        $serviceResult = json_decode($serviceResult);
         $serviceCode = $serviceResult['smsCode'];
         $serviceText = $serviceResult['smsText'];
 
