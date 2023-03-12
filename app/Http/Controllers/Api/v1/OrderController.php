@@ -58,6 +58,7 @@ class OrderController extends Controller
         return ApiHelpers::success($this->generateOrderArray($order));
     }
 
+    //8 Отменить активацию (если номер Вам не подошел)
     public function closeOrder(Request $request)
     {
         if (is_null($request->user_id))
@@ -68,6 +69,51 @@ class OrderController extends Controller
         $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
 
         $result = $this->orderService->setStatus($order, 8);
+
+        return ApiHelpers::success($result);
+    }
+
+    //1 - Сообщить, что SMS отправлен
+    public function reportOrderSms(Request $request)
+    {
+        if (is_null($request->user_id))
+            return ApiHelpers::error('Not found params: user_id');
+        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
+        if (is_null($request->order_id))
+            return ApiHelpers::error('Not found params: order_id');
+        $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
+
+        $result = $this->orderService->setStatus($order, 1);
+
+        return ApiHelpers::success($result);
+    }
+
+    //3 - Запросить еще одну смс
+    public function secondSms(Request $request)
+    {
+        if (is_null($request->user_id))
+            return ApiHelpers::error('Not found params: user_id');
+        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
+        if (is_null($request->order_id))
+            return ApiHelpers::error('Not found params: order_id');
+        $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
+
+        $result = $this->orderService->setStatus($order, 3);
+
+        return ApiHelpers::success($result);
+    }
+
+    //6 - Подтвердить SMS-код и завершить активацию
+    public function confirmOrder(Request $request)
+    {
+        if (is_null($request->user_id))
+            return ApiHelpers::error('Not found params: user_id');
+        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
+        if (is_null($request->order_id))
+            return ApiHelpers::error('Not found params: order_id');
+        $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
+
+        $result = $this->orderService->setStatus($order, 6);
 
         return ApiHelpers::success($result);
     }

@@ -58,6 +58,7 @@ class OrderService extends MainService
 
         $data = [
             'status' => $serviceResult,
+            'time' => null
         ];
 
         $order->update($data);
