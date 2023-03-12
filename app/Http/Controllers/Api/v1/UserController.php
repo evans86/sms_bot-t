@@ -7,63 +7,23 @@ use App\Http\Controllers\Controller;
 use App\Models\Activate\SmsCountry;
 use App\Models\Activate\SmsOperator;
 use App\Models\User\SmsUser;
+use App\Services\Activate\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    private UserService $userService;
+
+    public function __construct()
     {
-        //
+        $this->userService = new UserService();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function getBalance()
     {
-        //
-    }
+        $result = $this->userService->getBalance();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return ApiHelpers::success($result);
     }
 
     public function getUser(Request $request)
