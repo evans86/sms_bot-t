@@ -8,10 +8,6 @@ use App\Services\MainService;
 
 class OrderService extends MainService
 {
-//$service = 'tg';
-//$operator = 'mts'; //потом передать user
-//$country = '0'; //потом передать user
-
     public function createOrder($service, $operator, $country)
     {
         try {
@@ -35,7 +31,7 @@ class OrderService extends MainService
             $result = [
                 'id' => $id,
                 'phone' => $serviceResult['phoneNumber'],
-                'text' => 'sms',
+                'text' => '',
                 'time' => $endTime, //посмотреть время для сервисов?
                 'status' => 'status',
             ];
@@ -44,5 +40,14 @@ class OrderService extends MainService
             throw new \Exception($e->getMessage());
 //            return $e->getMessage();
         }
+    }
+
+    public function getActive()
+    {
+        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+
+        $serviceResult = $smsActivate->getActiveActivations();
+
+        return $serviceResult;
     }
 }

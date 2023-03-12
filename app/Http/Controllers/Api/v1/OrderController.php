@@ -45,4 +45,11 @@ class OrderController extends Controller
         }
 
     }
+
+    public function getActive()
+    {
+        $result = $this->orderService->getActive();
+
+        return ApiHelpers::success($result);
+    }
 }

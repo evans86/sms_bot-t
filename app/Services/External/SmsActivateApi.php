@@ -118,6 +118,11 @@ class SmsActivateApi
         return $this->request(array('api_key' => $this->apiKey, 'action' => __FUNCTION__), 'GET', true);
     }
 
+    public function getActiveActivations()
+    {
+        return $this->request(array('api_key' => $this->apiKey, 'action' => __FUNCTION__), 'GET', true);
+    }
+
     public function getAdditionalService($service, $activationId)
     {
         return $this->request(array('api_key' => $this->apiKey, 'action' => __FUNCTION__, 'service' => $service, 'id' => $activationId), 'GET', false, 1);
