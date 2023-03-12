@@ -105,7 +105,7 @@ class SmsActivateApi
             $requestParam['forward'] = $forward;
         }
 
-        return $this->request($requestParam, 'POST', null, 3);
+        return $this->request($requestParam, 'POST', null, 1);
     }
 
     public function getStatus($id)
