@@ -66,11 +66,15 @@ class OrderService extends MainService
         return $serviceResult;
     }
 
-    public function getActive()
+    public function getActive($order)
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $serviceResult = $smsActivate->getActiveActivations();
+
+        $serviceResult = $serviceResult['activeActivations']['smsCode'];
+        $serviceCode = $serviceResult['smsCode'];
+        $serviceText = $serviceResult['smsText'];
 
         return $serviceResult;
     }
