@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\v1\CountryController;
 use App\Http\Controllers\Api\v1\OperatorController;
 use App\Http\Controllers\Api\v1\UserController;
 use App\Http\Controllers\Api\v1\ProductController;
+use App\Http\Controllers\Api\v1\BotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,13 @@ Route::get('setCountry', [CountryController::class, 'setCountry']);
 Route::get('setOperator', [OperatorController::class, 'setOperator']);
 Route::get('setLanguage', [UserController::class, 'setLanguage']);
 Route::get('getUser', [UserController::class, 'getUser']);
+
+//api bot
+Route::get('ping', [BotController::class, 'ping']);
+Route::get('create', [BotController::class, 'create']);
+Route::get('error', [BotController::class, 'error']);
+Route::get('get', [BotController::class, 'get']);
+Route::get('update', [BotController::class, 'update']);
 
 
 //Route::get('getUser', [\App\Http\Controllers\ApiController::class, 'getUser']);
