@@ -7,10 +7,10 @@ class OrdersHelper
     public static function requestArray($result)
     {
         $errorCodes = [
-            'ACCESS_ACTIVATION' => 'Сервис успешно активирован',
-            'ACCESS_CANCEL' => 'Активация отменена',
-            'ACCESS_READY' => 'Ожидание нового смс',
-            'ACCESS_RETRY_GET' => 'Готовность номера подтверждена',
+            'ACCESS_ACTIVATION' => 6, //Сервис успешно активирован
+            'ACCESS_CANCEL' => 8, //Активация отменена
+            'ACCESS_READY' => 3, //Ожидание нового смс
+            'ACCESS_RETRY_GET' => 1, //Готовность номера подтверждена
             'ACCOUNT_INACTIVE' => 'Свободных номеров нет',
             'ALREADY_FINISH' => 'Аренда уже завершена',
             'ALREADY_CANCEL' => 'Аренда уже отменена',
@@ -29,7 +29,7 @@ class OrdersHelper
             'NO_ACTIVATION' => 'Указанного id активации не существует',
             'STATUS_CANCEL' => 'Активация/аренда отменена',
             'STATUS_FINISH' => 'Аренда оплачена и завершена',
-            'STATUS_WAIT_CODE' => 'Ожидание первой смс',
+            'STATUS_WAIT_CODE' => 4, //Ожидание первой смс
             'STATUS_WAIT_RETRY' => 'Ожидание уточнения кода',
             'SQL_ERROR' => 'Один из параметров имеет недопустимое значение',
             'INVALID_PHONE' => 'Номер арендован не вами (неправильный id аренды)',
