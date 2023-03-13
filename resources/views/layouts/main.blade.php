@@ -25,6 +25,7 @@
                         <a class="nav-link" href="{{ route('activate.product.index') }}">Список сервисов</a>
                         <a class="nav-link" href="{{ route('users.index') }}">Пользователи</a>
                         <a class="nav-link" href="{{ route('activate.order.index') }}">Заказы</a>
+                        <a class="nav-link" href="{{ route('activate.bot.index') }}">Боты</a>
                     </div>
                 </div>
             </div>

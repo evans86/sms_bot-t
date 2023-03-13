@@ -29,8 +29,7 @@
                     <td>{{ $order->status }}</td>
                     <td>{{ $order->codes }}</td>
                     <td>{{ $order->created_at }}</td>
-                    <td>{{ $order->time }}</td>
-                    {{\Carbon\Carbon::parse($order->time)->format('d M Y')}}
+                    <td>{{\Carbon\Carbon::createFromTimestamp($order->time)->toDateTimeString()}}</td>
                 </tr>
             @endforeach
             </tbody>
