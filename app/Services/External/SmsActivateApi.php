@@ -222,7 +222,7 @@ class SmsActivateApi
             if ($getNumber == 1) {
                 $parsedResponse = explode(':', $result);
 //                return OrdersHelper::requestArray($parsedResponse);
-                return $parsedResponse;
+                return $result;
             }
             $result = json_decode($result, true);
             return $result;
