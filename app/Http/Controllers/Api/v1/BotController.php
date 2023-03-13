@@ -96,9 +96,9 @@ class BotController extends Controller
             if (empty($bot))
                 return ApiHelpers::error('Not found module.');
             $bot->delete();
-//            if ($bot->delete())
-                return ApiHelpers::success('Bot delete');
-//            return ApiHelpers::error('Bot not delete.');
+            if (empty($bot))
+                return ApiHelpers::success('OK');
+            return ApiHelpers::error('Bot not delete.');
         } catch (\Exception $e) {
             return ApiHelpers::error($e->getMessage());
         }
