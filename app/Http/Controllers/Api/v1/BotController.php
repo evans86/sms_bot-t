@@ -91,7 +91,7 @@ class BotController extends Controller
 
     public function delete(Request $request)
     {
-//        try {
+        try {
             $bot = SmsBot::query()->where('public_key', $request->public_key)->where('private_key', $request->private_key)->first();
             if (empty($bot))
                 return ApiHelpers::error('Not found module.');
@@ -99,8 +99,8 @@ class BotController extends Controller
             if (empty($bot))
                 return ApiHelpers::success('OK');
             return ApiHelpers::error('Bot not delete.');
-//        } catch (\Exception $e) {
-//            return ApiHelpers::error($e->getMessage());
-//        }
+        } catch (\Exception $e) {
+            return ApiHelpers::error($e->getMessage());
+        }
     }
 }
