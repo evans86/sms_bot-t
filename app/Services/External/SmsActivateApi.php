@@ -223,7 +223,8 @@ class SmsActivateApi
                 $parsedResponse = explode(':', $result);
                 return OrdersHelper::requestArray($parsedResponse[0]);
             }
-            $result = json_decode($result, true);
+            $json_string = stripslashes(html_entity_decode($result));
+            $result =  json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $json_string), true );
             return $result;
         } else {
             $options = array(
