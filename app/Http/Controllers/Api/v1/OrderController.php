@@ -165,7 +165,6 @@ class OrderController extends Controller
         $result = [
             'id' => (integer) $order->org_id,
             'phone' => $order->phone,
-            'text' => 'сюда текст смс',
             'time' => $order->time,
             'status' => $order->status,
             'codes' => $order->codes,

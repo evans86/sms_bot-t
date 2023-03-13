@@ -82,7 +82,7 @@ class OrderService extends MainService
                 $results = $serviceResult;
         }
 
-        $result = json_encode($results['smsCode']);
+        $result = $results['smsCode'];
 
         $data = [
             'codes' => $result
