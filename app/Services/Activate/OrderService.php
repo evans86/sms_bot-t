@@ -19,7 +19,7 @@ class OrderService extends MainService
             $dateTime = new \DateTime($serviceResult['activationTime']);
             $dateTime = $dateTime->format('U');
             $dateTime = intval($dateTime);
-            $endTime = $dateTime + 1200;
+//            $endTime = $dateTime + 1200;
 
             $id = intval($serviceResult['activationId']);
 
@@ -27,7 +27,7 @@ class OrderService extends MainService
                 'id' => $id,
                 'phone' => $serviceResult['phoneNumber'],
                 'text' => '',
-                'time' => $endTime,
+                'time' => $dateTime,
                 'status' => $this->getStatus($id),
             ];
 
@@ -38,7 +38,7 @@ class OrderService extends MainService
                 'country' => $country,
                 'operator' => $serviceResult['activationOperator'],
                 'status' => $this->getStatus($id),
-                'time' => $endTime,
+                'time' => $dateTime,
                 'codes' => null
             ];
 
