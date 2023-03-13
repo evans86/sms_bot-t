@@ -10,6 +10,9 @@ use Illuminate\Validation\ValidationException;
 
 class BotCreateRequest extends FormRequest
 {
+    /**
+     * @return string[]
+     */
     public function rules()
     {
         return [
@@ -18,10 +21,12 @@ class BotCreateRequest extends FormRequest
             'private_key' => 'required|string|unique:sms_bots',
         ];
     }
+
     /**
      * @inheritDoc
      */
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         $response = response()
             ->make(ApiHelpers::error($validator->errors()->first()), 422);
 

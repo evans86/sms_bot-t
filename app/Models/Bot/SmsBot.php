@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SmsBot extends Model
 {
     use HasFactory;
+
+    protected $guarded = false;
+    protected $table = 'sms_bots';
 }

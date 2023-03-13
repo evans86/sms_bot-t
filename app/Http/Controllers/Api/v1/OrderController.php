@@ -10,11 +10,13 @@ use App\Models\Activate\SmsOperator;
 use App\Models\Order\SmsOrder;
 use App\Models\User\SmsUser;
 use App\Services\Activate\OrderService;
-use App\Services\Activate\UserService;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    /**
+     * @var OrderService
+     */
     private OrderService $orderService;
 
     public function __construct()
@@ -22,6 +24,16 @@ class OrderController extends Controller
         $this->orderService = new OrderService();
     }
 
+    /**
+     * Передача значений заказаов для пользователя
+     *
+     * Request[
+     *  'user_id'
+     * ]
+     *
+     * @param Request $request
+     * @return array|string
+     */
     public function orders(Request $request)
     {
         if (is_null($request->user_id))
@@ -33,6 +45,19 @@ class OrderController extends Controller
         return ApiHelpers::success($result);
     }
 
+    /**
+     * Создание заказа
+     *
+     * Request[
+     *  'user_id'
+     *  'service'
+     *  'user_secret_key'
+     *  'public_key'
+     * ]
+     *
+     * @param Request $request
+     * @return array|string
+     */
     public function createOrder(Request $request)
     {
         try {
@@ -58,6 +83,17 @@ class OrderController extends Controller
         }
     }
 
+    /**
+     * Получение активного заказа
+     *
+     * Request[
+     *  'user_id'
+     *  'order_id'
+     * ]
+     *
+     * @param Request $request
+     * @return array|string
+     */
     public function getOrder(Request $request)
     {
         if (is_null($request->user_id))
@@ -72,24 +108,17 @@ class OrderController extends Controller
         return ApiHelpers::success($this->generateOrderArray($order));
     }
 
-
-    //8 Отменить активацию (если номер Вам не подошел)
-    public function closeOrder(Request $request)
-    {
-        if (is_null($request->user_id))
-            return ApiHelpers::error('Not found params: user_id');
-        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
-        if (is_null($request->order_id))
-            return ApiHelpers::error('Not found params: order_id');
-        $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
-
-        $result = $this->orderService->setStatus($order, 8);
-
-        return ApiHelpers::success($result);
-    }
-
-    //1 - Сообщить, что SMS отправлен
-    //необязательно
+    /**
+     * Установить статус 1 (Сообщить, что SMS отправлен (не обязательно))
+     *
+     * Request[
+     *  'user_id'
+     *  'order_id'
+     * ]
+     *
+     * @param Request $request
+     * @return array|string
+     */
     public function reportOrderSms(Request $request)
     {
         if (is_null($request->user_id))
@@ -104,7 +133,17 @@ class OrderController extends Controller
         return ApiHelpers::success($result);
     }
 
-    //3 - Запросить еще одну смс
+    /**
+     * Установить статус 3 (Запросить еще одну смс)
+     *
+     * Request[
+     *  'user_id'
+     *  'order_id'
+     * ]
+     *
+     * @param Request $request
+     * @return array|string
+     */
     public function secondSms(Request $request)
     {
         if (is_null($request->user_id))
@@ -119,7 +158,17 @@ class OrderController extends Controller
         return ApiHelpers::success($result);
     }
 
-    //6 - Подтвердить SMS-код и завершить активацию
+    /**
+     * Установить статус 6 (Подтвердить SMS-код и завершить активацию)
+     *
+     * Request[
+     *  'user_id'
+     *  'order_id'
+     * ]
+     *
+     * @param Request $request
+     * @return array|string
+     */
     public function confirmOrder(Request $request)
     {
         if (is_null($request->user_id))
@@ -134,6 +183,42 @@ class OrderController extends Controller
         return ApiHelpers::success($result);
     }
 
+    /**
+     * Установить статус 8 (Отменить активацию (если номер Вам не подошел))
+     *
+     * Request[
+     *  'user_id'
+     *  'order_id'
+     * ]
+     *
+     * @param Request $request
+     * @return array|string
+     */
+    public function closeOrder(Request $request)
+    {
+        if (is_null($request->user_id))
+            return ApiHelpers::error('Not found params: user_id');
+        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
+        if (is_null($request->order_id))
+            return ApiHelpers::error('Not found params: order_id');
+        $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
+
+        $result = $this->orderService->setStatus($order, 8);
+
+        return ApiHelpers::success($result);
+    }
+
+    /**
+     * Вспомогательный метод получения активного заказа
+     *
+     * Request[
+     *  'user_id'
+     *  'order_id'
+     * ]
+     *
+     * @param Request $request
+     * @return array|string
+     */
     public function getActive(Request $request)
     {
         if (is_null($request->user_id))
@@ -148,6 +233,17 @@ class OrderController extends Controller
         return ApiHelpers::success($result);
     }
 
+    /**
+     * Вспомогательный метод получения статуса заказа
+     *
+     * Request[
+     *  'user_id'
+     *  'order_id'
+     * ]
+     *
+     * @param Request $request
+     * @return array|string
+     */
     public function getStatus(Request $request)
     {
         if (is_null($request->id))
@@ -158,10 +254,14 @@ class OrderController extends Controller
         return ApiHelpers::success($result);
     }
 
+    /**
+     * @param SmsOrder $order
+     * @return array
+     */
     private function generateOrderArray(SmsOrder $order): array
     {
         $result = [
-            'id' => (integer) $order->org_id,
+            'id' => (integer)$order->org_id,
             'phone' => $order->phone,
             'time' => $order->time,
             'status' => $order->status,

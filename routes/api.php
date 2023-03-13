@@ -24,44 +24,52 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/**
+ * Роуты API (страны, операторы, сервисы), ресурсный подход
+ */
 Route::resources([
     'countries' => CountryController::class,
     'operators' => OperatorController::class,
     'services' => ProductController::class,
 ]);
 
+/**
+ * Роуты API (пользователи)
+ */
 Route::get('setCountry', [CountryController::class, 'setCountry']);
 Route::get('setOperator', [OperatorController::class, 'setOperator']);
 Route::get('setLanguage', [UserController::class, 'setLanguage']);
 Route::get('getUser', [UserController::class, 'getUser']);
 Route::get('balance', [UserController::class, 'balance']);
 
-//api bot
+/**
+ * Роуты API (боты)
+ */
 Route::get('ping', [BotController::class, 'ping']);
 Route::get('create', [BotController::class, 'create']);
 Route::get('error', [BotController::class, 'error']);
 Route::get('get', [BotController::class, 'get']);
 Route::get('update', [BotController::class, 'update']);
 
-//api order
+/**
+ * Роуты API (заказы (создание, получение, все))
+ */
 Route::get('createOrder', [OrderController::class, 'createOrder']);
 Route::get('getOrder', [OrderController::class, 'getOrder']);
 Route::get('orders', [OrderController::class, 'orders']);
 
+/**
+ * Роуты API (заказы (изменение статусов))
+ */
 Route::get('closeOrder', [OrderController::class, 'closeOrder']);
 Route::get('reportOrderSms', [OrderController::class, 'reportOrderSms']);
 Route::get('secondSms', [OrderController::class, 'secondSms']);
 Route::get('confirmOrder', [OrderController::class, 'confirmOrder']);
 
+/**
+ * Роуты API (заказы (рабочие))
+ */
 Route::get('getActive', [OrderController::class, 'getActive']);
 Route::get('getStatus', [OrderController::class, 'getStatus']);
-
-
-//Route::get('getUser', [\App\Http\Controllers\ApiController::class, 'getUser']);
-
-//Route::get('setOperator', [\App\Http\Controllers\ApiController::class, 'setOperator']);
-//Route::get('setLanguage', [\App\Http\Controllers\ApiController::class, 'setLanguage']);
-
-//Route::get('services', [\App\Http\Controllers\ApiController::class, 'services']);
 
 

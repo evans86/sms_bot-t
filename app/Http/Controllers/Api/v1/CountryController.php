@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 class CountryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Передача списка стран согласно коллекции
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function index()
     {
@@ -23,17 +23,29 @@ class CountryController extends Controller
         return ApiHelpers::success($result);
     }
 
+    /**
+     * Задать значение страны
+     *
+     * Request[
+     *  'user_id'
+     *  'operator'
+     *  'country'
+     * ]
+     *
+     * @param Request $request
+     * @return array|string
+     */
     public function setCountry(Request $request)
     {
         if (is_null($request->user_id))
             return ApiHelpers::error('Not found params: user_id');
-        if(is_null($request->operator))
+        if (is_null($request->operator))
             return ApiHelpers::error('Not found params: operator');
         $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
-        if(is_null($user))
+        if (is_null($user))
             return ApiHelpers::error('Not found: user');
         $country = SmsCountry::query()->where(['org_id' => $request->country])->first();
-        if(is_null($country))
+        if (is_null($country))
             return ApiHelpers::error('Not found: country');
         $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
         $user->country_id = $country->id;
@@ -42,6 +54,12 @@ class CountryController extends Controller
         return ApiHelpers::success($this->generateUserArray($user, $country, $operator));
     }
 
+    /**
+     * @param SmsUser $user
+     * @param SmsCountry $country
+     * @param SmsOperator $operator
+     * @return array
+     */
     private function generateUserArray(SmsUser $user, SmsCountry $country, SmsOperator $operator): array
     {
         $result = [

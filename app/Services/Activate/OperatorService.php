@@ -9,6 +9,8 @@ use App\Services\MainService;
 class OperatorService extends MainService
 {
     /**
+     * Получение операторов по стране из API
+     *
      * @param $country_id
      * @param $country_org_id
      * @return mixed|null

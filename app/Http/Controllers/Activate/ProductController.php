@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Activate;
 
 use App\Http\Controllers\Controller;
 use App\Services\Activate\ProductService;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -15,9 +14,14 @@ class ProductController extends Controller
         $this->productService = new ProductService();
     }
 
+    /**
+     * Получение списка всех сервисов
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
-        $products = $this->productService->getAllProducts('tg', 0);
+        $products = $this->productService->getAllProducts();
 
         return view('activate.product.index', compact(
             'products',

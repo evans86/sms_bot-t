@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Activate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Activate\SmsCountry;
-use App\Models\Activate\SmsOperator;
-use Illuminate\Http\Request;
 use App\Services\Activate\CountryService;
 
 class CountryController extends Controller
 {
+    /**
+     * @var CountryService
+     */
     private CountryService $countryService;
 
     public function __construct()
@@ -17,7 +18,11 @@ class CountryController extends Controller
         $this->countryService = new CountryService();
     }
 
-
+    /**
+     * Получение списка стран
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $countries = SmsCountry::paginate(10);
@@ -27,6 +32,11 @@ class CountryController extends Controller
         ));
     }
 
+    /**
+     * Обновление списка стран с сервиса
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update()
     {
         $this->countryService->getApiCountries();
@@ -34,14 +44,14 @@ class CountryController extends Controller
         return redirect()->route('activate.countries.index');
     }
 
+    /**
+     * Удаление всех стран
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete()
     {
         $countries = SmsCountry::all();
-
-//        $operators = SmsOperator::all();
-//        foreach ($operators as $operator) {
-//            $operator->delete();
-//        }
 
         foreach ($countries as $country) {
             $country->delete();

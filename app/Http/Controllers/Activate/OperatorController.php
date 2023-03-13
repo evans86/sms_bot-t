@@ -10,13 +10,12 @@ use Illuminate\Http\Request;
 
 class OperatorController extends Controller
 {
-    private OperatorService $operatorService;
-
-    public function __construct()
-    {
-        $this->operatorService = new OperatorService();
-    }
-
+    /**
+     * Получение операторов по стране
+     *
+     * @param $country_id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index($country_id)
     {
         $countryOperators = SmsOperator::query()->where(['country_id' => $country_id])->get();

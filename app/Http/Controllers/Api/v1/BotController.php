@@ -11,11 +11,22 @@ use App\Models\Bot\SmsBot;
 
 class BotController extends Controller
 {
+    /**
+     * Запрос проверки доступности сервиса
+     *
+     * @return array
+     */
     public function ping()
     {
         return ApiHelpers::successStr('OK');
     }
 
+    /**
+     * Запрос создания веб–модуля
+     *
+     * @param BotCreateRequest $request
+     * @return array|string
+     */
     public function create(BotCreateRequest $request)
     {
         try {
@@ -35,11 +46,17 @@ class BotController extends Controller
         }
     }
 
+    /**
+     * Получение актуальных настроек
+     *
+     * @param BotGetRequest $request
+     * @return array|string
+     */
     public function get(BotGetRequest $request)
     {
         try {
             $bot = SmsBot::query()->where('public_key', $request->public_key)->where('private_key', $request->private_key)->first();
-            if(empty($bot))
+            if (empty($bot))
                 return ApiHelpers::error('Not found module.');
             return ApiHelpers::success($bot->toArray());
         } catch (\Exception $e) {
@@ -47,11 +64,17 @@ class BotController extends Controller
         }
     }
 
+    /**
+     * Обновление настроек в модуле
+     *
+     * @param BotUpdateRequest $request
+     * @return array|string
+     */
     public function update(BotUpdateRequest $request)
     {
         try {
             $bot = SmsBot::query()->where('public_key', $request->public_key)->where('private_key', $request->private_key)->first();
-            if(empty($bot))
+            if (empty($bot))
                 return ApiHelpers::error('Not found module.');
             $bot->version = $request->version;
             $bot->percent = $request->percent;
@@ -64,5 +87,4 @@ class BotController extends Controller
             return ApiHelpers::error($e->getMessage());
         }
     }
-
 }

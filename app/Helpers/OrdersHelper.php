@@ -4,6 +4,10 @@ namespace App\Helpers;
 
 class OrdersHelper
 {
+    /**
+     * @param $result
+     * @return false|mixed
+     */
     public static function requestArray($result)
     {
         $errorCodes = [
@@ -39,7 +43,7 @@ class OrdersHelper
             'WRONG_SECURITY' => 'Ошибка при попытке передать ID активации без переадресации, или же завершенной/не активной активации'
         ];
 
-        if (array_key_exists($result, $errorCodes)){
+        if (array_key_exists($result, $errorCodes)) {
             return $errorCodes[$result];
         } else {
             return false;

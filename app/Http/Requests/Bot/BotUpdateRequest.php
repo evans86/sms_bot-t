@@ -5,10 +5,15 @@ namespace App\Http\Requests\Bot;
 use App\Helpers\ApiHelpers;
 use Illuminate\Foundation\Http\FormRequest;
 use \Illuminate\Contracts\Validation\Validator;
-use Illuminate\Validation\ValidationException;;
+use Illuminate\Validation\ValidationException;
+
+;
 
 class BotUpdateRequest extends FormRequest
 {
+    /**
+     * @return string[]
+     */
     public function rules()
     {
         return [
@@ -24,7 +29,8 @@ class BotUpdateRequest extends FormRequest
     /**
      * @inheritDoc
      */
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         $response = response()
             ->make(ApiHelpers::error($validator->errors()->first()), 422);
 

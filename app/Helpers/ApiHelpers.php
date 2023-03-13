@@ -53,12 +53,17 @@ class ApiHelpers
         ];
     }
 
+    /**
+     * @param array $params
+     * @param string $token
+     * @return string
+     */
     public static function generateSignature(array $params, string $token): string
     {
         $str = '';
         ksort($params);
         foreach ($params as $key => $param) {
-            if(is_array($param))
+            if (is_array($param))
                 continue;
             $str .= $param . ':';
         }
@@ -66,6 +71,11 @@ class ApiHelpers
         return md5($str);
     }
 
+    /**
+     * @param array $gets
+     * @param string $token
+     * @return bool
+     */
     public static function checkSignature(array $gets, string $token): bool
     {
         $signature = $gets['signature'];

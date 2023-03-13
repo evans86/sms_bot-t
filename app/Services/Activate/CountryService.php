@@ -8,6 +8,9 @@ use App\Services\MainService;
 
 class CountryService extends MainService
 {
+    /**
+     * @var OperatorService
+     */
     private OperatorService $operatorService;
 
     public function __construct()
@@ -15,12 +18,15 @@ class CountryService extends MainService
         $this->operatorService = new OperatorService();
     }
 
+    /**
+     * Получение, добавление стран и их операторов из API сервиса
+     * @return void
+     */
     public function getApiCountries()
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $countries = $smsActivate->getCountries();
-//        $countries = json_decode($countries, true);
 
         foreach ($countries as $key => $country) {
 

@@ -9,6 +9,16 @@ use App\Services\MainService;
 
 class OrderService extends MainService
 {
+    /**
+     * Создание заказа а сервисе
+     *
+     * @param $service
+     * @param $operator
+     * @param $country
+     * @param $user_id
+     * @return array
+     * @throws \Exception
+     */
     public function createOrder($service, $operator, $country, $user_id)
     {
         try {
@@ -19,7 +29,6 @@ class OrderService extends MainService
             $dateTime = new \DateTime($serviceResult['activationTime']);
             $dateTime = $dateTime->format('U');
             $dateTime = intval($dateTime);
-//            $endTime = $dateTime + 1200;
 
             $id = intval($serviceResult['activationId']);
 
@@ -51,6 +60,13 @@ class OrderService extends MainService
         }
     }
 
+    /**
+     * Установка статуса заказа на сервисе
+     *
+     * @param $order
+     * @param $status
+     * @return mixed
+     */
     public function setStatus($order, $status)
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
@@ -67,6 +83,12 @@ class OrderService extends MainService
         return $serviceResult;
     }
 
+    /**
+     * Получение активных заказов с сервиса
+     *
+     * @param $order
+     * @return mixed
+     */
     public function getActive($order)
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
@@ -76,7 +98,7 @@ class OrderService extends MainService
         $serviceResults = $serviceResults['activeActivations'];
 
         $results = [];
-        foreach ($serviceResults as $serviceResult){
+        foreach ($serviceResults as $serviceResult) {
             $order_id = $serviceResult['activationId'];
             if ($order_id == $order->org_id)
                 $results = $serviceResult;
@@ -96,6 +118,12 @@ class OrderService extends MainService
         return $result;
     }
 
+    /**
+     * Статус заказа с сервиса
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getStatus($id)
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));

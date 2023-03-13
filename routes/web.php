@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/**
+ * Роуты для админки (страны, операторы, сервисы)
+ */
 Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
     Route::get('countries', 'CountryController@index')->name('activate.countries.index');
     Route::get('countries/update', 'CountryController@update')->name('activate.countries.update');
@@ -25,6 +28,9 @@ Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
     Route::get('product', 'ProductController@index')->name('activate.product.index');
 });
 
+/**
+ * Роуты для админки (пользователи)
+ */
 Route::group(['namespace' => 'User', 'prefix' => ''], function () {
     Route::get('users', 'UserController@index')->name('users.index');
 });

@@ -5,10 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\User\SmsUser;
 use App\Services\Activate\UserService;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    /**
+     * @var UserService
+     */
     private UserService $userService;
 
     public function __construct()
@@ -16,6 +18,11 @@ class UserController extends Controller
         $this->userService = new UserService();
     }
 
+    /**
+     * Все пользователи
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $users = SmsUser::paginate(10);
@@ -25,6 +32,10 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Значение баланса (вспомогательный)
+     * @return mixed
+     */
     public function balance()
     {
         $result = $this->userService->balance();
