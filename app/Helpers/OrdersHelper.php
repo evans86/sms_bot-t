@@ -7,6 +7,7 @@ class OrdersHelper
     public static function requestArray($result)
     {
         $errorCodes = [
+            'STATUS_OK' => 7,
             'ACCESS_ACTIVATION' => 6, //Сервис успешно активирован
             'ACCESS_CANCEL' => 8, //Активация отменена
             'ACCESS_READY' => 3, //Ожидание нового смс
