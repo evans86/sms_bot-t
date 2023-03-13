@@ -17,9 +17,9 @@ class OrderResource extends JsonResource
         return [
             'id' => (integer) $this->org_id,
             'phone' => $this->phone,
-            'time' => $this->time,
+            'time' => (integer) $this->time,
             'status' => $this->status,
-            'codes' => $this->codes,
+            'codes' => json_decode($this->codes),
         ];
     }
 }
