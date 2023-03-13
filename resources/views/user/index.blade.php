@@ -18,8 +18,8 @@
                 <tr>
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->telegram_id }}</td>
-                    <td>{{ $user->country_id }}</td>
-                    <td>{{ $user->operator_id }}</td>
+                    <td>{{ $user->country->name_ru }}</td>
+                    <td>{{ $user->operator->title }}</td>
                     <td>{{ $user->language }}</td>
                     <td>{{ $user->created_at }}</td>
                 </tr>

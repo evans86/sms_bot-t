@@ -23,6 +23,5 @@ class OperatorController extends Controller
         return view('activate.operator.index', compact(
             'countryOperators',
         ));
-
     }
 }

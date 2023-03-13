@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
     Route::get('countries/delete', 'CountryController@delete')->name('activate.countries.delete');
     Route::get('operators/{operators}', 'OperatorController@index')->name('activate.operators.index');
     Route::get('product', 'ProductController@index')->name('activate.product.index');
+    Route::get('order', 'OrderController@index')->name('activate.order.index');
 });
 
 /**

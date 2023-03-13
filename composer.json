@@ -12,7 +12,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
-        "league/iso3166": "^4.2"
+        "league/iso3166": "^4.2",
+        "nesbot/carbon": "^2.66"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

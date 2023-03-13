@@ -32,7 +32,9 @@ class ProductService extends MainService
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $services = $smsActivate->getPrices($country);
+
         $services = $services[$country];
+        dd($services);
 
         $result = [];
         foreach ($services as $key => $service) {
