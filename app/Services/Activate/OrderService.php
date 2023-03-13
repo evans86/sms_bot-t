@@ -83,9 +83,11 @@ class OrderService extends MainService
         }
 
         $result = $results['smsCode'];
+        $status = $this->getStatus($order->org_id);
 
         $data = [
-            'codes' => $result
+            'codes' => $result,
+            'status' => $status
         ];
 
         $order->update($data);

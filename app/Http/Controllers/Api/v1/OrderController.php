@@ -69,21 +69,9 @@ class OrderController extends Controller
 
         $this->orderService->getActive($order);
 
-
         return ApiHelpers::success($this->generateOrderArray($order));
     }
 
-//    public function getActivation(Request $request)
-//    {
-//        if (is_null($request->user_id))
-//            return ApiHelpers::error('Not found params: user_id');
-//        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
-//        if (is_null($request->order_id))
-//            return ApiHelpers::error('Not found params: order_id');
-//        $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
-//
-//        $result = $this->orderService->getActive($order);
-//    }
 
     //8 Отменить активацию (если номер Вам не подошел)
     public function closeOrder(Request $request)
@@ -115,8 +103,6 @@ class OrderController extends Controller
 
         return ApiHelpers::success($result);
     }
-
-        //?user_id=1028741753&order_id=
 
     //3 - Запросить еще одну смс
     public function secondSms(Request $request)
