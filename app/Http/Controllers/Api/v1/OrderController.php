@@ -55,6 +55,9 @@ class OrderController extends Controller
             return ApiHelpers::error('Not found params: order_id');
         $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
 
+        $this->orderService->getActive($order);
+
+
         return ApiHelpers::success($this->generateOrderArray($order));
     }
 
@@ -164,7 +167,8 @@ class OrderController extends Controller
             'phone' => $order->phone,
             'text' => 'сюда текст смс',
             'time' => $order->time,
-            'status' => $order->status
+            'status' => $order->status,
+            'codes' => $order->codes,
         ];
         return $result;
     }

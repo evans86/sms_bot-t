@@ -38,7 +38,8 @@ class OrderService extends MainService
                 'country' => $country,
                 'operator' => $serviceResult['activationOperator'],
                 'status' => $this->getStatus($id),
-                'time' => $endTime
+                'time' => $endTime,
+                'codes' => null
             ];
 
             $order = SmsOrder::create($data);
@@ -81,17 +82,16 @@ class OrderService extends MainService
                 $results = $serviceResult;
         }
 
+        $result = json_encode($results['smsCode']);
 
+        $data = [
+            'codes' => $result
+        ];
 
-//        foreach ($results as $result){
-//
-//        }
+        $order->update($data);
+        $order->save();
 
-//        $serviceResult = json_decode($serviceResult);
-//        $serviceCode = $serviceResult['smsCode'];
-//        $serviceText = $serviceResult['smsText'];
-
-        return $results['smsCode'];
+        return $result;
     }
 
     public function getStatus($id)
