@@ -220,8 +220,9 @@ class SmsActivateApi
         if ($method === 'GET') {
             $result = file_get_contents("$this->url?$serializedData");
             if ($getNumber == 1) {
-//                return OrdersHelper::requestArray($result);
-                return $result;
+                $parsedResponse = explode(':', $result);
+                return OrdersHelper::requestArray($parsedResponse);
+//                return $result;
             }
             $result = json_decode($result, true);
             return $result;
