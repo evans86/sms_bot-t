@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Helpers\ApiHelpers;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\api\OrderResource;
 use App\Models\Activate\SmsCountry;
 use App\Models\Activate\SmsOperator;
 use App\Models\Order\SmsOrder;
@@ -19,6 +20,17 @@ class OrderController extends Controller
     public function __construct()
     {
         $this->orderService = new OrderService();
+    }
+
+    public function orders(Request $request)
+    {
+        if (is_null($request->user_id))
+            return ApiHelpers::error('Not found params: user_id');
+        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
+
+        $result = OrderResource::collection(SmsOrder::query()->where(['user_id' => $user->id])->get());
+
+        return ApiHelpers::success($result);
     }
 
     public function createOrder(Request $request)
