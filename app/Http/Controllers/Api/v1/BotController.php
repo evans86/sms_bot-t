@@ -8,6 +8,7 @@ use App\Http\Requests\Bot\BotCreateRequest;
 use App\Http\Requests\Bot\BotGetRequest;
 use App\Http\Requests\Bot\BotUpdateRequest;
 use App\Models\Bot\SmsBot;
+use Illuminate\Http\Request;
 
 class BotController extends Controller
 {
@@ -83,6 +84,21 @@ class BotController extends Controller
             if ($bot->save())
                 return ApiHelpers::success($bot->toArray());
             return ApiHelpers::error('Bot not create.');
+        } catch (\Exception $e) {
+            return ApiHelpers::error($e->getMessage());
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        try {
+            $bot = SmsBot::query()->where('public_key', $request->public_key)->where('private_key', $request->private_key)->first();
+            if (empty($bot))
+                return ApiHelpers::error('Not found module.');
+            $bot->delete();
+            if (!isset($bot))
+                return ApiHelpers::success('Bot delete');
+            return ApiHelpers::error('Bot not delete.');
         } catch (\Exception $e) {
             return ApiHelpers::error($e->getMessage());
         }
