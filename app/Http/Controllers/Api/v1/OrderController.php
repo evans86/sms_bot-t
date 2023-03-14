@@ -69,17 +69,17 @@ class OrderController extends Controller
                 return ApiHelpers::error('Not found params: service');
 //        if(is_null($request->user_secret_key))
 //            return ApiHelpers::error('Not found params: user_secret_key');
-//        if(is_null($request->public_key))
-//            return ApiHelpers::error('Not found params: public_key');
-//            $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
-//            if (empty($bot))
-//                return ApiHelpers::error('Not found module.');
+        if(is_null($request->public_key))
+            return ApiHelpers::error('Not found params: public_key');
+            $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
+            if (empty($bot))
+                return ApiHelpers::error('Not found module.');
 
             $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
             $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
             $service = $request->service;
 
-            $result = $this->orderService->createOrder($service, $operator->title, $country->org_id, $user->id);
+            $result = $this->orderService->createOrder($service, $operator->title, $country->org_id, $user->id, $bot);
 
             return ApiHelpers::success($result);
         } catch (\Exception $e) {

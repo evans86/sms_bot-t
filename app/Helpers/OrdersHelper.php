@@ -32,7 +32,7 @@ class OrdersHelper
             'NO_CONNECTION' => 'Нет соединения с серверами sms-activate',
             'NO_ID_RENT' => 'Не указан id аренды',
             'NO_ACTIVATION' => 'Указанного id активации не существует',
-            'STATUS_CANCEL' => 'Активация/аренда отменена',
+            'STATUS_CANCEL' => 9, //'Активация/аренда отменена',
             'STATUS_FINISH' => 'Аренда оплачена и завершена',
             'STATUS_WAIT_CODE' => 4, //Ожидание первой смс
             'STATUS_WAIT_RETRY' => 5, //Ожидание уточнения кода,

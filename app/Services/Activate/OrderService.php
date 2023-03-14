@@ -20,7 +20,7 @@ class OrderService extends MainService
      * @return array
      * @throws \Exception
      */
-    public function createOrder($service, $operator, $country, $user_id)
+    public function createOrder($service, $operator, $country, $user_id, $bot)
     {
         try {
             $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
@@ -32,6 +32,9 @@ class OrderService extends MainService
             $dateTime = intval($dateTime);
 
             $id = intval($serviceResult['activationId']);
+            $apiPrice = $smsActivate->getPrices($country, $service);
+            $price = $apiPrice[$country]['cost'];
+            $pricePercent = $price + ($price * ($bot->percent / 100));
 
             $result = [
                 'id' => $id,
@@ -39,6 +42,11 @@ class OrderService extends MainService
                 'text' => '',
                 'time' => $dateTime,
                 'status' => $this->getStatus($id),
+                'codes' => '',
+                'country' => $country,
+                'operator' => $serviceResult['activationOperator'],
+                'service' => $service,
+                'cost' => $pricePercent
             ];
 
             $data = [
@@ -49,8 +57,9 @@ class OrderService extends MainService
                 'operator' => $serviceResult['activationOperator'],
                 'status' => $this->getStatus($id),
                 'time' => $dateTime,
-                'codes' => null,
-                'service' => $service
+                'codes' => '',
+                'service' => $service,
+                'price' => $pricePercent * 100,
             ];
 
             $order = SmsOrder::create($data);

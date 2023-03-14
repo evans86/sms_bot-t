@@ -27,6 +27,7 @@
                     <td>{{ $order->phone }}</td>
                     <td>{{ $order->country }}</td>
                     <td>{{ $order->operator }}</td>
+                    <td>{{ $order->service }}</td>
                     <td>{{ $order->status }}</td>
                     <td>{{ $order->codes }}</td>
                     <td>{{ $order->created_at }}</td>
