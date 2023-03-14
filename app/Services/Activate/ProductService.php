@@ -37,7 +37,10 @@ class ProductService extends MainService
         $result = [];
         foreach ($services as $key => $service) {
 
+
             $apiPrice = $smsActivate->getTopCountriesByService($key);
+            if(key_exists($key, $apiPrice))
+                continue;
             dd($apiPrice);
 
 
