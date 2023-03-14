@@ -159,7 +159,7 @@ class SmsActivateApi
         return $this->requestRent($requestParam, 'POST', true);
     }
 
-    public function getPricesActivate($service)
+    public function getPricesActivation($service)
     {
         $requestParam = array('api_key' => $this->apiKey, 'action' => __FUNCTION__, 'service' => $service);
         return $this->requestRent($requestParam, 'POST', true);

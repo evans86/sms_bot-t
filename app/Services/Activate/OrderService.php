@@ -33,7 +33,7 @@ class OrderService extends MainService
 
             $id = intval($serviceResult['activationId']);
 
-            $apiPrice = $smsActivate->getPricesActivate($service);
+            $apiPrice = $smsActivate->getPricesActivation($service);
             dd($apiPrice);
             $price = $apiPrice[$service][$country]['price'];
 
