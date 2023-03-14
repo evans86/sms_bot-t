@@ -36,16 +36,14 @@ class ProductService extends MainService
 
         $result = [];
         foreach ($services as $key => $service) {
-
             $price = $smsActivate->getTopCountriesByService($service);
-//            $price = $price;
-            dd($price);
+            $price = $price[$key][$country]['retail_price'];
 
             array_push($result, [
                 'name' => $key,
                 'image' => 'https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/' . $key . '0.webp',
                 'count' => $service['count'],
-                'cost' => $service['cost'],
+                'cost' => $price,
             ]);
         }
 
