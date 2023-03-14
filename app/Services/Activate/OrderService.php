@@ -97,21 +97,25 @@ class OrderService extends MainService
 
         $serviceResults = $smsActivate->getActiveActivations();
 
-        $serviceResults = $serviceResults['activeActivations'];
-
-        $results = [];
-        foreach ($serviceResults as $serviceResult) {
-            $order_id = $serviceResult['activationId'];
-            if ($order_id == $order->org_id)
-                $results = $serviceResult;
-        }
-
-        if (key_exists('smsCode', $results))
-            $result = $results['smsCode'];
-        else
-            $result = '';
-
         $status = $this->getStatus($order->org_id);
+
+        if (key_exists('activeActivations', $serviceResults)){
+            $serviceResults = $serviceResults['activeActivations'];
+
+            $results = [];
+            foreach ($serviceResults as $serviceResult) {
+                $order_id = $serviceResult['activationId'];
+                if ($order_id == $order->org_id)
+                    $results = $serviceResult;
+            }
+
+            if (key_exists('smsCode', $results))
+                $result = $results['smsCode'];
+            else
+                $result = '';
+        }else{
+            $result = '';
+        }
 
         $data = [
             'codes' => $result,
