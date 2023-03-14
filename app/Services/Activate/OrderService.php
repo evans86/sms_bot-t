@@ -32,11 +32,9 @@ class OrderService extends MainService
             $dateTime = intval($dateTime);
 
             $id = intval($serviceResult['activationId']);
+
             $apiPrice = $smsActivate->getPrices($country, $service);
-
-            dd($apiPrice);
-
-            $price = $apiPrice[$country]['cost'];
+            $price = $apiPrice[$country][$service]['cost'];
             $pricePercent = $price + ($price * ($bot->percent / 100));
 
             $result = [
