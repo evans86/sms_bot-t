@@ -92,7 +92,7 @@ class OrderService extends MainService
         $order->update($data);
         $order->save();
 
-        return $serviceResult;
+        return $order;
     }
 
     /**
