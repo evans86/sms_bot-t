@@ -16,6 +16,7 @@ class OrderService extends MainService
      * @param $operator
      * @param $country
      * @param $user_id
+     * @param $bot
      * @return array
      * @throws \Exception
      */
