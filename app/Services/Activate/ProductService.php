@@ -39,14 +39,19 @@ class ProductService extends MainService
 
 
             $apiPrice = $smsActivate->getTopCountriesByService($key);
-            if(key_exists($key, $apiPrice))
-                continue;
+
 
 
 //            dd($apiPrice);
 
+            if(key_exists($key, $apiPrice)){
+                $price = $apiPrice[$key][$country]['retail_price'];
+            }else{
+                continue;
+            }
 
-            $price = $apiPrice[$key][$country]['retail_price'];
+
+
 
 //            dd($price);
 
