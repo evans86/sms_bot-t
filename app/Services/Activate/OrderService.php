@@ -107,9 +107,12 @@ class OrderService extends MainService
 
         $serviceResults = $smsActivate->getActiveActivations();
 
-        $status = $this->getStatus($order->org_id);
+        if ($order->status == 6)
+            $status = 6;
+        else
+            $status = $this->getStatus($order->org_id);
 
-        if (key_exists('activeActivations', $serviceResults)){
+        if (key_exists('activeActivations', $serviceResults)) {
             $serviceResults = $serviceResults['activeActivations'];
 
             $results = [];
@@ -123,7 +126,7 @@ class OrderService extends MainService
                 $result = $results['smsCode'];
             else
                 $result = '';
-        }else{
+        } else {
             $result = '';
         }
 
