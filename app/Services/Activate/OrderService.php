@@ -106,7 +106,11 @@ class OrderService extends MainService
                 $results = $serviceResult;
         }
 
-        $result = $results['smsCode'];
+        if (key_exists('smsCode', $results))
+            $result = $results['smsCode'];
+        else
+            $result = '';
+
         $status = $this->getStatus($order->org_id);
 
         $data = [

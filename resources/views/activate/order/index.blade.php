@@ -10,6 +10,7 @@
                 <th scope="col">Номер телефона</th>
                 <th scope="col">Страна</th>
                 <th scope="col">Оператор</th>
+                <th scope="col">Сервис</th>
                 <th scope="col">Статус</th>
                 <th scope="col">Коды</th>
                 <th scope="col">Создан</th>
