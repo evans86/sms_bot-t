@@ -38,6 +38,8 @@ class ProductService extends MainService
         foreach ($services as $key => $service) {
 
             $apiPrice = $smsActivate->getTopCountriesByService($key);
+            dd($apiPrice);
+
 
             $price = $apiPrice[$key][$country]['retail_price'];
 
