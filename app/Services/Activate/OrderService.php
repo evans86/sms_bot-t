@@ -38,8 +38,6 @@ class OrderService extends MainService
             $price = $apiPrice[$country]['retail_price'];
             $pricePercent = $price + ($price * ($bot->percent / 100));
 
-            dd($pricePercent);
-
             $result = [
                 'id' => $id,
                 'phone' => $serviceResult['phoneNumber'],
