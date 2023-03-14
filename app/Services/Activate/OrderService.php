@@ -41,7 +41,6 @@ class OrderService extends MainService
             $result = [
                 'id' => $id,
                 'phone' => $serviceResult['phoneNumber'],
-                'text' => '',
                 'time' => $dateTime,
                 'status' => $this->getStatus($id),
                 'codes' => '',

@@ -319,6 +319,11 @@ class OrderController extends Controller
             'time' => $order->time,
             'status' => $order->status,
             'codes' => $order->codes,
+            'country' => $order->country,
+            'operator' => $order->operator,
+            'service' => $order->service,
+            'cost' => $order->price / 100
+
         ];
         return $result;
     }

@@ -40,7 +40,7 @@ class ProductService extends MainService
                 'name' => $key,
                 'image' => 'https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/' . $key . '0.webp',
                 'count' => $service['count'],
-                'cost' => $service['cost'],
+                'cost' => $smsActivate->getTopCountriesByService($service)[$country]['retail_price'],
             ]);
         }
 
