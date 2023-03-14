@@ -13,7 +13,7 @@ class AddServicesToSmsOrder extends Migration
      */
     public function up()
     {
-        Schema::table('sms_order', function (Blueprint $table) {
+        Schema::table('sms_orders', function (Blueprint $table) {
             $table->string('service')->nullable();
         });
     }
