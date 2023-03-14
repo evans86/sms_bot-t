@@ -37,7 +37,9 @@ class ProductService extends MainService
         $result = [];
         foreach ($services as $key => $service) {
             $price = $smsActivate->getTopCountriesByService($service);
-            $price = $price[$key][$country]['retail_price'];
+            $price = $price[$key][$country];
+
+            dd($price);
 
             array_push($result, [
                 'name' => $key,
