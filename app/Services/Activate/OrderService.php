@@ -33,6 +33,9 @@ class OrderService extends MainService
 
             $id = intval($serviceResult['activationId']);
             $apiPrice = $smsActivate->getPrices($country, $service);
+
+            dd($apiPrice);
+
             $price = $apiPrice[$country]['cost'];
             $pricePercent = $price + ($price * ($bot->percent / 100));
 
