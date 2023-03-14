@@ -49,7 +49,8 @@ class OrderService extends MainService
                 'operator' => $serviceResult['activationOperator'],
                 'status' => $this->getStatus($id),
                 'time' => $dateTime,
-                'codes' => null
+                'codes' => null,
+                'service' => $service
             ];
 
             $order = SmsOrder::create($data);
