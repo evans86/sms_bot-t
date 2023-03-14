@@ -22,7 +22,8 @@ class OrderResource extends JsonResource
             'codes' => json_decode($this->codes),
             'country' => $this->country,
             'operator' => $this->operator,
-            'service' => $this->service
+            'service' => $this->service,
+            'cost' => $this->price
         ];
     }
 }
