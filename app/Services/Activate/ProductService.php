@@ -39,7 +39,10 @@ class ProductService extends MainService
             $price = $smsActivate->getTopCountriesByService($service);
             $price = $price[$key][$country];
 
-            dd($price);
+            if(key_exists('retail_price', $price))
+                $price = $price[$key][$country]['retail_price'];
+            else
+                $price = $price[$key][$country]['price'];
 
             array_push($result, [
                 'name' => $key,
