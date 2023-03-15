@@ -79,12 +79,14 @@ class OrderService extends MainService
      *
      * @param $order
      * @param $status
+     * @param $bot
      * @return mixed
      */
-    public function setStatus($order, $status)
+    public function setStatus($order, $status, $bot)
     {
         //API с бота
-        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+//        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+        $smsActivate = new SmsActivateApi($bot->api_key);
 
         $serviceResult = $smsActivate->setStatus($order->org_id, $status);
 
@@ -151,12 +153,14 @@ class OrderService extends MainService
      * Статус заказа с сервиса
      *
      * @param $id
+     * @param $bot
      * @return mixed
      */
-    public function getStatus($id)
+    public function getStatus($id, $bot)
     {
         //API с бота
-        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+//        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+        $smsActivate = new SmsActivateApi($bot->api_key);
 
         $serviceResult = $smsActivate->getStatus($id);
 

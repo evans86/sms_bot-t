@@ -127,6 +127,7 @@ class OrderController extends Controller
      * Request[
      *  'user_id'
      *  'order_id'
+     *  'public_key'
      * ]
      *
      * @param Request $request
@@ -142,13 +143,13 @@ class OrderController extends Controller
         $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
         //        if(is_null($request->user_secret_key))
 //            return ApiHelpers::error('Not found params: user_secret_key');
-//        if(is_null($request->public_key))
-//            return ApiHelpers::error('Not found params: public_key');
-//            $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
-//            if (empty($bot))
-//                return ApiHelpers::error('Not found module.');
+        if (is_null($request->public_key))
+            return ApiHelpers::error('Not found params: public_key');
+        $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
+        if (empty($bot))
+            return ApiHelpers::error('Not found module.');
 
-        $result = $this->orderService->setStatus($order, 1);
+        $result = $this->orderService->setStatus($order, 1, $bot);
 
         return ApiHelpers::success($result);
     }
@@ -159,6 +160,7 @@ class OrderController extends Controller
      * Request[
      *  'user_id'
      *  'order_id'
+     *  'public_key'
      * ]
      *
      * @param Request $request
@@ -174,13 +176,13 @@ class OrderController extends Controller
         $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
         //        if(is_null($request->user_secret_key))
 //            return ApiHelpers::error('Not found params: user_secret_key');
-//        if(is_null($request->public_key))
-//            return ApiHelpers::error('Not found params: public_key');
-//            $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
-//            if (empty($bot))
-//                return ApiHelpers::error('Not found module.');
+        if (is_null($request->public_key))
+            return ApiHelpers::error('Not found params: public_key');
+        $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
+        if (empty($bot))
+            return ApiHelpers::error('Not found module.');
 
-        $result = $this->orderService->setStatus($order, 3);
+        $result = $this->orderService->setStatus($order, 3, $bot);
 
         return ApiHelpers::success($result);
     }
@@ -191,6 +193,7 @@ class OrderController extends Controller
      * Request[
      *  'user_id'
      *  'order_id'
+     *  'public_key'
      * ]
      *
      * @param Request $request
@@ -206,13 +209,13 @@ class OrderController extends Controller
         $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
         //        if(is_null($request->user_secret_key))
 //            return ApiHelpers::error('Not found params: user_secret_key');
-//        if(is_null($request->public_key))
-//            return ApiHelpers::error('Not found params: public_key');
-//            $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
-//            if (empty($bot))
-//                return ApiHelpers::error('Not found module.');
+        if (is_null($request->public_key))
+            return ApiHelpers::error('Not found params: public_key');
+        $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
+        if (empty($bot))
+            return ApiHelpers::error('Not found module.');
 
-        $result = $this->orderService->setStatus($order, 6);
+        $result = $this->orderService->setStatus($order, 6, $bot);
 
         return ApiHelpers::success($result);
     }
@@ -223,6 +226,7 @@ class OrderController extends Controller
      * Request[
      *  'user_id'
      *  'order_id'
+     *  'public_key'
      * ]
      *
      * @param Request $request
@@ -238,13 +242,13 @@ class OrderController extends Controller
         $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
         //        if(is_null($request->user_secret_key))
 //            return ApiHelpers::error('Not found params: user_secret_key');
-//        if(is_null($request->public_key))
-//            return ApiHelpers::error('Not found params: public_key');
-//            $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
-//            if (empty($bot))
-//                return ApiHelpers::error('Not found module.');
+        if (is_null($request->public_key))
+            return ApiHelpers::error('Not found params: public_key');
+        $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
+        if (empty($bot))
+            return ApiHelpers::error('Not found module.');
 
-        $result = $this->orderService->setStatus($order, 8);
+        $result = $this->orderService->setStatus($order, 8, $bot);
 
         return ApiHelpers::success($result);
     }
@@ -255,6 +259,7 @@ class OrderController extends Controller
      * Request[
      *  'user_id'
      *  'order_id'
+     *  'public_key'
      * ]
      *
      * @param Request $request
@@ -270,13 +275,13 @@ class OrderController extends Controller
         $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
         //        if(is_null($request->user_secret_key))
 //            return ApiHelpers::error('Not found params: user_secret_key');
-//        if(is_null($request->public_key))
-//            return ApiHelpers::error('Not found params: public_key');
-//            $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
-//            if (empty($bot))
-//                return ApiHelpers::error('Not found module.');
+        if (is_null($request->public_key))
+            return ApiHelpers::error('Not found params: public_key');
+        $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
+        if (empty($bot))
+            return ApiHelpers::error('Not found module.');
 
-        $result = $this->orderService->getActive($order);
+        $result = $this->orderService->getActive($order, $bot);
 
         return ApiHelpers::success($result);
     }
@@ -287,6 +292,7 @@ class OrderController extends Controller
      * Request[
      *  'user_id'
      *  'order_id'
+     *  'public_key'
      * ]
      *
      * @param Request $request
@@ -298,13 +304,13 @@ class OrderController extends Controller
             return ApiHelpers::error('Not found params: user_id');
         //        if(is_null($request->user_secret_key))
 //            return ApiHelpers::error('Not found params: user_secret_key');
-//        if(is_null($request->public_key))
-//            return ApiHelpers::error('Not found params: public_key');
-//            $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
-//            if (empty($bot))
-//                return ApiHelpers::error('Not found module.');
+        if (is_null($request->public_key))
+            return ApiHelpers::error('Not found params: public_key');
+        $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
+        if (empty($bot))
+            return ApiHelpers::error('Not found module.');
 
-        $result = $this->orderService->getStatus($request->id);
+        $result = $this->orderService->getStatus($request->id, $bot);
 
         return ApiHelpers::success($result);
     }
@@ -325,7 +331,6 @@ class OrderController extends Controller
             'operator' => $order->operator,
             'service' => $order->service,
             'cost' => $order->price / 100
-
         ];
         return $result;
     }
