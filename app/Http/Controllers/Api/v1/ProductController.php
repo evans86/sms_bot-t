@@ -47,4 +47,36 @@ class ProductController extends Controller
         $products = $this->productService->getPricesCountry();
         return ApiHelpers::success($products);
     }
+
+    public function setService(Request $request)
+    {
+        if (is_null($request->user_id))
+            return ApiHelpers::error('Not found params: user_id');
+        if (is_null($request->service))
+            return ApiHelpers::error('Not found params: service');
+        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
+        if (is_null($user))
+            return ApiHelpers::error('Not found: user');
+        $user->service = $request->service;
+        $user->save();
+        return ApiHelpers::success($this->generateUserArray($user));
+    }
+
+    /**
+     * @param SmsUser $user
+     * @param SmsCountry $country
+     * @param SmsOperator $operator
+     * @return array
+     */
+    private function generateUserArray(SmsUser $user): array
+    {
+        $result = [
+            'id' => $user->telegram_id,
+            'country' => $user->org_id,
+            'operator' => $user->title,
+            'language' => $user->language,
+            'service' => $user->service
+        ];
+        return $result;
+    }
 }

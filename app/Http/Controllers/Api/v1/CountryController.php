@@ -8,19 +8,41 @@ use App\Http\Resources\api\CountryResource;
 use App\Models\Activate\SmsCountry;
 use App\Models\Activate\SmsOperator;
 use App\Models\User\SmsUser;
+use App\Services\Activate\CountryService;
+use App\Services\Activate\ProductService;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
     /**
+     * @var CountryService
+     */
+    private CountryService $countryService;
+
+    public function __construct()
+    {
+        $this->countryService = new CountryService();
+    }
+    /**
      * Передача списка стран согласно коллекции
      *
-     * @return array
+     *
      */
-    public function index()
+    public function index(Request $request)
     {
-        $result = CountryResource::collection(SmsCountry::all());
-        return ApiHelpers::success($result);
+        if (is_null($request->user_id))
+            return ApiHelpers::error('Not found params: user_id');
+        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
+        if (is_null($user))
+            return ApiHelpers::error('Not found: user');
+//        $user->language = $request->language;
+
+//        $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
+//        $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
+        $countries = $this->countryService->getPricesService($user->service);
+        return ApiHelpers::success($countries);
+//        $countries = CountryResource::collection(SmsCountry::all());
+//        return ApiHelpers::success($result);
     }
 
     /**
@@ -66,7 +88,8 @@ class CountryController extends Controller
             'id' => $user->telegram_id,
             'country' => $country->org_id,
             'operator' => $operator->title,
-            'language' => $user->language
+            'language' => $user->language,
+            'service' => $user->service
         ];
         return $result;
     }

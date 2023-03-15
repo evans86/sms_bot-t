@@ -37,6 +37,7 @@ Route::resources([
  * Роуты API (пользователи)
  */
 Route::get('setCountry', [CountryController::class, 'setCountry']);
+Route::get('setService', [ProductController::class, 'setService']);
 Route::get('setOperator', [OperatorController::class, 'setOperator']);
 Route::get('setLanguage', [UserController::class, 'setLanguage']);
 Route::get('getUser', [UserController::class, 'getUser']);

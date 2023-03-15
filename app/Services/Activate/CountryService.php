@@ -24,6 +24,7 @@ class CountryService extends MainService
      */
     public function getApiCountries()
     {
+        //оставить свой API
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $countries = $smsActivate->getCountries();
@@ -42,5 +43,30 @@ class CountryService extends MainService
 
             $this->operatorService->getOperatorsByCountry($country->id, $country->org_id);
         }
+    }
+
+    public function getPricesService($service = null)
+    {
+        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+
+        $countries = $smsActivate->getTopCountriesByService($service, true);
+
+        $result = [];
+        foreach ($countries as $key => $country) {
+            $smsCountry = SmsCountry::query()->where(['org_id' => $country['country']])->first();
+
+            array_push($result, [
+                'id' => $smsCountry->org_id,
+                'title_ru' => $smsCountry->name_ru,
+                'title_eng' => $smsCountry->name_en,
+                'image' => $smsCountry->image,
+                'count' => $country["count"],
+                'cost' => $country["retail_price"],
+            ]);
+        }
+
+//        dd($result);
+
+        return $result;
     }
 }

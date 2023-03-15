@@ -23,6 +23,7 @@ class OrderService extends MainService
     public function createOrder($service, $operator, $country, $user_id, $bot)
     {
         try {
+            //API с бота
             $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
             $serviceResult = $smsActivate->getNumberV2($service, $country);
@@ -81,6 +82,7 @@ class OrderService extends MainService
      */
     public function setStatus($order, $status)
     {
+        //API с бота
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $serviceResult = $smsActivate->setStatus($order->org_id, $status);
@@ -103,6 +105,7 @@ class OrderService extends MainService
      */
     public function getActive($order)
     {
+        //API с бота
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $serviceResults = $smsActivate->getActiveActivations();
@@ -149,6 +152,7 @@ class OrderService extends MainService
      */
     public function getStatus($id)
     {
+        //API с бота
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $serviceResult = $smsActivate->getStatus($id);

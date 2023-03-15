@@ -17,6 +17,7 @@ class OperatorService extends MainService
      */
     public function getOperatorsByCountry($country_id, $country_org_id)
     {
+        //оставить свой API
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $operators = $smsActivate->getOperators($country_org_id);

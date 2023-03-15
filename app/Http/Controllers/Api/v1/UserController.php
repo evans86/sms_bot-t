@@ -106,7 +106,8 @@ class UserController extends Controller
             'id' => (integer)$user->telegram_id,
             'country' => $country->org_id,
             'operator' => $operator->title,
-            'language' => $user->language
+            'language' => $user->language,
+            'service' => $user->service
         ];
         return $result;
     }
