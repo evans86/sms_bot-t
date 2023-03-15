@@ -61,7 +61,7 @@ class OrderController extends Controller
      */
     public function createOrder(Request $request)
     {
-//        try {
+        try {
             if (is_null($request->user_id))
                 return ApiHelpers::error('Not found params: user_id');
             $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
@@ -82,9 +82,9 @@ class OrderController extends Controller
             $result = $this->orderService->createOrder($service, $operator->title, $request->country, $user->id, $bot);
 
             return ApiHelpers::success($result);
-//        } catch (\Exception $e) {
-//            return ApiHelpers::error($e->getMessage());
-//        }
+        } catch (\Exception $e) {
+            return ApiHelpers::error($e->getMessage());
+        }
     }
 
     /**
