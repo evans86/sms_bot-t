@@ -194,9 +194,10 @@ class OrderService extends MainService
         );
 
         $serializedData = http_build_query($requestParam);
+
         $options = array(
             'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'header' => 'Content-Type: application/x-www-form-urlencoded' . PHP_EOL,
                 'method' => 'POST',
                 'content' => $serializedData
             )
