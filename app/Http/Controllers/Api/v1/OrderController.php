@@ -65,8 +65,8 @@ class OrderController extends Controller
             if (is_null($request->user_id))
                 return ApiHelpers::error('Not found params: user_id');
             $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
-//            if (is_null($request->service))
-//                return ApiHelpers::error('Not found params: service');
+            if (is_null($request->country))
+                return ApiHelpers::error('Not found params: country');
 //        if(is_null($request->user_secret_key))
 //            return ApiHelpers::error('Not found params: user_secret_key');
         if(is_null($request->public_key))
@@ -75,7 +75,7 @@ class OrderController extends Controller
             if (empty($bot))
                 return ApiHelpers::error('Not found module.');
 
-            $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
+            $country = SmsCountry::query()->where(['org_id' => $request->country])->first();
             $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
             $service = $user->service;
 
