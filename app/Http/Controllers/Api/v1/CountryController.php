@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\api\CountryResource;
 use App\Models\Activate\SmsCountry;
 use App\Models\Activate\SmsOperator;
+use App\Models\Bot\SmsBot;
 use App\Models\User\SmsUser;
 use App\Services\Activate\CountryService;
 use App\Services\Activate\ProductService;
@@ -23,6 +24,7 @@ class CountryController extends Controller
     {
         $this->countryService = new CountryService();
     }
+
     /**
      * Передача списка стран согласно коллекции
      *
@@ -35,11 +37,16 @@ class CountryController extends Controller
         $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
         if (is_null($user))
             return ApiHelpers::error('Not found: user');
+        if (is_null($request->public_key))
+            return ApiHelpers::error('Not found params: public_key');
+        $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
+        if (empty($bot))
+            return ApiHelpers::error('Not found module.');
 //        $user->language = $request->language;
 
 //        $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
 //        $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
-        $countries = $this->countryService->getPricesService($user->service);
+        $countries = $this->countryService->getPricesService($bot, $user->service);
         return ApiHelpers::success($countries);
 //        $countries = CountryResource::collection(SmsCountry::all());
 //        return ApiHelpers::success($result);

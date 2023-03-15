@@ -45,7 +45,7 @@ class CountryService extends MainService
         }
     }
 
-    public function getPricesService($service = null)
+    public function getPricesService($bot, $service = null)
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
@@ -55,13 +55,16 @@ class CountryService extends MainService
         foreach ($countries as $key => $country) {
             $smsCountry = SmsCountry::query()->where(['org_id' => $country['country']])->first();
 
+            $price = $country["retail_price"];
+            $pricePercent = $price + ($price * ($bot->percent / 100));
+
             array_push($result, [
                 'id' => $smsCountry->org_id,
                 'title_ru' => $smsCountry->name_ru,
                 'title_eng' => $smsCountry->name_en,
                 'image' => $smsCountry->image,
                 'count' => $country["count"],
-                'cost' => $country["retail_price"],
+                'cost' => $pricePercent,
             ]);
         }
 
