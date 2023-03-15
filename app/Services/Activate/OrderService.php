@@ -168,6 +168,8 @@ class OrderService extends MainService
     }
 
     /**
+     * Списание баланса на Bot-t
+     *
      * @param $order
      * @param $bot
      * @return void
@@ -178,7 +180,7 @@ class OrderService extends MainService
         $public_key = $bot->public_key;
         $private_key = $bot->private_key;
         $user_id = $order->user->telegram_id;
-        $secret_key = 'key';
+        $secret_key = 'b41c9f4e38d4954419a43b8b52d67575b41c9f4e52d6c011b41c6998bf81bf81';
         $amount = $order->price;
         $comment = 'Модуль приема СМС';
 
