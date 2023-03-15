@@ -40,9 +40,13 @@ class ProductService extends MainService
         $result = [];
         foreach ($services as $key => $service) {
 
-            $priceService = $smsActivate->getTopCountriesByService($key);
+            try {
+                $priceService = $smsActivate->getTopCountriesByService($key);
+            }catch (\Exception $e) {
+                continue;
+            }
 
-            if ($priceService != null && (key_exists($country, $priceService))) {
+            if (key_exists($country, $priceService)) {
                 $priceService = $priceService[$country]['retail_price'];
 
                 array_push($result, [
