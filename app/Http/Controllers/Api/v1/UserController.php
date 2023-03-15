@@ -57,6 +57,7 @@ class UserController extends Controller
             $user->country_id = $country->id;
             $user->operator_id = $operator->id;
             $user->language = SmsUser::LANGUAGE_RU;
+            $user->service = null;
             $user->save();
         } else {
             $country = SmsCountry::query()->where(['id' => $user->country_id])->first();

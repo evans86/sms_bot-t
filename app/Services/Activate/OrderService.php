@@ -24,7 +24,8 @@ class OrderService extends MainService
     {
         try {
             //API с бота
-            $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+//            $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+            $smsActivate = new SmsActivateApi($bot->api_key);
 
             $serviceResult = $smsActivate->getNumberV2($service, $country);
 
@@ -101,12 +102,14 @@ class OrderService extends MainService
      * Получение активных заказов с сервиса
      *
      * @param $order
-     * @return mixed
+     * @param $bot
+     * @return mixed|string
      */
-    public function getActive($order)
+    public function getActive($order, $bot)
     {
         //API с бота
-        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+//        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+        $smsActivate = new SmsActivateApi($bot->api_key);
 
         $serviceResults = $smsActivate->getActiveActivations();
 
