@@ -16,6 +16,7 @@ class ProductService extends MainService
      */
     public function getAllProducts($country = null, $operator = null)
     {
+        //оставить свой API
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         return $smsActivate->getNumbersStatus($country, $operator);
@@ -29,21 +30,34 @@ class ProductService extends MainService
      */
     public function getPricesCountry($country = null)
     {
+        //оставить свой API
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
         $services = $smsActivate->getPrices($country);
         $services = $services[$country];
 
+
         $result = [];
         foreach ($services as $key => $service) {
 
-            array_push($result, [
-                'name' => $key,
-                'image' => 'https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/' . $key . '0.webp',
-                'count' => $service['count'],
-                'cost' => $service['cost'],
-            ]);
+            $priceService = $smsActivate->getTopCountriesByService($key);
+
+            if ($priceService != null && (key_exists($country, $priceService))) {
+                $priceService = $priceService[$country]['retail_price'];
+
+                array_push($result, [
+                    'name' => $key,
+                    'image' => 'https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/' . $key . '0.webp',
+                    'count' => $service['count'],
+                    'cost' => $priceService,
+                ]);
+
+            } else {
+                continue;
+            }
         }
+
+//        dd($result);
 
         return $result;
     }
