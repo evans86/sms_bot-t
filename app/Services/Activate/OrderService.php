@@ -22,7 +22,7 @@ class OrderService extends MainService
      */
     public function createOrder($service, $operator, $country, $user_id, $bot)
     {
-        try {
+//        try {
             //API с бота
             $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
@@ -68,9 +68,9 @@ class OrderService extends MainService
             $order->save();
 
             return $result;
-        } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
-        }
+//        } catch (\Exception $e) {
+//            throw new \Exception($e->getMessage());
+//        }
     }
 
     /**
