@@ -44,7 +44,7 @@ class OrderService extends MainService
                 'id' => $id,
                 'phone' => $serviceResult['phoneNumber'],
                 'time' => $dateTime,
-                'status' => $this->getStatus($id),
+                'status' => $this->getStatus($id, $bot),
                 'codes' => '',
                 'country' => $country,
                 'operator' => $serviceResult['activationOperator'],
@@ -58,7 +58,7 @@ class OrderService extends MainService
                 'phone' => $serviceResult['phoneNumber'],
                 'country' => $country,
                 'operator' => $serviceResult['activationOperator'],
-                'status' => $this->getStatus($id),
+                'status' => $this->getStatus($id, $bot),
                 'time' => $dateTime,
                 'codes' => '',
                 'service' => $service,
@@ -118,7 +118,7 @@ class OrderService extends MainService
         if ($order->status == 6)
             $status = 6;
         else
-            $status = $this->getStatus($order->org_id);
+            $status = $this->getStatus($order->org_id, $bot);
 
         if (key_exists('activeActivations', $serviceResults)) {
             $serviceResults = $serviceResults['activeActivations'];
