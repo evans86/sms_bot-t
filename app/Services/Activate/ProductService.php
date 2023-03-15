@@ -33,32 +33,36 @@ class ProductService extends MainService
         //оставить свой API
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
-        $services = $smsActivate->getPrices($country);
-        $services = $services[$country];
+//        $services = $smsActivate->getPrices($country);
+//        $services = $services[$country];
 
+        $services = $smsActivate->getTopCountriesByService();
+
+//        $priceService = $smsActivate->getTopCountriesByService('tg');
+
+//        $price = $priceService[$country];
+
+//        dd($priceService);
 
         $result = [];
         foreach ($services as $key => $service) {
 
-            try {
-                $priceService = $smsActivate->getTopCountriesByService($key);
-            }catch (\Exception $e) {
-                continue;
-            }
 
-            if (key_exists($country, $priceService)) {
-                $priceService = $priceService[$country]['retail_price'];
+//            $priceService = $priceService[$country]['retail_price'];
 
-                array_push($result, [
-                    'name' => $key,
-                    'image' => 'https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/' . $key . '0.webp',
-                    'count' => $service['count'],
-                    'cost' => $priceService,
-                ]);
 
-            } else {
-                continue;
-            }
+//            $priceService = $smsActivate->getPrices(null, $key);
+
+//            dd($priceService[$country]);
+
+//            $result = $priceService;
+
+            array_push($result, [
+                'name' => $key,
+                'image' => 'https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/' . $key . '0.webp',
+//                'count' => $service['count'],
+//                'cost' => $service['cost'],
+            ]);
         }
 
 //        dd($result);
