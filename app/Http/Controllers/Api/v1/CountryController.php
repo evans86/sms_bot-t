@@ -28,7 +28,13 @@ class CountryController extends Controller
     /**
      * Передача списка стран согласно коллекции
      *
+     * Request[
+     *  'user_id'
+     *  'public_key'
+     * ]
      *
+     * @param Request $request
+     * @return array|string
      */
     public function index(Request $request)
     {
@@ -42,14 +48,9 @@ class CountryController extends Controller
         $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
         if (empty($bot))
             return ApiHelpers::error('Not found module.');
-//        $user->language = $request->language;
 
-//        $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
-//        $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
         $countries = $this->countryService->getPricesService($bot, $user->service);
         return ApiHelpers::success($countries);
-//        $countries = CountryResource::collection(SmsCountry::all());
-//        return ApiHelpers::success($result);
     }
 
     /**

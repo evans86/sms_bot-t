@@ -23,31 +23,22 @@ class ProductController extends Controller
     }
 
     /**
-     * Передача значений доступных сервисов для страны и оператора
+     * Передача значений доступных сервисов
      *
-     * Request[
-     *  'user_id'
-     * ]
-     *
-     * @param Request $request
-     * @return array|string
+     * @return array
      */
-    public function index(Request $request)
+    public function index()
     {
-//        if (is_null($request->user_id))
-//            return ApiHelpers::error('Not found params: user_id');
-//        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
-//        if (is_null($user))
-//            return ApiHelpers::error('Not found: user');
-//        $user->language = $request->language;
-//
-//        $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
-//        $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
-
         $products = $this->productService->getPricesCountry();
         return ApiHelpers::success($products);
     }
 
+    /**
+     * Задать значение сервиса
+     *
+     * @param Request $request
+     * @return array|string
+     */
     public function setService(Request $request)
     {
         if (is_null($request->user_id))
@@ -64,8 +55,6 @@ class ProductController extends Controller
 
     /**
      * @param SmsUser $user
-     * @param SmsCountry $country
-     * @param SmsOperator $operator
      * @return array
      */
     private function generateUserArray(SmsUser $user): array

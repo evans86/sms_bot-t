@@ -25,41 +25,17 @@ class ProductService extends MainService
     /**
      * Сервисы доступные для конкретной страны
      *
-     * @param $country
      * @return array
      */
-    public function getPricesCountry($country = null)
+    public function getPricesCountry()
     {
         //оставить свой API
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
-//        $services = $smsActivate->getPrices($country);
-//        $services = $services[$country];
-
         $services = $smsActivate->getTopCountriesByService();
-
-
-//        $priceService = $smsActivate->getTopCountriesByService('tg');
-
-//        $price = $priceService[$country];
-
-//        dd($priceService);
 
         $result = [];
         foreach ($services as $key => $service) {
-
-//            $firstPrice = $smsActivate->getPrices(null, $key);
-//            $firstPrice = next($firstPrice);
-//            $firstPrice = next($service);
-//            dd($firstPrice["count"]);
-//            $priceService = $priceService[$country]['retail_price'];
-
-//            $result = $firstPrice;
-//            $priceService = $smsActivate->getPrices(null, $key);
-
-//            dd($priceService[$country]);
-
-//            $result = $priceService;
 
             array_push($result, [
                 'name' => $key,
@@ -68,8 +44,6 @@ class ProductService extends MainService
 //                'cost' => $firstPrice["price"],
             ]);
         }
-
-//dd($result);
 
         return $result;
     }

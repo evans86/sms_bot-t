@@ -89,6 +89,12 @@ class BotController extends Controller
         }
     }
 
+    /**
+     * Удаление модуля
+     *
+     * @param Request $request
+     * @return array|string
+     */
     public function delete(Request $request)
     {
         try {

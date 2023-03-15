@@ -45,6 +45,13 @@ class CountryService extends MainService
         }
     }
 
+    /**
+     * Список стран по сервису
+     *
+     * @param $bot
+     * @param $service
+     * @return array
+     */
     public function getPricesService($bot, $service = null)
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
@@ -67,8 +74,6 @@ class CountryService extends MainService
                 'cost' => $pricePercent,
             ]);
         }
-
-//        dd($result);
 
         return $result;
     }
