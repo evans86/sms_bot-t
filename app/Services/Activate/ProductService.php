@@ -48,10 +48,13 @@ class ProductService extends MainService
         $result = [];
         foreach ($services as $key => $service) {
 
-            $firstPrice = $smsActivate->getPrices(null, $key);
+//            $firstPrice = $smsActivate->getPrices(null, $key);
+//            $firstPrice = next($firstPrice);
+//            $firstPrice = next($service);
+//            dd($firstPrice["count"]);
 //            $priceService = $priceService[$country]['retail_price'];
 
-
+//            $result = $firstPrice;
 //            $priceService = $smsActivate->getPrices(null, $key);
 
 //            dd($priceService[$country]);
@@ -61,12 +64,12 @@ class ProductService extends MainService
             array_push($result, [
                 'name' => $key,
                 'image' => 'https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/' . $key . '0.webp',
-                'count' => $firstPrice['count'],
-                'cost' => $firstPrice['cost'],
+//                'count' => $firstPrice["count"],
+//                'cost' => $firstPrice["price"],
             ]);
         }
 
-//        dd($result);
+//dd($result);
 
         return $result;
     }
