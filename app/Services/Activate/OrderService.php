@@ -166,4 +166,40 @@ class OrderService extends MainService
 
         return $serviceResult;
     }
+
+    /**
+     * @param $order
+     * @param $bot
+     * @return void
+     */
+    public function subtractBalance($order, $bot)
+    {
+        $link = 'https://api.bot-t.com/v1/module/bot/subtract-balance';
+        $public_key = $bot->public_key;
+        $private_key = $bot->private_key;
+        $user_id = $order->user->telegram_id;
+        $secret_key = 'key';
+        $amount = $order->price;
+        $comment = 'Модуль приема СМС';
+
+        $requestParam = array(
+            'public_key' => $public_key,
+            'private_key' => $private_key,
+            'user_id' => $user_id,
+            'secret_key' => $secret_key,
+            'amount' => $amount,
+            'comment' => $comment,
+        );
+
+        $serializedData = http_build_query($requestParam);
+        $options = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => $serializedData
+            )
+        );
+        $context = stream_context_create($options);
+        $result = file_get_contents($link, false, $context);
+    }
 }
