@@ -19,9 +19,9 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*', 'https://sms.bot-t.com/'],
+    'allowed_origins' => ['*'],
 
-    'allowed_origins_patterns' => ['/https?:\/\/sms.bot-t\.com\/?\z/'],
+    'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
 
