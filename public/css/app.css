@@ -615,6 +615,13 @@ progress {
   line-height: 1;
 }
 
+.adm {
+    background: url(../img/adm.png) no-repeat center center;
+    width: 135px;
+    height: 135px;
+}
+
+
 .figure-caption {
   font-size: 0.875em;
   color: #6c757d;
