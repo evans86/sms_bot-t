@@ -8,7 +8,7 @@
     <link rel="icon" href="{{ url('css/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css' )}}">
     <link rel="stylesheet" href="{{ asset('css/flag-icon.css' )}}"/>
-    <title>Document</title>
+    <title>Activate</title>
 </head>
 <body class="d-flex flex-column min-vh-100" style="background-image: url('{{ asset('img/bg.svg')}}');">
 <div class="container">
