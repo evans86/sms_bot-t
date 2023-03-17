@@ -62,10 +62,7 @@ class CountryService extends MainService
         foreach ($countries as $key => $country) {
             $smsCountry = SmsCountry::query()->where(['org_id' => $country['country']])->first();
 
-//            dd($country);
             $price = $country["retail_price"];
-
-
 
             $pricePercent = $price + ($price * ($bot->percent / 100));
 
