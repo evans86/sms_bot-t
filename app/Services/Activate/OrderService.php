@@ -37,7 +37,7 @@ class OrderService extends MainService
 
             $countries = $smsActivate->getTopCountriesByService($service);
             foreach ($countries as $key => $country) {
-                if($country['country'] == $country_id){
+                if ($country['country'] == $country_id) {
                     $price = $country["retail_price"];
                     $pricePercent = $price + ($price * ($bot->percent / 100));
                     break;
@@ -199,18 +199,33 @@ class OrderService extends MainService
 
         $serializedData = http_build_query($requestParam);
 
-        $options = array(
-            'http' => array(
-                'method' => 'POST',
-                'protocol_version' => '1.1',
-                'header' => [
-                    'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0',
-                    'Connection: close'],
-                'content' => $serializedData
-            )
+//        $options = array(
+//            'http' => array(
+//                'method' => 'POST',
+//                'protocol_version' => '1.1',
+//                'header' => [
+//                    'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0',
+//                    'Connection: close'],
+//                'content' => $serializedData
+//            )
+//        );
+        $context = stream_context_create(
+            [
+                'http' => [
+                    'method' => 'POST',
+                    'protocol_version' => '1.1',
+                    'header' => [
+                        'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0',
+                        'Connection: close',
+                    ],
+                    'content' => $serializedData,
+                ]
+            ]
         );
-        $stream = fopen($link, 'r', false, $options);
-        $content =  stream_get_contents($stream); //тут получаем страницу
+
+
+        $stream = fopen($link, 'r', false, $context);
+        $content = stream_get_contents($stream); //тут получаем страницу
         $data = stream_get_meta_data($stream); //тут получаем информацию, в том числе заголовки ответа
 
 //        $context = stream_context_create($options);
