@@ -180,7 +180,9 @@ class OrderService extends MainService
      */
     public function subtractBalance($order, $bot)
     {
-        $link = 'https://api.bot-t.com/v1/module/bot/subtract-balance';
+        $link = 'https://api.bot-t.com/v1/module/bot/';
+        $method = 'subtract-balance';
+
         $public_key = $bot->public_key;
         $private_key = $bot->private_key;
         $user_id = $order->user->telegram_id;
@@ -189,6 +191,7 @@ class OrderService extends MainService
         $comment = 'Модуль приема СМС';
 
         $requestParam = array(
+            'method' => $method,
             'public_key' => $public_key,
             'private_key' => $private_key,
             'user_id' => $user_id,
@@ -197,33 +200,47 @@ class OrderService extends MainService
             'comment' => $comment,
         );
 
-        $headers = array(
-            'Content-Type: application/json',
-        );
-
+// преобразование в json-формат
         $request = json_encode($requestParam);
-
+// параметры запроса
         $opts = array(
             'http' => array(
                 'method' => "POST",
-                'header' => implode("\r\n", $headers),
                 'content' => $request,
+                'header' => 'application/json',
             )
         );
-
+// создание контекста потока
         $context = stream_context_create($opts);
-
+// отправляем запрос и получаем ответ от сервера
         $result = file_get_contents($link, 0, $context);
-
         $result = json_decode($result, true);
-
-        return $result;
-
-
+// вывод результата
+        print_r($result);
 
 
-
-
+//
+//        $headers = array(
+//            'Content-Type: application/json',
+//        );
+//
+//        $request = json_encode($requestParam);
+//
+//        $opts = array(
+//            'http' => array(
+//                'method' => "POST",
+//                'header' => implode("\r\n", $headers),
+//                'content' => $request,
+//            )
+//        );
+//
+//        $context = stream_context_create($opts);
+//
+//        $result = file_get_contents($link, 0, $context);
+//
+//        $result = json_decode($result, true);
+//
+//        return $result;
 
 
 //        $serializedData = http_build_query($requestParam);
