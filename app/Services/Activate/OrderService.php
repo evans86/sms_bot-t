@@ -180,9 +180,7 @@ class OrderService extends MainService
      */
     public function subtractBalance($order, $bot)
     {
-        $link = 'https://api.bot-t.com/v1/module/bot/';
-        $method = 'subtract-balance';
-
+        $link = 'https://api.bot-t.com/v1/module/bot/subtract-balance/';
         $public_key = $bot->public_key;
         $private_key = $bot->private_key;
         $user_id = $order->user->telegram_id;
@@ -191,7 +189,6 @@ class OrderService extends MainService
         $comment = 'Модуль приема СМС';
 
         $requestParam = array(
-            'method' => $method,
             'public_key' => $public_key,
             'private_key' => $private_key,
             'user_id' => $user_id,
