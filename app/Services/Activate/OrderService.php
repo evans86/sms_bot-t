@@ -20,14 +20,14 @@ class OrderService extends MainService
      * @return array
      * @throws \Exception
      */
-    public function createOrder($service, $operator, $country, $user_id, $bot)
+    public function createOrder($service, $operator, $country_id, $user_id, $bot)
     {
         try {
             //API с бота
 //            $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
             $smsActivate = new SmsActivateApi($bot->api_key);
 
-            $serviceResult = $smsActivate->getNumberV2($service, $country);
+            $serviceResult = $smsActivate->getNumberV2($service, $country_id);
 
             $dateTime = new \DateTime($serviceResult['activationTime']);
             $dateTime = $dateTime->format('U');
@@ -35,14 +35,21 @@ class OrderService extends MainService
 
             $id = intval($serviceResult['activationId']);
 
-            $apiPrice = $smsActivate->getTopCountriesByService($service);
+            $countries = $smsActivate->getTopCountriesByService($service);
+            foreach ($countries as $key => $country) {
+                if($country['country'] == $country_id){
+                    $price = $country["retail_price"];
+                    $pricePercent = $price + ($price * ($bot->percent / 100));
+                    break;
+                }
+            }
 
-            dd($apiPrice);
+//            dd($apiPrice);
 
-            $price = $apiPrice[$country]['retail_price'];
-
-
-            $pricePercent = $price + ($price * ($bot->percent / 100));
+//            $price = $apiPrice[$country]['retail_price'];
+//
+//
+//            $pricePercent = $price + ($price * ($bot->percent / 100));
 
             $result = [
                 'id' => $id,
@@ -50,7 +57,7 @@ class OrderService extends MainService
                 'time' => $dateTime,
                 'status' => $this->getStatus($id, $bot),
                 'codes' => '',
-                'country' => $country,
+                'country' => $country_id,
                 'operator' => $serviceResult['activationOperator'],
                 'service' => $service,
                 'cost' => $pricePercent
@@ -60,7 +67,7 @@ class OrderService extends MainService
                 'org_id' => $id,
                 'user_id' => $user_id,
                 'phone' => $serviceResult['phoneNumber'],
-                'country' => $country,
+                'country' => $country_id,
                 'operator' => $serviceResult['activationOperator'],
                 'status' => $this->getStatus($id, $bot),
                 'time' => $dateTime,
