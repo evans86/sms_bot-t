@@ -197,20 +197,49 @@ class OrderService extends MainService
             'comment' => $comment,
         );
 
+        $headers = array(
+            'Content-Type: application/json',
+        );
+
+        $request = json_encode($requestParam);
+
+        $opts = array(
+            'http' => array(
+                'method' => "POST",
+                'header' => implode("\r\n", $headers),
+                'content' => $request,
+            )
+        );
+
+        $context = stream_context_create($opts);
+
+        $result = file_get_contents($link, 0, $context);
+
+        $result = json_decode($result, true);
+
+        return $result;
+
+
+
+
+
+
+
+
 //        $serializedData = http_build_query($requestParam);
 
-        $query = http_build_query($requestParam);
-        $options = array(
-            'http' => array(
-                'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
-                    "Content-Length: ".strlen($query)."\r\n".
-                    "User-Agent:MyAgent/1.0\r\n",
-                'method'  => "POST",
-                'content' => $query,
-            ),
-        );
-        $context = stream_context_create($options);
-        $result = file_get_contents($link, false, $context, -1, 40000);
+//        $query = http_build_query($requestParam);
+//        $options = array(
+//            'http' => array(
+//                'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
+//                    "Content-Length: ".strlen($query)."\r\n".
+//                    "User-Agent:MyAgent/1.0\r\n",
+//                'method'  => "POST",
+//                'content' => $query,
+//            ),
+//        );
+//        $context = stream_context_create($options);
+//        $result = file_get_contents($link, false, $context, -1, 40000);
 
 //        $options = array(
 //            'http' => array(
