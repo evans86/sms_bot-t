@@ -201,12 +201,19 @@ class OrderService extends MainService
 
         $options = array(
             'http' => array(
-                'header' => "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36\r\n",
                 'method' => 'POST',
+                'protocol_version' => '1.1',
+                'header' => [
+                    'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0',
+                    'Connection: close'],
                 'content' => $serializedData
             )
         );
-        $context = stream_context_create($options);
-        $result = file_get_contents($link, false, $context);
+        $stream = fopen($link, 'r', false, $options);
+        $content =  stream_get_contents($stream); //тут получаем страницу
+        $data = stream_get_meta_data($stream); //тут получаем информацию, в том числе заголовки ответа
+
+//        $context = stream_context_create($options);
+//        $result = file_get_contents($link, false, $context);
     }
 }
