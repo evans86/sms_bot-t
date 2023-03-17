@@ -56,7 +56,7 @@ class CountryService extends MainService
     {
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
-        $countries = $smsActivate->getTopCountriesByService($service, true);
+        $countries = $smsActivate->getTopCountriesByService($service);
 
         $result = [];
         foreach ($countries as $key => $country) {
