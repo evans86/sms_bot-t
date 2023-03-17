@@ -38,6 +38,8 @@ class OrderService extends MainService
             $apiPrice = $smsActivate->getTopCountriesByService($service);
 
             $price = $apiPrice[$country]['retail_price'];
+            dd($price);
+
             $pricePercent = $price + ($price * ($bot->percent / 100));
 
             $result = [
