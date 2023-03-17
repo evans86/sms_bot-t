@@ -212,29 +212,5 @@ class OrderService extends MainService
         $result = file_get_contents($link, 0, $context);
         $result = json_decode($result, true);
         return $result;
-
-
-
-
-
-//
-//        $request = json_encode($requestParam);
-//
-//        $opts = array(
-//            'http' => array(
-//                'method' => "POST",
-//                'content' => $request,
-//                'header' =>
-//                    "Content-Type: application/x-www-form-urlencoded\r\n".
-//                    "Authorization: Bearer sdf541gs6df51gsd1bsb16etb16teg1etr1ge61g\n",
-//            )
-//        );
-//
-//        $context = stream_context_create($opts);
-//
-//        $result = file_get_contents($link, 0, $context);
-//        $result = json_decode($result, true);
-//
-//        print_r($result);
     }
 }
