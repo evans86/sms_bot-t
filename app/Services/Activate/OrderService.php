@@ -201,7 +201,7 @@ class OrderService extends MainService
 
         $options = array(
             'http' => array(
-                'header' => 'Content-Type: application/x-www-form-urlencoded' . PHP_EOL,
+                'header' => "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36\r\n",
                 'method' => 'POST',
                 'content' => $serializedData
             )
