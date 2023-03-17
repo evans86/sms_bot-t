@@ -207,7 +207,9 @@ class OrderService extends MainService
             'http' => array(
                 'method' => "POST",
                 'content' => $request,
-                'header' => 'application/json',
+                'header' =>
+                    "Content-Type: application/x-www-form-urlencoded\r\n".
+                    "Authorization: Bearer sdf541gs6df51gsd1bsb16etb16teg1etr1ge61g\n",
             )
         );
 // создание контекста потока
