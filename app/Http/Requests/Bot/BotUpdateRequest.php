@@ -19,10 +19,10 @@ class BotUpdateRequest extends FormRequest
         return [
             'public_key' => 'required|string',
             'private_key' => 'required|string',
-            'version' => 'string|min:1|max:1',
-            'category_id' => 'integer|min:1',
-            'percent' => 'integer|min:0',
-            'api_key' => 'string',
+            'version' => 'required|string|min:1|max:1',
+            'category_id' => 'required|integer|min:1',
+            'percent' => 'required|integer|min:0',
+            'api_key' => 'required|string',
         ];
     }
 
