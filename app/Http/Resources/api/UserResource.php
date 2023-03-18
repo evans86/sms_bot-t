@@ -5,21 +5,9 @@ namespace App\Http\Resources\api;
 use App\Models\Activate\SmsCountry;
 use App\Models\Activate\SmsOperator;
 use App\Models\User\SmsUser;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class OperatorResource extends JsonResource
+class UserResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
-    public function toArray($request)
-    {
-        return parent::toArray($request);
-    }
-
     /**
      * @param SmsUser $user
      * @param SmsCountry $country
@@ -29,7 +17,7 @@ class OperatorResource extends JsonResource
     public static function generateUserArray(SmsUser $user, SmsCountry $country, SmsOperator $operator): array
     {
         return [
-            'id' => $user->telegram_id,
+            'id' => (integer)$user->telegram_id,
             'country' => $country->org_id,
             'operator' => $operator->title,
             'language' => $user->language,

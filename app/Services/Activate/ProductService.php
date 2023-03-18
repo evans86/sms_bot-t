@@ -34,6 +34,15 @@ class ProductService extends MainService
 
         $services = $smsActivate->getTopCountriesByService();
 
+        return $this->formingPricesArr($services);
+    }
+
+    /**
+     * @param $services
+     * @return array
+     */
+    private function formingPricesArr($services)
+    {
         $result = [];
         foreach ($services as $key => $service) {
 

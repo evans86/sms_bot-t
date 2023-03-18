@@ -24,16 +24,26 @@ class OperatorService extends MainService
         if (key_exists('countryOperators', $operators)) {
             $operators = $operators['countryOperators'][$country_org_id];
 
-            foreach ($operators as $key => $operator) {
+            $this->formingOperatorArr($operators, $country_id);
+        }
+    }
 
-                $dataOperator = [
-                    'org_id' => $key,
-                    'title' => $operator,
-                    'country_id' => $country_id,
-                ];
+    /**
+     * @param $operators
+     * @param $country_id
+     * @return void
+     */
+    private function formingOperatorArr($operators, $country_id)
+    {
+        foreach ($operators as $key => $operator) {
 
-                SmsOperator::create($dataOperator);
-            }
+            $dataOperator = [
+                'org_id' => $key,
+                'title' => $operator,
+                'country_id' => $country_id,
+            ];
+
+            SmsOperator::create($dataOperator);
         }
     }
 }

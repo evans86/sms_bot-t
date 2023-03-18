@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Helpers\ApiHelpers;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\api\UserResource;
 use App\Models\Activate\SmsCountry;
 use App\Models\Activate\SmsOperator;
 use App\Models\User\SmsUser;
@@ -63,7 +64,7 @@ class UserController extends Controller
             $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
             $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
         }
-        return ApiHelpers::success($this->generateUserArray($user, $country, $operator));
+        return ApiHelpers::success(UserResource::generateUserArray($user, $country, $operator));
     }
 
     /**
@@ -92,24 +93,6 @@ class UserController extends Controller
         $user->save();
         $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
         $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
-        return ApiHelpers::success($this->generateUserArray($user, $country, $operator));
-    }
-
-    /**
-     * @param SmsUser $user
-     * @param SmsCountry $country
-     * @param SmsOperator $operator
-     * @return array
-     */
-    private function generateUserArray(SmsUser $user, SmsCountry $country, SmsOperator $operator): array
-    {
-        $result = [
-            'id' => (integer)$user->telegram_id,
-            'country' => $country->org_id,
-            'operator' => $operator->title,
-            'language' => $user->language,
-            'service' => $user->service
-        ];
-        return $result;
+        return ApiHelpers::success(UserResource::generateUserArray($user, $country, $operator));
     }
 }

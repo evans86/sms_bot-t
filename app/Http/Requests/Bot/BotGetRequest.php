@@ -7,8 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use \Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-;
-
 class BotGetRequest extends FormRequest
 {
     /**

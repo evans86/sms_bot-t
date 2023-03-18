@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\api;
 
+use App\Models\User\SmsUser;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -15,5 +16,20 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         return parent::toArray($request);
+    }
+
+    /**
+     * @param SmsUser $user
+     * @return array
+     */
+    public static function generateUserArray(SmsUser $user): array
+    {
+        return [
+            'id' => $user->telegram_id,
+            'country' => $user->org_id,
+            'operator' => $user->title,
+            'language' => $user->language,
+            'service' => $user->service
+        ];
     }
 }

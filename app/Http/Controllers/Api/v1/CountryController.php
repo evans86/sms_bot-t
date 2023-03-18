@@ -10,7 +10,6 @@ use App\Models\Activate\SmsOperator;
 use App\Models\Bot\SmsBot;
 use App\Models\User\SmsUser;
 use App\Services\Activate\CountryService;
-use App\Services\Activate\ProductService;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
@@ -81,24 +80,6 @@ class CountryController extends Controller
         $user->country_id = $country->id;
         $user->operator_id = $operator->id;
         $user->save();
-        return ApiHelpers::success($this->generateUserArray($user, $country, $operator));
-    }
-
-    /**
-     * @param SmsUser $user
-     * @param SmsCountry $country
-     * @param SmsOperator $operator
-     * @return array
-     */
-    private function generateUserArray(SmsUser $user, SmsCountry $country, SmsOperator $operator): array
-    {
-        $result = [
-            'id' => $user->telegram_id,
-            'country' => $country->org_id,
-            'operator' => $operator->title,
-            'language' => $user->language,
-            'service' => $user->service
-        ];
-        return $result;
+        return ApiHelpers::success(CountryResource::generateUserArray($user, $country, $operator));
     }
 }

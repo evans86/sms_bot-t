@@ -118,7 +118,7 @@ class OrderController extends Controller
 
         $this->orderService->getActive($order, $bot);
 
-        return ApiHelpers::success($this->generateOrderArray($order));
+        return ApiHelpers::success(OrderResource::generateOrderArray($order));
     }
 
     /**
@@ -248,7 +248,6 @@ class OrderController extends Controller
         if (empty($bot))
             return ApiHelpers::error('Not found module.');
 
-
 //        $this->orderService->subtractBalance($order, $bot);
         $result = $this->orderService->setStatus($order, 8, $bot);
 
@@ -315,25 +314,5 @@ class OrderController extends Controller
         $result = $this->orderService->getStatus($request->id, $bot);
 
         return ApiHelpers::success($result);
-    }
-
-    /**
-     * @param SmsOrder $order
-     * @return array
-     */
-    private function generateOrderArray(SmsOrder $order): array
-    {
-        $result = [
-            'id' => (integer)$order->org_id,
-            'phone' => $order->phone,
-            'time' => $order->time,
-            'status' => $order->status,
-            'codes' => $order->codes,
-            'country' => $order->country,
-            'operator' => $order->operator,
-            'service' => $order->service,
-            'cost' => $order->price / 100
-        ];
-        return $result;
     }
 }

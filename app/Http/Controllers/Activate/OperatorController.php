@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Activate;
 
 use App\Http\Controllers\Controller;
-use App\Models\Activate\SmsCountry;
 use App\Models\Activate\SmsOperator;
-use App\Services\Activate\OperatorService;
-use Illuminate\Http\Request;
 
 class OperatorController extends Controller
 {

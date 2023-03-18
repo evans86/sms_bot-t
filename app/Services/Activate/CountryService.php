@@ -29,6 +29,32 @@ class CountryService extends MainService
 
         $countries = $smsActivate->getCountries();
 
+        $this->formingCountriesArr($countries);
+
+    }
+
+    /**
+     * Список стран по сервису
+     *
+     * @param $bot
+     * @param $service
+     * @return array
+     */
+    public function getPricesService($bot, $service = null)
+    {
+        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+
+        $countries = $smsActivate->getTopCountriesByService($service);
+
+        return $this->formingServicesArr($countries, $bot);
+    }
+
+    /**
+     * @param $countries
+     * @return void
+     */
+    private function formingCountriesArr($countries)
+    {
         foreach ($countries as $key => $country) {
 
             $data = [
@@ -46,18 +72,12 @@ class CountryService extends MainService
     }
 
     /**
-     * Список стран по сервису
-     *
+     * @param $countries
      * @param $bot
-     * @param $service
      * @return array
      */
-    public function getPricesService($bot, $service = null)
+    private function formingServicesArr($countries, $bot)
     {
-        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
-
-        $countries = $smsActivate->getTopCountriesByService($service);
-
         $result = [];
         foreach ($countries as $key => $country) {
             $smsCountry = SmsCountry::query()->where(['org_id' => $country['country']])->first();

@@ -2,7 +2,6 @@
 
 namespace App\Services\Activate;
 
-use App\Helpers\ApiHelpers;
 use App\Models\Order\SmsOrder;
 use App\Services\External\SmsActivateApi;
 use App\Services\MainService;
@@ -14,7 +13,7 @@ class OrderService extends MainService
      *
      * @param $service
      * @param $operator
-     * @param $country
+     * @param $country_id
      * @param $user_id
      * @param $bot
      * @return array
