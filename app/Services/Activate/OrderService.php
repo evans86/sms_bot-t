@@ -199,20 +199,20 @@ class OrderService extends MainService
                 'comment' => $comment,
             ]
         ];
-
-        $requestParam = [
-            'public_key' => $public_key,
-            'private_key' => $private_key,
-            'user_id' => $user_id,
-            'secret_key' => $secret_key,
-            'amount' => $amount,
-            'comment' => $comment,
-        ];
+        $myBody['name'] = "Demo";
+//        $requestParam = [
+//            'public_key' => $public_key,
+//            'private_key' => $private_key,
+//            'user_id' => $user_id,
+//            'secret_key' => $secret_key,
+//            'amount' => $amount,
+//            'comment' => $comment,
+//        ];
 
 //        $request = json_encode($requestParam);
 
         $client = new Client();
-        $request = $client->post($link, ['form_params' => $requestParam]);
+        $request = $client->post($link, ['form_params' => $myBody]);
         $response = $request->send();
 
         return $response;
