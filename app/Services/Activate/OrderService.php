@@ -194,7 +194,7 @@ class OrderService extends MainService
         $public_key = '062d7c679ca22cf88b01b13c0b24b057'; //062d7c679ca22cf88b01b13c0b24b057
         $private_key = 'd75bee5e605d87bf6ebd432a2b25eb0e'; //d75bee5e605d87bf6ebd432a2b25eb0e
         $user_id = '1028741753'; //1028741753
-        $secret_key = 'b41c9f4e38d4954419a43b8b52d67575b41c9f4e52d6c011b41c6998bf81bf81';
+        $secret_key = '2997ec12c0c4e2df3e316d943e3da6e72997ec123e3d4d9429971695e4d5e4d5';
         $amount = 1050; //1050
         $comment = 'Списание СМС';
 
