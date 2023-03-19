@@ -214,7 +214,7 @@ class OrderService extends MainService
         $client = new Client(["base_uri" => $link]);
 
         $response = $client->post('/v1/module/user/subtract-balance', [
-            RequestOptions::FORM_PARAMS => $requestParam
+            RequestOptions::JSON => $requestParam
         ]);
 
 //        $response = $client->post("/v1/module/user/subtract-balance", $options);
