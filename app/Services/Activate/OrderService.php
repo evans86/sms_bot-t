@@ -188,7 +188,7 @@ class OrderService extends MainService
         $user_id = $order->user->telegram_id; //1028741753
         $secret_key = 'b41c9f4e38d4954419a43b8b52d67575b41c9f4e52d6c011b41c6998bf81bf81';
         $amount = $order->price; //1050
-        $comment = 'Модуль приема СМС';
+        $comment = '';
 
 //        $options = [
 //            'form_params' => [
