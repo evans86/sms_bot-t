@@ -190,17 +190,7 @@ class OrderService extends MainService
         $amount = $order->price; //1050
         $comment = '';
 
-//        $options = [
-//            'form_params' => [
-//                'public_key' => $public_key,
-//                'private_key' => $private_key,
-//                'user_id' => $user_id,
-//                'secret_key' => $secret_key,
-//                'amount' => $amount,
-//                'comment' => $comment,
-//            ]
-//        ];
-//        $myBody['name'] = "Demo";
+
         $requestParam = [
             'public_key' => $public_key,
             'private_key' => $private_key,
@@ -210,15 +200,13 @@ class OrderService extends MainService
             'comment' => $comment,
         ];
 
-//        $request = json_encode($requestParam);
 
         $client = new Client();
         $response = $client->request('POST', $link, [
             'form_params' => $requestParam,
         ]);
 
-//        $client = new Client();
-//        $response = $client->request('POST', $link .'?'. http_build_query($requestParam));
+        dd($response);
 
 
         return $response->getBody();
