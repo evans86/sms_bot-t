@@ -189,16 +189,16 @@ class OrderService extends MainService
         $amount = $order->price; //1050
         $comment = 'Модуль приема СМС';
 
-        $options = [
-            'form_params' => [
-                'public_key' => $public_key,
-                'private_key' => $private_key,
-                'user_id' => $user_id,
-                'secret_key' => $secret_key,
-                'amount' => $amount,
-                'comment' => $comment,
-            ]
-        ];
+//        $options = [
+//            'form_params' => [
+//                'public_key' => $public_key,
+//                'private_key' => $private_key,
+//                'user_id' => $user_id,
+//                'secret_key' => $secret_key,
+//                'amount' => $amount,
+//                'comment' => $comment,
+//            ]
+//        ];
         $myBody['name'] = "Demo";
 //        $requestParam = [
 //            'public_key' => $public_key,
@@ -212,8 +212,17 @@ class OrderService extends MainService
 //        $request = json_encode($requestParam);
 
         $client = new Client();
-        $request = $client->request('POST', $link, $options);
-//        $response = $request->send();
+        $request = $client->request('POST', $link, [
+            'form_params' => [
+                'public_key' => $public_key,
+                'private_key' => $private_key,
+                'user_id' => $user_id,
+                'secret_key' => $secret_key,
+                'amount' => $amount,
+                'comment' => $comment,
+            ]
+        ]);
+
 
         return $request->getBody();
 
