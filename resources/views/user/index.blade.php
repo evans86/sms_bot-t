@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->telegram_id }}</td>
-                    <td>{{ $user->country->name_ru }}</td>
+                    <td>{{ $user->country->name_ru }}<img src={{ $user->country->image }} width="24"></td>
                     <td>{{ $user->operator->title }}</td>
                     <td>{{ $user->language }}</td>
                     <td>{{ $user->created_at }}</td>
