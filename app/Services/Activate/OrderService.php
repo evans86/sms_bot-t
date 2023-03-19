@@ -203,7 +203,7 @@ class OrderService extends MainService
 
         $client = new Client();
         $response = $client->request('POST', $link, [
-            'json' => $requestParam,
+            'form_params' => $requestParam,
         ]);
 
 //        dd($response);
