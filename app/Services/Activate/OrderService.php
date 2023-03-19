@@ -97,10 +97,10 @@ class OrderService extends MainService
 //        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
         $smsActivate = new SmsActivateApi($bot->api_key);
 
-        $serviceResult = $smsActivate->setStatus($order->org_id, $status);
-
-        if($serviceResult != 6)
+        if($this->getStatus($order->org_id, $bot) != 6 )
             $this->changeBalance($order, $bot, 'add-balance', $user_secret_key);
+
+        $serviceResult = $smsActivate->setStatus($order->org_id, $status);
 
         $data = [
             'status' => $serviceResult
