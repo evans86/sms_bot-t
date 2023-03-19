@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 use App\Helpers\ApiHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\api\ProductResource;
+use App\Models\Bot\SmsBot;
 use App\Models\User\SmsUser;
 use App\Services\Activate\ProductService;
 use Illuminate\Http\Request;
@@ -24,11 +25,15 @@ class ProductController extends Controller
     /**
      * Передача значений доступных сервисов
      *
-     * @return array
+     * @param Request $request
+     * @return array|string
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = $this->productService->getPricesCountry();
+        if (is_null($request->public_key))
+            return ApiHelpers::error('Not found params: public_key');
+        $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
+        $products = $this->productService->getPricesCountry($bot);
         return ApiHelpers::success($products);
     }
 

@@ -27,10 +27,11 @@ class ProductService extends MainService
      *
      * @return array
      */
-    public function getPricesCountry()
+    public function getPricesCountry($bot)
     {
         //оставить свой API
-        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+//        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+        $smsActivate = new SmsActivateApi($bot->api_key);
 
         $services = $smsActivate->getTopCountriesByService();
 

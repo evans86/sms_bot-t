@@ -42,7 +42,8 @@ class CountryService extends MainService
      */
     public function getPricesService($bot, $service = null)
     {
-        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+//        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+        $smsActivate = new SmsActivateApi($bot->api_key);
 
         $countries = $smsActivate->getTopCountriesByService($service);
 

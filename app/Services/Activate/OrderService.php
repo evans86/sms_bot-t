@@ -22,7 +22,7 @@ class OrderService extends MainService
      * @return array
      * @throws \Exception
      */
-    public function createOrder($service, $operator, $country_id, $user_id, $bot)
+    public function createOrder($service, $operator, $country_id, $user_id, $bot, $user_secret_key)
     {
         try {
             //API с бота
@@ -74,6 +74,9 @@ class OrderService extends MainService
             $order = SmsOrder::create($data);
             $order->save();
 
+            //списание баланса
+            $this->changeBalance($order, $bot, 'subtract-balance', $user_secret_key);
+
             return $result;
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
@@ -113,7 +116,7 @@ class OrderService extends MainService
      * @param $bot
      * @return mixed|string
      */
-    public function getActive($order, $bot)
+    public function getActive($order, $bot, $user_secret_key)
     {
         //API с бота
 //        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
@@ -121,10 +124,13 @@ class OrderService extends MainService
 
         $serviceResults = $smsActivate->getActiveActivations();
 
-        if ($order->status == 6)
+        if ($order->status == 6) {
             $status = 6;
-        else
+        } else {
             $status = $this->getStatus($order->org_id, $bot);
+
+            $this->changeBalance($order, $bot, 'add-balance', $user_secret_key);
+        }
 
         if (key_exists('activeActivations', $serviceResults)) {
             $serviceResults = $serviceResults['activeActivations'];
@@ -178,15 +184,18 @@ class OrderService extends MainService
      *
      * @param $order
      * @param $bot
-     * @return
+     * @param $uri
+     * @param $user_key
+     * @return \Psr\Http\Message\StreamInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function subtractBalance($order, $bot, $uri = 'add-balance')
+    public function changeBalance($order, $bot, $uri, $user_key)
     {
         $link = 'https://api.bot-t.com/v1/module/user/';
         $public_key = $bot->public_key; //062d7c679ca22cf88b01b13c0b24b057
         $private_key = $bot->private_key; //d75bee5e605d87bf6ebd432a2b25eb0e
         $user_id = $order->user->telegram_id; //1028741753
-        $secret_key = '2997ec12c0c4e2df3e316d943e3da6e72997ec123e3d4d9429971695e4d5e4d5';
+        $secret_key = $user_key; //'2997ec12c0c4e2df3e316d943e3da6e72997ec123e3d4d9429971695e4d5e4d5';
         $amount = $order->price; //1050
         $comment = 'Списание за активацию СМС';
 
