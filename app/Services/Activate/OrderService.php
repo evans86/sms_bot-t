@@ -200,33 +200,24 @@ class OrderService extends MainService
 //                'comment' => $comment,
 //            ]
 //        ];
-        $myBody['name'] = "Demo";
-//        $requestParam = [
-//            'public_key' => $public_key,
-//            'private_key' => $private_key,
-//            'user_id' => $user_id,
-//            'secret_key' => $secret_key,
-//            'amount' => $amount,
-//            'comment' => $comment,
-//        ];
+//        $myBody['name'] = "Demo";
+        $requestParam = [
+            'public_key' => $public_key,
+            'private_key' => $private_key,
+            'user_id' => $user_id,
+            'secret_key' => $secret_key,
+            'amount' => $amount,
+            'comment' => $comment,
+        ];
 
 //        $request = json_encode($requestParam);
 
 
 
         $client = new Client();
-        $stream = Utils::streamFor('contents...');
-        $response = $client->request('POST', $link, ['body' => $stream]);
-//        $response = $client->request('POST', $link, [
-//            'form_params' => [
-//                'public_key' => $public_key,
-//                'private_key' => $private_key,
-//                'user_id' => $user_id,
-//                'secret_key' => $secret_key,
-//                'amount' => $amount,
-//                'comment' => $comment,
-//            ]
-//        ]);
+//        $stream = Utils::streamFor('contents...');
+//        $response = $client->request('POST', $link, ['body' => $stream]);
+        $response = $client->request('POST', $link .'?'. http_build_query($requestParam));
 
 
         return $response->getBody();
