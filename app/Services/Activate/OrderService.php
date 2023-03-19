@@ -210,7 +210,7 @@ class OrderService extends MainService
 
 
         $client = new Client();
-        $response = $client->request('POST', $link, [
+        $response = $client->request('POST', 'https://api.bot-t.com/v1/module/user/add-balance', [
             'form_params' => $requestParam,
         ]);
 
