@@ -188,16 +188,7 @@ class OrderService extends MainService
         $user_id = $order->user->telegram_id; //1028741753
         $secret_key = '2997ec12c0c4e2df3e316d943e3da6e72997ec123e3d4d9429971695e4d5e4d5';
         $amount = $order->price; //1050
-        $comment = 'Списание СМС';
-
-//        $link = 'https://api.bot-t.com/v1/module/user/subtract-balance';
-//        $public_key = '062d7c679ca22cf88b01b13c0b24b057'; //062d7c679ca22cf88b01b13c0b24b057
-//        $private_key = 'd75bee5e605d87bf6ebd432a2b25eb0e'; //d75bee5e605d87bf6ebd432a2b25eb0e
-//        $user_id = '1028741753'; //1028741753
-//        $secret_key = '2997ec12c0c4e2df3e316d943e3da6e72997ec123e3d4d9429971695e4d5e4d5';
-//        $amount = 1050; //1050
-//        $comment = 'Списание СМС';
-
+        $comment = 'Списание за активацию СМС';
 
         $requestParam = [
             'public_key' => $public_key,
@@ -207,7 +198,6 @@ class OrderService extends MainService
             'amount' => $amount,
             'comment' => $comment,
         ];
-
 
         $client = new Client();
         $response = $client->request('POST', $link, [
