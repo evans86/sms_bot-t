@@ -185,7 +185,7 @@ class OrderService extends MainService
         $link = 'https://api.bot-t.com/v1/module/user/subtract-balance';
         $public_key = $bot->public_key; //062d7c679ca22cf88b01b13c0b24b057
         $private_key = $bot->private_key; //d75bee5e605d87bf6ebd432a2b25eb0e
-        $user_id = $order->user->telegram_id; //1028741753
+        $user_id = 1028741753; //1028741753
         $secret_key = 'b41c9f4e38d4954419a43b8b52d67575b41c9f4e52d6c011b41c6998bf81bf81';
         $amount = $order->price; //1050
         $comment = 'Списание СМС';
