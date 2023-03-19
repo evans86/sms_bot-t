@@ -6,6 +6,7 @@ use App\Models\Order\SmsOrder;
 use App\Services\External\SmsActivateApi;
 use App\Services\MainService;
 use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 
 class OrderService extends MainService
 {
@@ -199,20 +200,24 @@ class OrderService extends MainService
             ]
         ];
 
-//        $requestParam = array(
-//            'public_key' => $public_key,
-//            'private_key' => $private_key,
-//            'user_id' => $user_id,
-//            'secret_key' => $secret_key,
-//            'amount' => $amount,
-//            'comment' => $comment,
-//        );
+        $requestParam = array(
+            'public_key' => $public_key,
+            'private_key' => $private_key,
+            'user_id' => $user_id,
+            'secret_key' => $secret_key,
+            'amount' => $amount,
+            'comment' => $comment,
+        );
 
 //        $request = json_encode($requestParam);
 
         $client = new Client(["base_uri" => $link]);
 
-        $response = $client->post("/v1/module/user/subtract-balance", $options);
+        $response = $client->post('/v1/module/user/subtract-balance', [
+            RequestOptions::FORM_PARAMS => $requestParam
+        ]);
+
+//        $response = $client->post("/v1/module/user/subtract-balance", $options);
 
         return $response->getBody();
 
