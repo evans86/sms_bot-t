@@ -248,12 +248,10 @@ class OrderController extends Controller
         if (empty($bot))
             return ApiHelpers::error('Not found module.');
 
-        $resultBot = $this->orderService->subtractBalance($order, $bot);
+        $this->orderService->subtractBalance($order, $bot);
         $result = $this->orderService->setStatus($order, 8, $bot);
 
-//        $result = array_merge($resultBot, $result);
-
-        return ApiHelpers::success($resultBot);
+        return ApiHelpers::success($result);
     }
 
     /**
