@@ -97,9 +97,6 @@ class OrderService extends MainService
 //        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
         $smsActivate = new SmsActivateApi($bot->api_key);
 
-//        if($this->getStatus($order->org_id, $bot) != 6 )
-//
-
         $serviceResult = $smsActivate->setStatus($order->org_id, $status);
 
         $data = [
