@@ -212,7 +212,7 @@ class OrderService extends MainService
 //        $request = json_encode($requestParam);
 
         $client = new Client();
-        $request = $client->post($link, $requestParam);
+        $request = $client->post($link, ['body' => $requestParam]);
         $response = $request->send();
 
         return $response;
