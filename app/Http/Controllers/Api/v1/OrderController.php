@@ -247,15 +247,15 @@ class OrderController extends Controller
         if (is_null($request->order_id))
             return ApiHelpers::error('Not found params: order_id');
         $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
-//        if (is_null($request->user_secret_key))
-//            return ApiHelpers::error('Not found params: user_secret_key');
+        if (is_null($request->user_secret_key))
+            return ApiHelpers::error('Not found params: user_secret_key');
         if (is_null($request->public_key))
             return ApiHelpers::error('Not found params: public_key');
         $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
         if (empty($bot))
             return ApiHelpers::error('Not found module.');
 
-//        $this->orderService->changeBalance($order, $bot, 'add-balance', $request->user_secret_key);
+        $this->orderService->changeBalance($order, $bot, 'add-balance', $request->user_secret_key);
         $result = $this->orderService->setStatus($order, 8, $bot);
 
         return ApiHelpers::success($result);

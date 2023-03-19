@@ -128,7 +128,7 @@ class OrderService extends MainService
             $status = 6;
         } else {
             $status = $this->getStatus($order->org_id, $bot);
-            if ($status == 8 || $status == 9)
+            if ($status == 9)
                 $this->changeBalance($order, $bot, 'add-balance', $user_secret_key);
         }
 
