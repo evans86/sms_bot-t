@@ -91,13 +91,16 @@ class OrderService extends MainService
      * @param $bot
      * @return mixed
      */
-    public function setStatus($order, $status, $bot)
+    public function setStatus($order, $status, $bot, $user_secret_key)
     {
         //API с бота
 //        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
         $smsActivate = new SmsActivateApi($bot->api_key);
 
         $serviceResult = $smsActivate->setStatus($order->org_id, $status);
+
+        if($serviceResult != 6)
+            $this->changeBalance($order, $bot, 'add-balance', $user_secret_key);
 
         $data = [
             'status' => $serviceResult
