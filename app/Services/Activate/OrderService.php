@@ -190,7 +190,7 @@ class OrderService extends MainService
 //        $amount = $order->price; //1050
 //        $comment = 'Списание СМС';
 
-        $link = 'https://api.bot-t.com/v1/module/user/subtract-balance';
+        $link = 'https://api.bot-t.com/v1/module/user/add-balance';
         $public_key = '062d7c679ca22cf88b01b13c0b24b057'; //062d7c679ca22cf88b01b13c0b24b057
         $private_key = 'd75bee5e605d87bf6ebd432a2b25eb0e'; //d75bee5e605d87bf6ebd432a2b25eb0e
         $user_id = '1028741753'; //1028741753
