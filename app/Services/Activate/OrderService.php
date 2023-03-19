@@ -190,7 +190,7 @@ class OrderService extends MainService
         $comment = 'Модуль приема СМС';
 
         $options = [
-            'json' => [
+            'form_params' => [
                 'public_key' => $public_key,
                 'private_key' => $private_key,
                 'user_id' => $user_id,
@@ -212,10 +212,10 @@ class OrderService extends MainService
 //        $request = json_encode($requestParam);
 
         $client = new Client();
-        $request = $client->post($link, ['form_params' => $myBody]);
-        $response = $request->send();
+        $request = $client->request('POST', $link, $options);
+//        $response = $request->send();
 
-        return $response;
+        return $request->getBody();
 
 //        $response = $client->post('', [
 //            RequestOptions::FORM_PARAMS => $requestParam
