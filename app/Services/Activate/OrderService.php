@@ -189,7 +189,7 @@ class OrderService extends MainService
         $comment = 'Модуль приема СМС';
 
         $options = [
-            'form_params' => [
+            'json' => [
                 'public_key' => $public_key,
                 'private_key' => $private_key,
                 'user_id' => $user_id,
