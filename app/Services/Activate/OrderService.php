@@ -212,12 +212,13 @@ class OrderService extends MainService
 
 //        $request = json_encode($requestParam);
 
-
-
         $client = new Client();
-//        $stream = Utils::streamFor('contents...');
-//        $response = $client->request('POST', $link, ['body' => $stream]);
-        $response = $client->request('POST', $link .'?'. http_build_query($requestParam));
+        $response = $client->request('POST', $link, [
+            'form_params' => $requestParam,
+        ]);
+
+//        $client = new Client();
+//        $response = $client->request('POST', $link .'?'. http_build_query($requestParam));
 
 
         return $response->getBody();
