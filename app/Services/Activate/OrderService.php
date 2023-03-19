@@ -212,7 +212,7 @@ class OrderService extends MainService
 //        $request = json_encode($requestParam);
 
         $client = new Client();
-        $request = $client->request('POST', $link, [
+        $response = $client->request('POST', $link, [
             'form_params' => [
                 'public_key' => $public_key,
                 'private_key' => $private_key,
@@ -224,7 +224,7 @@ class OrderService extends MainService
         ]);
 
 
-        return $request->getBody();
+        return $response->getBody();
 
 //        $response = $client->post('', [
 //            RequestOptions::FORM_PARAMS => $requestParam
