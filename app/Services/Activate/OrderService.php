@@ -5,6 +5,7 @@ namespace App\Services\Activate;
 use App\Models\Order\SmsOrder;
 use App\Services\External\SmsActivateApi;
 use App\Services\MainService;
+use GuzzleHttp\Client;
 
 class OrderService extends MainService
 {
@@ -175,11 +176,11 @@ class OrderService extends MainService
      *
      * @param $order
      * @param $bot
-     * @return void
+     * @return
      */
     public function subtractBalance($order, $bot)
     {
-        $link = 'https://api.bot-t.com/v1/module/user/subtract-balance';
+        $link = 'https://api.bot-t.com/v1/module/user';
         $public_key = $bot->public_key; //062d7c679ca22cf88b01b13c0b24b057
         $private_key = $bot->private_key; //d75bee5e605d87bf6ebd432a2b25eb0e
         $user_id = $order->user->telegram_id; //1028741753
@@ -196,20 +197,28 @@ class OrderService extends MainService
             'comment' => $comment,
         );
 
-        $headers = array(
-            'Content-Type: application/json',
-        );
-        $request = json_encode($requestParam);
-        $opts = array(
-            'http' => array(
-                'method' => "POST",
-                'header' => implode("\r\n", $headers),
-                'content' => $request,
-            )
-        );
-        $context = stream_context_create($opts);
-        $result = file_get_contents($link, 0, $context);
-        $result = json_decode($result, true);
-        return $result;
+//        $request = json_encode($requestParam);
+
+        $client = new Client(["base_uri" => $link]);
+
+        $response = $client->post("/subtract-balance", $requestParam);
+
+        return $response->getBody();
+
+//        $headers = array(
+//            'Content-Type: application/json',
+//        );
+//        $request = json_encode($requestParam);
+//        $opts = array(
+//            'http' => array(
+//                'method' => "POST",
+//                'header' => implode("\r\n", $headers),
+//                'content' => $request,
+//            )
+//        );
+//        $context = stream_context_create($opts);
+//        $result = file_get_contents($link, 0, $context);
+//        $result = json_decode($result, true);
+//        return $result;
     }
 }
