@@ -181,7 +181,7 @@ class OrderService extends MainService
      */
     public function subtractBalance($order, $bot)
     {
-        $link = 'https://api.bot-t.com';
+        $link = 'https://api.bot-t.com/v1/module/user/subtract-balance';
         $public_key = $bot->public_key; //062d7c679ca22cf88b01b13c0b24b057
         $private_key = $bot->private_key; //d75bee5e605d87bf6ebd432a2b25eb0e
         $user_id = $order->user->telegram_id; //1028741753
@@ -200,26 +200,30 @@ class OrderService extends MainService
             ]
         ];
 
-        $requestParam = array(
+        $requestParam = [
             'public_key' => $public_key,
             'private_key' => $private_key,
             'user_id' => $user_id,
             'secret_key' => $secret_key,
             'amount' => $amount,
             'comment' => $comment,
-        );
+        ];
 
 //        $request = json_encode($requestParam);
 
-        $client = new Client(["base_uri" => $link]);
+        $client = new Client();
+        $request = $client->post($link, $requestParam);
+        $response = $request->send();
 
-        $response = $client->post('/v1/module/user/subtract-balance?', [
-            RequestOptions::FORM_PARAMS => $requestParam
-        ]);
+        return $response;
+
+//        $response = $client->post('', [
+//            RequestOptions::FORM_PARAMS => $requestParam
+//        ]);
 
 //        $response = $client->post("/v1/module/user/subtract-balance", $options);
 
-        return $response->getBody();
+//        return $response->getBody();
 
 //        $headers = array(
 //            'Content-Type: application/json',
