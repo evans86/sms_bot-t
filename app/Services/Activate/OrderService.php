@@ -210,7 +210,7 @@ class OrderService extends MainService
 
 
         $client = new Client();
-        $response = $client->request('GET', $link, [
+        $response = $client->request('POST', $link, [
             'form_params' => $requestParam,
         ]);
 
