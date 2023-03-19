@@ -6,6 +6,7 @@ use App\Models\Order\SmsOrder;
 use App\Services\External\SmsActivateApi;
 use App\Services\MainService;
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Utils;
 use GuzzleHttp\RequestOptions;
 
 class OrderService extends MainService
@@ -211,17 +212,21 @@ class OrderService extends MainService
 
 //        $request = json_encode($requestParam);
 
+
+
         $client = new Client();
-        $response = $client->request('POST', $link, [
-            'form_params' => [
-                'public_key' => $public_key,
-                'private_key' => $private_key,
-                'user_id' => $user_id,
-                'secret_key' => $secret_key,
-                'amount' => $amount,
-                'comment' => $comment,
-            ]
-        ]);
+        $stream = Utils::streamFor('contents...');
+        $response = $client->request('POST', $link, ['body' => $stream]);
+//        $response = $client->request('POST', $link, [
+//            'form_params' => [
+//                'public_key' => $public_key,
+//                'private_key' => $private_key,
+//                'user_id' => $user_id,
+//                'secret_key' => $secret_key,
+//                'amount' => $amount,
+//                'comment' => $comment,
+//            ]
+//        ]);
 
 
         return $response->getBody();
