@@ -128,8 +128,8 @@ class OrderService extends MainService
             $status = 6;
         } else {
             $status = $this->getStatus($order->org_id, $bot);
-            if ($status == 9)
-                $this->changeBalance($order, $bot, 'add-balance', $user_secret_key);
+//            if ($status == 9)
+//                $this->changeBalance($order, $bot, 'add-balance', $user_secret_key);
         }
 
         if (key_exists('activeActivations', $serviceResults)) {
