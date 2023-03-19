@@ -50,7 +50,7 @@ Route::get('ping', [BotController::class, 'ping']);
 Route::get('create', [BotController::class, 'create']);
 Route::get('error', [BotController::class, 'error']);
 Route::get('get', [BotController::class, 'get']);
-Route::get('update', [BotController::class, 'update']);
+Route::post('update', [BotController::class, 'update']);
 Route::get('delete', [BotController::class, 'delete']);
 
 /**
