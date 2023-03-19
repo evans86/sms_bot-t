@@ -180,7 +180,7 @@ class OrderService extends MainService
      * @param $bot
      * @return
      */
-    public function subtractBalance($order, $bot, $uri = 'subtract-balance')
+    public function subtractBalance($order, $bot, $uri = 'add-balance')
     {
         $link = 'https://api.bot-t.com/v1/module/user/';
         $public_key = $bot->public_key; //062d7c679ca22cf88b01b13c0b24b057
