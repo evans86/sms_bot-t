@@ -256,7 +256,7 @@ class OrderController extends Controller
             return ApiHelpers::error('Not found module.');
 
         $result = $this->orderService->setStatus($order, 8, $bot, $request->user_secret_key);
-//        $this->orderService->changeBalance($order, $bot, 'add-balance', $request->user_secret_key);
+        $this->orderService->changeBalance($order, $bot, 'add-balance', $request->user_secret_key);
 
 
         return ApiHelpers::success($result);
