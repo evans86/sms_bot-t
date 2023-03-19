@@ -188,20 +188,31 @@ class OrderService extends MainService
         $amount = $order->price; //1050
         $comment = 'Модуль приема СМС';
 
-        $requestParam = array(
-            'public_key' => $public_key,
-            'private_key' => $private_key,
-            'user_id' => $user_id,
-            'secret_key' => $secret_key,
-            'amount' => $amount,
-            'comment' => $comment,
-        );
+        $options = [
+            'form_params' => [
+                'public_key' => $public_key,
+                'private_key' => $private_key,
+                'user_id' => $user_id,
+                'secret_key' => $secret_key,
+                'amount' => $amount,
+                'comment' => $comment,
+            ]
+        ];
+
+//        $requestParam = array(
+//            'public_key' => $public_key,
+//            'private_key' => $private_key,
+//            'user_id' => $user_id,
+//            'secret_key' => $secret_key,
+//            'amount' => $amount,
+//            'comment' => $comment,
+//        );
 
 //        $request = json_encode($requestParam);
 
         $client = new Client(["base_uri" => $link]);
 
-        $response = $client->post("/v1/module/user/subtract-balance", $requestParam);
+        $response = $client->post("/v1/module/user/subtract-balance", $options);
 
         return $response->getBody();
 
