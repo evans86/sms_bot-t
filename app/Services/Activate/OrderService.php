@@ -6,8 +6,6 @@ use App\Models\Order\SmsOrder;
 use App\Services\External\SmsActivateApi;
 use App\Services\MainService;
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Utils;
-use GuzzleHttp\RequestOptions;
 
 class OrderService extends MainService
 {
@@ -123,6 +121,8 @@ class OrderService extends MainService
         $smsActivate = new SmsActivateApi($bot->api_key);
 
         $serviceResults = $smsActivate->getActiveActivations();
+
+        dd($serviceResults);
 
         if ($order->status == 6) {
             $status = 6;
