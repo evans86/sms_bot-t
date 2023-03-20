@@ -55,9 +55,9 @@ class OrderController extends Controller
      *  'user_secret_key'
      *  'public_key'
      * ]
-     *
      * @param Request $request
      * @return array|string
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function createOrder(Request $request)
     {
@@ -238,6 +238,7 @@ class OrderController extends Controller
      *
      * @param Request $request
      * @return array|string
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function closeOrder(Request $request)
     {

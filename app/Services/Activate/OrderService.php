@@ -17,8 +17,9 @@ class OrderService extends MainService
      * @param $country_id
      * @param $user_id
      * @param $bot
+     * @param $user_secret_key
      * @return array
-     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function createOrder($service, $operator, $country_id, $user_id, $bot, $user_secret_key)
     {
