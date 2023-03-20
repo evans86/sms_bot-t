@@ -67,7 +67,7 @@ class OrderService extends MainService
                 'codes' => null,
                 'service' => $service,
                 'price' => $pricePercent * 100,
-                'end_time' => $dateTime + 1200,
+                'end_time' => $dateTime + 1177,
             ];
 
             $order = SmsOrder::create($data);
@@ -123,9 +123,6 @@ class OrderService extends MainService
 
         $serviceResults = $smsActivate->getActiveActivations();
 
-//        $order->status = $this->getStatus($order->org_id, $bot);
-//        $order->save();
-
         switch ($this->getStatus($order->org_id, $bot)) {
             case 5:
                 $order->status = 3;
@@ -140,6 +137,7 @@ class OrderService extends MainService
 
         if (time() >= $order->end_time) {
             switch ($order->status) {
+                case 3:
                 case 4:
                     if (is_null($order->codes)) {
                         $order->status = 8;
