@@ -38,7 +38,7 @@ class OrderResource extends JsonResource
             'id' => (integer)$order->org_id,
             'phone' => $order->phone,
             'time' => $order->time,
-            'status' => $order->status,
+            'status' => (integer)$order->status,
             'codes' => $order->codes,
             'country' => $order->country,
             'operator' => $order->operator,
