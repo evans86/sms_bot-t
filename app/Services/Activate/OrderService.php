@@ -125,7 +125,7 @@ class OrderService extends MainService
 
         switch ($this->getStatus($order->org_id, $bot)) {
             case 5:
-                $order->status = 8;
+                $order->status = 3;
                 $order->save();
                 break;
             case 4:
@@ -134,7 +134,7 @@ class OrderService extends MainService
                 break;
         }
 
-        if ($order->end_time >= time()) {
+        if (time() >= $order->end_time) {
             switch ($order->status) {
                 case 4:
                     if (is_null($order->codes)) {
