@@ -118,6 +118,12 @@ class SmsActivateApi
         return $this->request(array('api_key' => $this->apiKey, 'action' => __FUNCTION__), 'GET', true);
     }
 
+
+    public function getListOfActiveActivationsForDesktop()
+    {
+        return $this->request(array('api_key' => $this->apiKey, 'action' => __FUNCTION__), 'GET', true);
+    }
+
     public function getActiveActivations()
     {
         return $this->request(array('api_key' => $this->apiKey, 'action' => __FUNCTION__), 'GET', true);
