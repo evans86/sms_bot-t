@@ -47,7 +47,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Создание заказа
+     * Создание заказа +
      *
      * Request[
      *  'user_id'
@@ -255,7 +255,7 @@ class OrderController extends Controller
         if (empty($bot))
             return ApiHelpers::error('Not found module.');
 
-        $result = $this->orderService->setStatus($order, 8, $bot, $request->user_secret_key);
+        $result = $this->orderService->setStatus($order, 8, $bot);
         $this->orderService->changeBalance($order, $bot, 'add-balance', $request->user_secret_key);
 
 
@@ -282,15 +282,15 @@ class OrderController extends Controller
         if (is_null($request->order_id))
             return ApiHelpers::error('Not found params: order_id');
         $order = SmsOrder::query()->where(['org_id' => $request->order_id])->first();
-        //        if(is_null($request->user_secret_key))
-//            return ApiHelpers::error('Not found params: user_secret_key');
+        if (is_null($request->user_secret_key))
+            return ApiHelpers::error('Not found params: user_secret_key');
         if (is_null($request->public_key))
             return ApiHelpers::error('Not found params: public_key');
         $bot = SmsBot::query()->where('public_key', $request->public_key)->first();
         if (empty($bot))
             return ApiHelpers::error('Not found module.');
 
-        $result = $this->orderService->getActive($order, $bot);
+        $result = $this->orderService->getActive($order, $bot, $request->user_secret_key);
 
         return ApiHelpers::success($result);
     }

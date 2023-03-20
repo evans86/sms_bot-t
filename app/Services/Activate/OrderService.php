@@ -48,8 +48,8 @@ class OrderService extends MainService
                 'id' => $id,
                 'phone' => $serviceResult['phoneNumber'],
                 'time' => $dateTime,
-                'status' => $this->getStatus($id, $bot),
-                'codes' => '',
+                'status' => $this->getStatus($id, $bot), //4
+                'codes' => null,
                 'country' => $country_id,
                 'operator' => $serviceResult['activationOperator'],
                 'service' => $service,
@@ -62,11 +62,12 @@ class OrderService extends MainService
                 'phone' => $serviceResult['phoneNumber'],
                 'country' => $country_id,
                 'operator' => $serviceResult['activationOperator'],
-                'status' => $this->getStatus($id, $bot),
+                'status' => $this->getStatus($id, $bot), //4
                 'time' => $dateTime,
-                'codes' => '',
+                'codes' => null,
                 'service' => $service,
                 'price' => $pricePercent * 100,
+                'end_time' => $dateTime + 1200,
             ];
 
             $order = SmsOrder::create($data);
@@ -89,7 +90,7 @@ class OrderService extends MainService
      * @param $bot
      * @return mixed
      */
-    public function setStatus($order, $status, $bot, $user_secret_key)
+    public function setStatus($order, $status, $bot)
     {
         //API с бота
 //        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
@@ -122,12 +123,33 @@ class OrderService extends MainService
 
         $serviceResults = $smsActivate->getActiveActivations();
 
-//        dd($serviceResults);
+        switch ($this->getStatus($order->org_id, $bot)) {
+            case 5:
+                $order->status = 8;
+                $order->save();
+                break;
+            case 4:
+                $order->status = 4;
+                $order->save();
+                break;
+        }
 
-        if ($order->status == 6) {
-            $status = 6;
-        } else {
-            $status = $this->getStatus($order->org_id, $bot);
+        if ($order->end_time >= time()) {
+            switch ($order->status) {
+                case 4:
+                    if (is_null($order->codes)) {
+                        $order->status = 8;
+                        $order->save();
+                        $this->changeBalance($order, $bot, 'add-balance', $user_secret_key);
+                    } else {
+                        $order->status = 6;
+                        $order->save();
+                    }
+                    break;
+                case 6:
+                case 8:
+                    break;
+            }
         }
 
         if (key_exists('activeActivations', $serviceResults)) {
@@ -143,14 +165,14 @@ class OrderService extends MainService
             if (key_exists('smsCode', $results))
                 $result = $results['smsCode'];
             else
-                $result = '';
+                $result = null;
         } else {
-            $result = '';
+            $result = null;
         }
 
         $data = [
             'codes' => $result,
-            'status' => $status
+            'status' => $order->status
         ];
 
         $order->update($data);
