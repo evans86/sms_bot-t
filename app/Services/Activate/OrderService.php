@@ -132,9 +132,6 @@ class OrderService extends MainService
                 $order->save();
                 break;
             case 7:
-                $order->status = 7;
-                $order->save();
-                break;
             case 4:
                 $order->status = 4;
                 $order->save();
