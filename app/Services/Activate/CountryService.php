@@ -57,6 +57,7 @@ class CountryService extends MainService
     private function formingCountriesArr($countries)
     {
         foreach ($countries as $key => $country) {
+            dd($country);
 
             $data = [
                 'org_id' => $country['id'],
@@ -81,6 +82,7 @@ class CountryService extends MainService
     {
         $result = [];
         foreach ($countries as $key => $country) {
+
             $smsCountry = SmsCountry::query()->where(['org_id' => $country['country']])->first();
 
             $price = $country["retail_price"];
