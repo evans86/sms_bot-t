@@ -57,7 +57,6 @@ class CountryService extends MainService
     private function formingCountriesArr($countries)
     {
         foreach ($countries as $key => $country) {
-            dd($country);
 
             $data = [
                 'org_id' => $country['id'],
