@@ -123,16 +123,19 @@ class OrderService extends MainService
 
         $serviceResults = $smsActivate->getActiveActivations();
 
-        switch ($this->getStatus($order->org_id, $bot)) {
-            case 5:
-                $order->status = 3;
-                $order->save();
-                break;
-            case 4:
-                $order->status = 4;
-                $order->save();
-                break;
-        }
+        $order->status = $this->getStatus($order->org_id, $bot);
+        $order->save();
+
+//        switch ($this->getStatus($order->org_id, $bot)) {
+//            case 5:
+//                $order->status = 3;
+//                $order->save();
+//                break;
+//            case 4:
+//                $order->status = 4;
+//                $order->save();
+//                break;
+//        }
 
         if (time() >= $order->end_time) {
             switch ($order->status) {
