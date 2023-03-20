@@ -120,9 +120,9 @@ class OrderService extends MainService
 //        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
         $smsActivate = new SmsActivateApi($bot->api_key);
 
-        $serviceResults = $smsActivate->getListOfActiveActivationsForDesktop();
+        $serviceResults = $smsActivate->getActiveActivations();
 
-        dd($serviceResults);
+//        dd($serviceResults);
 
         if ($order->status == 6) {
             $status = 6;
