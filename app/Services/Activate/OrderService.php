@@ -99,7 +99,7 @@ class OrderService extends MainService
         $serviceResult = $smsActivate->setStatus($order->org_id, $status);
 
         $data = [
-            'status' => $serviceResult
+            'status' => $status
         ];
 
         $order->update($data);
