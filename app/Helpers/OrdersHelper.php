@@ -2,8 +2,6 @@
 
 namespace App\Helpers;
 
-use Nette\Utils\Html;
-
 class OrdersHelper
 {
     /**
