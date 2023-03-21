@@ -87,7 +87,7 @@ class OrdersHelper
                 break;
             case 8:
             case 9:
-                $class = 'btn btn-danger';
+                $class = 'badge bg-danger';
                 break;
             default:
                 $class = 'badge bg-default';
