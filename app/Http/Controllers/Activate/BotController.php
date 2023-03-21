@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Activate;
 
 use App\Models\Bot\SmsBot;
+use App\Services\Activate\UserService;
 
 class BotController
 {

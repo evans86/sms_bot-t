@@ -18,7 +18,7 @@ class SmsActivateApi
 
     public function getBalance()
     {
-        return $this->request(array('api_key' => $this->apiKey, 'action' => __FUNCTION__), 'GET');
+        return $this->request(array('api_key' => $this->apiKey, 'action' => __FUNCTION__), 'GET', true, 3);
     }
 
     public function getBalanceAndCashBack()
@@ -223,8 +223,15 @@ class SmsActivateApi
 
         $serializedData = http_build_query($data);
 
+
         if ($method === 'GET') {
             $result = file_get_contents("$this->url?$serializedData");
+
+            if ($getNumber == 3) {
+                $parsedResponse = explode(':', $result);
+                return $parsedResponse[1];
+            }
+
             if ($getNumber == 1) {
                 $parsedResponse = explode(':', $result);
                 return OrdersHelper::requestArray($parsedResponse[0]);

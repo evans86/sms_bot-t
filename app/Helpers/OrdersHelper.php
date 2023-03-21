@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use Nette\Utils\Html;
+
 class OrdersHelper
 {
     /**
@@ -27,7 +29,7 @@ class OrdersHelper
             'CANT_CANCEL' => 'Невозможно отменить аренду (прошло более 20 мин.)',
             'ERROR_SQL' => 'Один из параметров имеет недопустимое значение',
             'NO_NUMBERS' => 2, //'Нет свободных номеров для приёма смс от текущего сервиса',
-            'NO_BALANCE' => 10 , //'Закончился баланс'
+            'NO_BALANCE' => 10, //'Закончился баланс'
             'NO_YULA_MAIL' => 'Необходимо иметь на счету более 500 рублей для покупки сервисов холдинга Mail.ru и Mamba',
             'NO_CONNECTION' => 11, //'Нет соединения с серверами sms-activate',
             'NO_ID_RENT' => 'Не указан id аренды',
@@ -48,5 +50,50 @@ class OrdersHelper
         } else {
             return false;
         }
+    }
+
+    public static function statusList(): array
+    {
+        return [
+            1 => 'Готовность номера',
+            2 => 'Нет свободных номеров',
+            3 => 'Ожидание нового смс',
+            4 => 'Ожидание смс',
+            5 => 'Ожидание уточнения',
+            6 => 'Сервис активирован',
+            7 => 'OK',
+            8 => 'Активация отменена',
+            9 => 'Активация отменена (9)',
+        ];
+    }
+
+    public static function statusLabel($status): string
+    {
+        switch ($status) {
+            case 1:
+            case 2:
+            case 5:
+            case 7:
+                $class = 'badge bg-info';
+                break;
+            case 3:
+                $class = 'badge bg-warning';
+                break;
+            case 4:
+                $class = 'badge bg-primary';
+                break;
+            case 6:
+                $class = 'badge bg-success';
+                break;
+            case 8:
+            case 9:
+                $class = 'btn btn-danger';
+                break;
+            default:
+                $class = 'badge bg-default';
+        }
+
+
+        return '<span class="' . $class . '">' . \Arr::get(self::statusList(), $status) . '</span>';
     }
 }

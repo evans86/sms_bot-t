@@ -25,10 +25,14 @@
                     <td>{{ $order->org_id }}</td>
                     <td>{{ $order->user->telegram_id }}</td>
                     <td>{{ $order->phone }}</td>
-                    <td>{{ $order->country }}</td>
+                    <td><img class="service_img"
+                             src="https://sms-activate.org/assets/ico/country/{{ $order->country }}.png"
+                             width="24"></td>
                     <td>{{ $order->operator }}</td>
-                    <td>{{ $order->service }}</td>
-                    <td>{{ $order->status }}</td>
+                    <td><img class="service_img"
+                             src="https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/{{ $order->service }}0.webp"
+                             width="24"></td>
+                    <td>{!!\App\Helpers\OrdersHelper::statusLabel($order->status)!!}</td>
                     <td>{{ $order->codes }}</td>
                     <td>{{ $order->created_at }}</td>
                     <td>{{\Carbon\Carbon::createFromTimestamp($order->time)->toDateTimeString()}}</td>

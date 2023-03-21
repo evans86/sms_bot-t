@@ -12,9 +12,10 @@ class UserService extends MainService
      *
      * @return mixed
      */
-    public function balance()
+    public function balance($bot)
     {
-        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+        $smsActivate = new SmsActivateApi($bot->api_key);
+//        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
         $balance = $smsActivate->getBalance();
 
         return $balance;
