@@ -14,9 +14,13 @@ class UserService extends MainService
      */
     public function balance($bot)
     {
-        $smsActivate = new SmsActivateApi($bot->api_key);
+        try {
+            $smsActivate = new SmsActivateApi($bot->api_key);
 //        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
-        $balance = $smsActivate->getBalance();
+            $balance = $smsActivate->getBalance();
+        } catch (\Exception $e) {
+            $balance = '';
+        }
 
         return $balance;
     }
