@@ -224,7 +224,7 @@ class OrderService extends MainService
      */
     public function createBotOrder($order, $bot, $user_key)
     {
-        $link = 'https://api.bot-t.com/v1/module/shop';
+        $link = 'https://api.bot-t.com/v1/module/shop/';
         $uri = 'order-create';
         $public_key = $bot->public_key; //062d7c679ca22cf88b01b13c0b24b057
         $private_key = $bot->private_key; //d75bee5e605d87bf6ebd432a2b25eb0e
