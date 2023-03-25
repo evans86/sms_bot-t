@@ -53,7 +53,7 @@ class UserController extends Controller
         if (is_null($user)) {
             $user = new SmsUser();
             $country = SmsCountry::query()->first();
-            $operator = SmsOperator::query()->where(['country_id' => $country->id])->first();
+//            $operator = SmsOperator::query()->where(['country_id' => $country->id])->first();
             $user->telegram_id = $request->user_id;
             $user->country_id = $country->id;
 //            $user->operator_id = $operator->id;
