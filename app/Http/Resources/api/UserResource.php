@@ -18,7 +18,6 @@ class UserResource
         return [
             'id' => (integer)$user->telegram_id,
             'country' => $country->org_id,
-            'operator' => 'mts',
             'language' => $user->language,
             'service' => $user->service
         ];

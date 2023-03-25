@@ -18,13 +18,13 @@ class OrderResource extends JsonResource
         return [
             'id' => (integer)$this->org_id,
             'phone' => $this->phone,
-            'time' => (integer)$this->time,
+            'time' => (integer)$this->start_time,
             'status' => (integer)$this->status,
             'codes' => json_decode($this->codes),
             'country' => $this->country,
             'operator' => $this->operator,
             'service' => $this->service,
-            'cost' => $this->price / 100
+            'cost' => $this->price_final / 100
         ];
     }
 
