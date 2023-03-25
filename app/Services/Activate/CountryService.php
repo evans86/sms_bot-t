@@ -9,16 +9,6 @@ use App\Services\MainService;
 class CountryService extends MainService
 {
     /**
-     * @var OperatorService
-     */
-    private OperatorService $operatorService;
-
-    public function __construct()
-    {
-        $this->operatorService = new OperatorService();
-    }
-
-    /**
      * Получение, добавление стран и их операторов из API сервиса
      * @return void
      */
@@ -67,8 +57,6 @@ class CountryService extends MainService
 
             $country = SmsCountry::updateOrCreate($data);
             $country->save();
-
-            $this->operatorService->getOperatorsByCountry($country->id, $country->org_id);
         }
     }
 

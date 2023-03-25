@@ -10,7 +10,7 @@ class SmsCountry extends Model
     use HasFactory;
 
     protected $guarded = false;
-    protected $table = 'sms_countries';
+    protected $table = 'country';
 
     public function operators()
     {

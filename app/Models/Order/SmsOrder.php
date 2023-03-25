@@ -13,7 +13,7 @@ class SmsOrder extends Model
     use HasFactory;
 
     protected $guarded = false;
-    protected $table = 'sms_orders';
+    protected $table = 'order';
 
     public function user()
     {

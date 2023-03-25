@@ -13,14 +13,13 @@ class CreateSmsCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sms_countries', function (Blueprint $table) {
+        Schema::create('country', function (Blueprint $table) {
             $table->id();
             $table->string('org_id')->nullable();
             $table->string('name_ru')->nullable();
             $table->string('name_en')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

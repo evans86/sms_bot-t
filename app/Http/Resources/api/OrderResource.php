@@ -37,13 +37,13 @@ class OrderResource extends JsonResource
         return [
             'id' => (integer)$order->org_id,
             'phone' => $order->phone,
-            'time' => $order->time,
+            'time' => $order->start_time,
             'status' => (integer)$order->status,
             'codes' => $order->codes,
             'country' => $order->country,
             'operator' => $order->operator,
             'service' => $order->service,
-            'cost' => $order->price / 100
+            'cost' => $order->price_final / 100
         ];
     }
 }

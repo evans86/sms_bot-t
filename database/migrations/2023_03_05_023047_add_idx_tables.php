@@ -13,24 +13,20 @@ class AddIdxTables extends Migration
      */
     public function up()
     {
-        Schema::table('sms_users', function (Blueprint $table) {
+        Schema::table('user', function (Blueprint $table) {
             $table->index('country_id', 'user_country_idx');
-            $table->foreign('country_id', 'user_country_fk')->on('sms_countries')->references('id')->nullOnDelete();
+            $table->foreign('country_id', 'user_country_fk')->on('country')->references('id')->nullOnDelete();
         });
 
-        Schema::table('sms_users', function (Blueprint $table) {
-            $table->index('operator_id', 'user_operator_idx');
-            $table->foreign('operator_id', 'user_operator_fk')->on('sms_operators')->references('id')->nullOnDelete();
-        });
-
-        Schema::table('sms_operators', function (Blueprint $table) {
-            $table->index('country_id', 'operator_country_idx');
-            $table->foreign('country_id', 'operator_country_fk')->on('sms_countries')->references('id')->cascadeOnDelete();
-        });
-
-        Schema::table('sms_orders', function (Blueprint $table) {
+        Schema::table('order', function (Blueprint $table) {
             $table->index('user_id', 'order_user_idx');
-            $table->foreign('user_id', 'order_user_fk')->on('sms_users')->references('id');
+            $table->foreign('user_id', 'order_user_fk')->on('user')->references('id');
+
+            $table->index('bot_id', 'order_bot_idx');
+            $table->foreign('bot_id', 'order_bot_fk')->on('bot')->references('id');
+
+            $table->index('country_id', 'order_country_idx');
+            $table->foreign('country_id', 'order_country_fk')->on('country')->references('id');
         });
     }
 

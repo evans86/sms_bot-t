@@ -13,14 +13,14 @@ class CreateSmsUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sms_users', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->id();
             $table->integer('telegram_id')->nullable();
             $table->unsignedBigInteger('country_id')->nullable();
-            $table->unsignedBigInteger('operator_id')->nullable();
+            $table->unsignedBigInteger('service_id')->nullable();
+            $table->string('service')->nullable();
             $table->string('language')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

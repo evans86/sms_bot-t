@@ -27,10 +27,6 @@
                     <td><img src={{ $country->image }} width="24">
                     </td>
                     <td>{{ $country->created_at }}</td>
-                    <td>
-                        <a class="btn btn-success" href="{{ route('activate.operators.index', $country->id) }}"
-                           role="button">Операторы</a>
-                    </td>
                 </tr>
             @endforeach
             </tbody>

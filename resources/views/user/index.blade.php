@@ -7,7 +7,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Telegram ID</th>
                 <th scope="col">Страна</th>
-                <th scope="col">Оператор</th>
+                <th scope="col">Сервис</th>
                 <th scope="col">Язык</th>
                 <th scope="col">Добален</th>
             </tr>
@@ -19,7 +19,7 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->telegram_id }}</td>
                     <td>{{ $user->country->name_ru }}<img src={{ $user->country->image }} width="24"></td>
-                    <td>{{ $user->operator->title }}</td>
+                    <td>{{ $user->service }}</td>
                     <td>{{ $user->language }}</td>
                     <td>{{ $user->created_at }}</td>
                 </tr>

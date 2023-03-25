@@ -76,12 +76,10 @@ class OrderController extends Controller
                 return ApiHelpers::error('Not found module.');
 
             $country = SmsCountry::query()->where(['org_id' => $request->country])->first();
-            $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
             $service = $user->service;
 
             $result = $this->orderService->createOrder(
                 $service,
-                $operator->title,
                 $country->org_id,
                 $user->id,
                 $bot,

@@ -15,12 +15,7 @@ class SmsUser extends Model
     use HasFactory;
 
     protected $guarded = false;
-    protected $table = 'sms_users';
-
-    public function operator()
-    {
-        return $this->hasOne(SmsOperator::class, 'id', 'operator_id');
-    }
+    protected $table = 'user';
 
     public function country()
     {

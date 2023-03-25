@@ -2,6 +2,7 @@
 
 namespace App\Services\Activate;
 
+use App\Models\Activate\SmsCountry;
 use App\Models\Order\SmsOrder;
 use App\Services\External\SmsActivateApi;
 use App\Services\MainService;
@@ -21,7 +22,7 @@ class OrderService extends MainService
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function createOrder($service, $operator, $country_id, $user_id, $bot, $user_secret_key)
+    public function createOrder($service, $country_id, $user_id, $bot, $user_secret_key)
     {
         try {
             //API с бота
@@ -51,6 +52,8 @@ class OrderService extends MainService
                 }
             }
 
+            $country = SmsCountry::query()->where(['org_id' => $country_id])->first();
+
             $result = [
                 'id' => $id,
                 'phone' => $serviceResult['phoneNumber'],
@@ -64,17 +67,23 @@ class OrderService extends MainService
             ];
 
             $data = [
-                'org_id' => $id,
+                'bot_id' => $bot->id,
                 'user_id' => $user_id,
-                'phone' => $serviceResult['phoneNumber'],
-                'country' => $country_id,
-                'operator' => $serviceResult['activationOperator'],
-                'status' => $this->getStatus($id, $bot), //4
-                'time' => $dateTime,
-                'codes' => null,
+
+                'service_id' => null,
                 'service' => $service,
-                'price' => $pricePercent * 100,
+                'country_id' => $country->id,
+                'country' => $country_id,
+
+                'org_id' => $id,
+                'phone' => $serviceResult['phoneNumber'],
+                'codes' => null,
+                'status' => $this->getStatus($id, $bot), //4
+                'start_time' => $dateTime,
                 'end_time' => $dateTime + 1177,
+                'operator' => $serviceResult['activationOperator'],
+                'price_final' => $pricePercent * 100,
+                'price_start' => $price * 100,
             ];
 
             $order = SmsOrder::create($data);
@@ -82,7 +91,7 @@ class OrderService extends MainService
 
             //списание баланса
             $this->changeBalance($order, $bot, 'subtract-balance', $user_secret_key);
-            $this->createBotOrder($order, $bot, 'order-create', $user_secret_key);
+//            $this->createBotOrder($order, $bot, 'order-create', $user_secret_key);
 
             return $result;
         } catch (\Exception $e) {
@@ -230,7 +239,7 @@ class OrderService extends MainService
         $private_key = $bot->private_key; //d75bee5e605d87bf6ebd432a2b25eb0e
         $user_id = $order->user->telegram_id; //1028741753
         $secret_key = $user_key; //'2997ec12c0c4e2df3e316d943e3da6e72997ec123e3d4d9429971695e4d5e4d5';
-        $amount = $order->price; //1050
+        $amount = $order->price_final; //1050
         $count = 1;
         $category_id = $bot->category_id;
         $product = 'СМС Активация';
@@ -271,7 +280,7 @@ class OrderService extends MainService
         $private_key = $bot->private_key; //d75bee5e605d87bf6ebd432a2b25eb0e
         $user_id = $order->user->telegram_id; //1028741753
         $secret_key = $user_key; //'2997ec12c0c4e2df3e316d943e3da6e72997ec123e3d4d9429971695e4d5e4d5';
-        $amount = $order->price; //1050
+        $amount = $order->price_final; //1050
         $comment = 'Списание за активацию СМС';
 
         $requestParam = [

@@ -13,15 +13,16 @@ class CreateSmsBotsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sms_bots', function (Blueprint $table) {
+        Schema::create('bot', function (Blueprint $table) {
             $table->id();
             $table->string('public_key')->nullable();
             $table->string('private_key')->nullable();
             $table->unsignedBigInteger('bot_id')->nullable();
             $table->integer('version')->default(1);
-            $table->string('key')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('percent')->nullable();
+            $table->string('api_key')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
