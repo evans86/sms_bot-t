@@ -28,7 +28,13 @@ class OrderService extends MainService
 //            $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
             $smsActivate = new SmsActivateApi($bot->api_key);
 
-            $serviceResult = $smsActivate->getNumberV2($service, $country_id);
+            $serviceResult = $smsActivate->getNumberV2(
+                $service,
+                $country_id,
+                0,
+                null,
+                config('services.key_activate.ref')
+            );
 
             $dateTime = new \DateTime($serviceResult['activationTime']);
             $dateTime = $dateTime->format('U');
@@ -76,6 +82,7 @@ class OrderService extends MainService
 
             //списание баланса
             $this->changeBalance($order, $bot, 'subtract-balance', $user_secret_key);
+            $this->createBotOrder($order, $bot, $user_secret_key);
 
             return $result;
         } catch (\Exception $e) {
@@ -205,6 +212,45 @@ class OrderService extends MainService
         $serviceResult = $smsActivate->getStatus($id);
 
         return $serviceResult;
+    }
+
+    /**
+     * Создание заказа bot-t
+     * @param $order
+     * @param $bot
+     * @param $user_key
+     * @return \Psr\Http\Message\StreamInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function createBotOrder($order, $bot, $user_key)
+    {
+        $link = 'https://api.bot-t.com/v1/module/shop/order-create';
+        $public_key = $bot->public_key; //062d7c679ca22cf88b01b13c0b24b057
+        $private_key = $bot->private_key; //d75bee5e605d87bf6ebd432a2b25eb0e
+        $user_id = $order->user->telegram_id; //1028741753
+        $secret_key = $user_key; //'2997ec12c0c4e2df3e316d943e3da6e72997ec123e3d4d9429971695e4d5e4d5';
+        $amount = $order->price; //1050
+        $count = 1;
+        $category_id = $bot->category_id;
+        $product = 'СМС Активация';
+
+        $requestParam = [
+            'public_key' => $public_key,
+            'private_key' => $private_key,
+            'user_id' => $user_id,
+            'secret_key' => $secret_key,
+            'amount' => $amount,
+            'count' => $count,
+            'category_id' => $category_id,
+            'product' => $product,
+        ];
+
+        $client = new Client(['base_uri' => $link]);
+        $response = $client->request('POST', [
+            'form_params' => $requestParam,
+        ]);
+
+        return $response->getBody();
     }
 
     /**

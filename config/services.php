@@ -32,6 +32,7 @@ return [
 
     'key_activate' => [
         'key' => env('SIM_ACTIVATE_KEY'),
+        'ref' => 5245236,
     ],
 
 ];
