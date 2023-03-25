@@ -91,7 +91,7 @@ class OrderService extends MainService
 
             //списание баланса
             $this->changeBalance($order, $bot, 'subtract-balance', $user_secret_key);
-            $this->createBotOrder($order, $bot, 'order-create', $user_secret_key);
+//            $this->createBotOrder($order, $bot, 'order-create', $user_secret_key);
 
             return $result;
         } catch (\Exception $e) {
