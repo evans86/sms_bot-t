@@ -82,7 +82,7 @@ class OrderService extends MainService
 
             //списание баланса
             $this->changeBalance($order, $bot, 'subtract-balance', $user_secret_key);
-            $this->createBotOrder($order, $bot, $user_secret_key);
+            $this->createBotOrder($order, $bot, 'order-create', $user_secret_key);
 
             return $result;
         } catch (\Exception $e) {
@@ -219,13 +219,13 @@ class OrderService extends MainService
      * @param $order
      * @param $bot
      * @param $user_key
+     * @param $uri
      * @return \Psr\Http\Message\StreamInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function createBotOrder($order, $bot, $user_key)
+    public function createBotOrder($order, $bot, $uri, $user_key)
     {
         $link = 'https://api.bot-t.com/v1/module/shop/';
-        $uri = 'order-create';
         $public_key = $bot->public_key; //062d7c679ca22cf88b01b13c0b24b057
         $private_key = $bot->private_key; //d75bee5e605d87bf6ebd432a2b25eb0e
         $user_id = $order->user->telegram_id; //1028741753
