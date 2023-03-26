@@ -32,12 +32,27 @@ class CountryController extends Controller
         ));
     }
 
+    public function update($id)
+    {
+        $country = SmsCountry::findOrFail($id);
+
+        return view('activate.country.update', compact(
+            'country',
+        ));
+    }
+
+    public function delete(SmsCountry $country)
+    {
+        $country->delete();
+        return redirect()->route('activate.countries.index');
+    }
+
     /**
      * Обновление списка стран с сервиса
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update()
+    public function allUpdate()
     {
         $this->countryService->getApiCountries();
 
@@ -49,7 +64,7 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete()
+    public function allDelete()
     {
         $countries = SmsCountry::all();
 

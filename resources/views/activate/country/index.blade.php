@@ -2,8 +2,8 @@
 @section('content')
     <div class="container mt-2">
         <div class="d-grid gap-2 d-md-block mb-2">
-            <a href="{{ route('activate.countries.update') }}" class="btn btn-success">Добавить/Обновить данные</a>
-            <a href="{{ route('activate.countries.delete') }}" class="btn btn-danger">Удалить все</a>
+            <a href="{{ route('activate.countries.all-update') }}" class="btn btn-success">Добавить/Обновить данные</a>
+            <a href="{{ route('activate.countries.all-delete') }}" class="btn btn-danger">Удалить все</a>
         </div>
         <table class="table table-striped">
             <thead>
@@ -27,6 +27,19 @@
                     <td><img src={{ $country->image }} width="24">
                     </td>
                     <td>{{ $country->created_at }}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <a class="btn btn-primary" href="{{ route('activate.countries.update', $country->id) }}"
+                               role="button">
+                                Редактировать
+                            </a>
+                            <form action="{{ route('activate.countries.delete', $country->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <input type="submit" class="btn btn-danger" value="Удалить">
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
