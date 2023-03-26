@@ -28,15 +28,13 @@ class CountryResource extends JsonResource
     /**
      * @param SmsUser $user
      * @param SmsCountry $country
-     * @param SmsOperator $operator
      * @return array
      */
-    public static function generateUserArray(SmsUser $user, SmsCountry $country, SmsOperator $operator): array
+    public static function generateUserArray(SmsUser $user, SmsCountry $country): array
     {
         return [
             'id' => $user->telegram_id,
             'country' => $country->org_id,
-            'operator' => $operator->title,
             'language' => $user->language,
             'service' => $user->service
         ];

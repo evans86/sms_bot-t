@@ -6,7 +6,6 @@ use App\Helpers\ApiHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\api\OrderResource;
 use App\Models\Activate\SmsCountry;
-use App\Models\Activate\SmsOperator;
 use App\Models\Bot\SmsBot;
 use App\Models\Order\SmsOrder;
 use App\Models\User\SmsUser;

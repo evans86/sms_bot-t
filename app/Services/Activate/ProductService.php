@@ -11,15 +11,14 @@ class ProductService extends MainService
      * Все доступные сервисы с API
      *
      * @param $country
-     * @param $operator
      * @return array
      */
-    public function getAllProducts($country = null, $operator = null)
+    public function getAllProducts($country = null)
     {
         //оставить свой API
         $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
 
-        return $smsActivate->getNumbersStatus($country, $operator);
+        return $smsActivate->getNumbersStatus($country);
     }
 
     /**

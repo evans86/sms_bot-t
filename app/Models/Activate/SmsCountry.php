@@ -11,9 +11,4 @@ class SmsCountry extends Model
 
     protected $guarded = false;
     protected $table = 'country';
-
-    public function operators()
-    {
-        return $this->hasMany(SmsOperator::class, 'country_id', 'id');
-    }
 }

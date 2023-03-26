@@ -14,7 +14,6 @@ class OrderService extends MainService
      * Создание заказа а сервисе
      *
      * @param $service
-     * @param $operator
      * @param $country_id
      * @param $user_id
      * @param $bot
@@ -60,7 +59,7 @@ class OrderService extends MainService
                 'time' => $dateTime,
                 'status' => $this->getStatus($id, $bot), //4
                 'codes' => null,
-                'country' => $country_id,
+                'country' => $country->org_id,
                 'operator' => $serviceResult['activationOperator'],
                 'service' => $service,
                 'cost' => $pricePercent
@@ -73,7 +72,6 @@ class OrderService extends MainService
                 'service_id' => null,
                 'service' => $service,
                 'country_id' => $country->id,
-                'country' => $country_id,
 
                 'org_id' => $id,
                 'phone' => $serviceResult['phoneNumber'],

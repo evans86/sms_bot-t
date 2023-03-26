@@ -6,7 +6,6 @@ use App\Helpers\ApiHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\api\UserResource;
 use App\Models\Activate\SmsCountry;
-use App\Models\Activate\SmsOperator;
 use App\Models\User\SmsUser;
 use App\Services\Activate\UserService;
 use Illuminate\Http\Request;
@@ -89,7 +88,6 @@ class UserController extends Controller
         $user->language = $request->language;
         $user->save();
         $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
-        $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
-        return ApiHelpers::success(UserResource::generateUserArray($user, $country, $operator));
+        return ApiHelpers::success(UserResource::generateUserArray($user, $country));
     }
 }

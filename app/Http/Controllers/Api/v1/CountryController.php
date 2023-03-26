@@ -6,7 +6,6 @@ use App\Helpers\ApiHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\api\CountryResource;
 use App\Models\Activate\SmsCountry;
-use App\Models\Activate\SmsOperator;
 use App\Models\Bot\SmsBot;
 use App\Models\User\SmsUser;
 use App\Services\Activate\CountryService;
@@ -76,10 +75,8 @@ class CountryController extends Controller
         $country = SmsCountry::query()->where(['org_id' => $request->country])->first();
         if (is_null($country))
             return ApiHelpers::error('Not found: country');
-        $operator = SmsOperator::query()->where(['id' => $user->operator_id])->first();
         $user->country_id = $country->id;
-        $user->operator_id = $operator->id;
         $user->save();
-        return ApiHelpers::success(CountryResource::generateUserArray($user, $country, $operator));
+        return ApiHelpers::success(CountryResource::generateUserArray($user, $country));
     }
 }

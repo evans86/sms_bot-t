@@ -26,8 +26,7 @@ class ProductResource extends JsonResource
     {
         return [
             'id' => $user->telegram_id,
-            'country' => $user->org_id,
-            'operator' => $user->title,
+            'country' => $user->country->org_id,
             'language' => $user->language,
             'service' => $user->service
         ];

@@ -21,8 +21,7 @@ class OrderResource extends JsonResource
             'time' => (integer)$this->start_time,
             'status' => (integer)$this->status,
             'codes' => json_decode($this->codes),
-            'country' => $this->country,
-            'operator' => $this->operator,
+            'country' => $this->country->org_id,
             'service' => $this->service,
             'cost' => $this->price_final / 100
         ];
@@ -40,7 +39,7 @@ class OrderResource extends JsonResource
             'time' => $order->start_time,
             'status' => (integer)$order->status,
             'codes' => $order->codes,
-            'country' => $order->country,
+            'country' => $order->country->org_id,
             'operator' => $order->operator,
             'service' => $order->service,
             'cost' => $order->price_final / 100

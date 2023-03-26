@@ -29,7 +29,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  */
 Route::resources([
     'countries' => CountryController::class,
-    'operators' => OperatorController::class,
     'services' => ProductController::class,
 ]);
 
@@ -38,7 +37,6 @@ Route::resources([
  */
 Route::get('setCountry', [CountryController::class, 'setCountry']);
 Route::get('setService', [ProductController::class, 'setService']);
-Route::get('setOperator', [OperatorController::class, 'setOperator']);
 Route::get('setLanguage', [UserController::class, 'setLanguage']);
 Route::get('getUser', [UserController::class, 'getUser']);
 Route::get('balance', [UserController::class, 'balance']);

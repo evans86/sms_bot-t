@@ -20,7 +20,6 @@ class CreateSmsOrdersTable extends Migration
             $table->unsignedBigInteger('service_id')->nullable();
             $table->string('service')->nullable();
             $table->unsignedBigInteger('country_id')->nullable();
-            $table->string('country')->nullable();
             $table->string('org_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('codes')->nullable();
