@@ -4,10 +4,20 @@ namespace App\Http\Controllers\Activate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Resource\SmsResource;
+use App\Services\Activate\ResourceService;
 use Illuminate\Http\Request;
 
 class ResourceController extends Controller
 {
+    /**
+     * @var ResourceService
+     */
+    private ResourceService $resourceService;
+
+    public function __construct()
+    {
+        $this->resourceService = new ResourceService();
+    }
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
@@ -71,5 +81,11 @@ class ResourceController extends Controller
     {
         $resource->delete();
         return redirect()->route('activate.resource.index');
+    }
+
+    //для проверки
+    public function resourceCountries()
+    {
+        $this->resourceService->addResourceCountry();
     }
 }

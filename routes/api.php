@@ -3,11 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\CountryController;
-use App\Http\Controllers\Api\v1\OperatorController;
 use App\Http\Controllers\Api\v1\UserController;
 use App\Http\Controllers\Api\v1\ProductController;
 use App\Http\Controllers\Api\v1\BotController;
 use App\Http\Controllers\Api\v1\OrderController;
+use App\Http\Controllers\Activate\ResourceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,5 +71,9 @@ Route::get('confirmOrder', [OrderController::class, 'confirmOrder']);
  */
 Route::get('getActive', [OrderController::class, 'getActive']);
 Route::get('getStatus', [OrderController::class, 'getStatus']);
+
+
+//рабочее API потом убрать
+Route::get('resourceCountries', [ResourceController::class, 'resourceCountries']);
 
 
