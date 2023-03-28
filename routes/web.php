@@ -33,12 +33,8 @@ Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
     Route::get('bot', 'BotController@index')->name('activate.bot.index');
 
     // Ресурсы:
-    Route::get('resources', 'ResourceController@index')->name('activate.resource.index');
-    Route::get('resources/edit/{resource}', 'ResourceController@edit')->name('activate.resource.edit');
-    Route::post('resources/update/{id}', 'ResourceController@update')->name('activate.resource.update');
-
-    Route::post('/resources', 'ResourceController@store')->name('activate.resource.store');
-    Route::delete('resources/{resource}', 'ResourceController@delete')->name('activate.resource.delete');
+    Route::resource('resources', ResourceController::class)
+        ->only(['index', 'edit', 'update', 'destroy'])->names('activate.resource');
 });
 
 /**

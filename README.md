@@ -21,3 +21,5 @@ version PHP 8.0+<br>
 version Laravel 8.83<br>
 version MariaDB 10.4<br>
 
+<h1>Просмотр маршрутов</h1>
+php artisan route:list >routes.txt

@@ -25,9 +25,9 @@
                             @method('update')
                             <input type="submit" class="btn btn-primary" value="Изменить">
                         </form>
-                        <form action="{{ route('activate.resource.delete', $resource->id) }}" method="post">
+                        <form action="{{ route('activate.resource.destroy', $resource->id) }}" method="post">
                             @csrf
-                            @method('delete')
+                            @method('destroy')
                             <input type="submit" class="btn btn-danger" value="Удалить">
                         </form>
                     </td>
