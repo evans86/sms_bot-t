@@ -31,8 +31,9 @@ return [
     ],
 
     'key_activate' => [
-        'key' => env('SIM_ACTIVATE_KEY'),
-        'ref' => 5245236,
+        'key_activate' => env('SIM_ACTIVATE_KEY'),
+        'key_5sim' => 'eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTE0ODU3NzcsImlhdCI6MTY3OTk0OTc3NywicmF5IjoiZTJiYWM2MDBlZWE1Mjg1YWZmMTgzZTVjYzk2Mjk5NDkiLCJzdWIiOjE1Mzg1MjN9.pyTe9aYLcrT3cINmvzG2WdcNJFW1eDRE-9KftCp9bz_3wfv67QtjHElhpqMknS71v1hjE3qu9dInBYOPzAGUBJEw7gUOzqrgsTCkqQlS_zSbWYxDUihXpbsG43-2jKDRwq8LB4jxCxykLajqbpMe_7YSdyj1aaem9W5QHpKtKKxRXlODSa9UoOlNSobh4ELnUS7Q2iwnyVYnp-2iboCsMbmUA9NpHZuUDUEhgX4fccu1TLNjAcRULamkng4DJaCeM24Mjvic2Dh3Om5ZHdJPTrsgc7cav213kDE2kClcF_xAOlN6naryCR3Y6DM2R0efe9HNDBvwF-IVyJZAxOkleg',
+        'ref_activate' => 5245236,
     ],
 
 ];

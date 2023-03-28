@@ -16,7 +16,7 @@ class ProductService extends MainService
     public function getAllProducts($country = null)
     {
         //оставить свой API
-        $smsActivate = new SmsActivateApi(config('services.key_activate.key'));
+        $smsActivate = new SmsActivateApi(config('services.key_activate.key_activate'));
 
         return $smsActivate->getNumbersStatus($country);
     }

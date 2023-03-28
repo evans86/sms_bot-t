@@ -33,7 +33,7 @@ class OrderService extends MainService
                 $country_id,
                 0,
                 null,
-                config('services.key_activate.ref')
+                config('services.key_activate.ref_activate')
             );
 
             $dateTime = new \DateTime($serviceResult['activationTime']);

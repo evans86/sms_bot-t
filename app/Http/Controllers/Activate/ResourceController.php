@@ -6,6 +6,8 @@ use App\Exceptions\NotFoundException;
 use App\Http\Repositories\ResourceRepository;
 use App\Http\Requests\Resource\ResourceUpdateRequest;
 use App\Models\Resource\SmsResource;
+use App\Services\Activate\ResourceService;
+use Illuminate\Http\Request;
 
 class ResourceController extends BaseController
 {
@@ -17,6 +19,15 @@ class ResourceController extends BaseController
         $this->resources = app(ResourceRepository::class);
     }
 
+    /**
+     * @var ResourceService
+     */
+    private ResourceService $resourceService;
+
+    public function __construct()
+    {
+        $this->resourceService = new ResourceService();
+    }
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
@@ -81,5 +92,11 @@ class ResourceController extends BaseController
     {
         $resource->delete();
         return redirect()->route('activate.resource.index');
+    }
+
+    //для проверки
+    public function resourceCountries()
+    {
+        $this->resourceService->addResourceCountry();
     }
 }

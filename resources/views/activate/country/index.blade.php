@@ -29,10 +29,10 @@
                     <td>{{ $country->created_at }}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <a class="btn btn-primary" href="{{ route('activate.countries.update', $country->id) }}"
-                               role="button">
-                                Редактировать
-                            </a>
+                            <form action="{{ route('activate.countries.update', $country->id) }}" method="get">
+                                @method('update')
+                                <input type="submit" class="btn btn-primary" value="Изменить">
+                            </form>
                             <form action="{{ route('activate.countries.delete', $country->id) }}" method="post">
                                 @csrf
                                 @method('delete')
