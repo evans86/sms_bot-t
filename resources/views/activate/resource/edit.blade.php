@@ -6,6 +6,7 @@
         @endphp
         <form action="{{ route('activate.resource.update', $resource->id) }}" method="post">
             @csrf
+            @method('patch')
             <div class="mb-3">
                 <label for="exampleInputTitle" class="form-label">Название ресурса</label>
                 <input type="text" name="title" value="{{ $resource->title }}" class="form-control" id="exampleInputTitle">

@@ -20,21 +20,19 @@ Route::get('/', [Controller::class, 'welcome'])->name('welcome');
  * Роуты для админки (страны, операторы, сервисы)
  */
 Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
-    Route::get('countries', 'CountryController@index')->name('activate.countries.index');
-    Route::get('countries/{country}/update', 'CountryController@update')->name('activate.countries.update');
-    Route::delete('countries/{country}', 'CountryController@delete')->name('activate.countries.delete');
-    Route::get('countries/all-update', 'CountryController@allUpdate')->name('activate.countries.all-update');
-    Route::get('countries/all-delete', 'CountryController@allDelete')->name('activate.countries.all-delete');
+    // Ресурсы:
+    Route::resource('resources', ResourceController::class)
+        ->only(['index', 'edit', 'update', 'destroy'])->names('activate.resource');
+
+    // Страны
+    Route::resource('countries', CountryController::class)
+        ->only(['index', 'edit', 'update', 'destroy'])->names('activate.country');
 
     Route::get('product', 'ProductController@index')->name('activate.product.index');
 
     Route::get('order', 'OrderController@index')->name('activate.order.index');
 
     Route::get('bot', 'BotController@index')->name('activate.bot.index');
-
-    // Ресурсы:
-    Route::resource('resources', ResourceController::class)
-        ->only(['index', 'edit', 'update', 'destroy'])->names('activate.resource');
 });
 
 /**
