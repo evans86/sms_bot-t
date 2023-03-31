@@ -28,7 +28,9 @@ Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
     Route::resource('countries', CountryController::class)
         ->only(['index', 'edit', 'update', 'destroy'])->names('activate.country');
 
-    Route::get('product', 'ProductController@index')->name('activate.product.index');
+    //Сервисы
+    Route::resource('product', ProductController::class)
+        ->only(['index', 'edit', 'update', 'destroy'])->names('activate.service');
 
     Route::get('order', 'OrderController@index')->name('activate.order.index');
 

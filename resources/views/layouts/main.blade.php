@@ -25,7 +25,7 @@
                     <div class="navbar-nav">
                         <a class="nav-link" href="{{ route('activate.resource.index') }}">Ресурсы</a>
                         <a class="nav-link" href="{{ route('activate.country.index') }}">Cтраны</a>
-                        <a class="nav-link" href="{{ route('activate.product.index') }}">Сервисы</a>
+                        <a class="nav-link" href="{{ route('activate.service.index') }}">Сервисы</a>
                         <a class="nav-link" href="{{ route('users.index') }}">Пользователи</a>
                         <a class="nav-link" href="{{ route('activate.order.index') }}">Заказы</a>
                         <a class="nav-link" href="{{ route('activate.bot.index') }}">Боты</a>
