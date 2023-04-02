@@ -10,14 +10,14 @@ class CountryTableSeeder extends Seeder
     public function run()
     {
         $data[] = [
-            "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Afghanistan.svg/22px-Flag_of_Afghanistan.svg.png",
+            "image" => "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg?uselang=ru",
             "name_ru" => "Афганистан",
             "name_en" => "Afghanistan",
             "iso_two" => "AF",
             "iso_three" => "AFG"
         ];
         $data[] = [
-            "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Afghanistan.svg/22px-Flag_of_Afghanistan.svg.png",
+            "image" => "https://upload.wikimedia.org/wikipedia/commons/b/be/Flag_of_England.svg",
             "name_ru" => "Англия",
             "name_en" => "England",
             "iso_two" => "",
@@ -73,7 +73,7 @@ class CountryTableSeeder extends Seeder
             "iso_three" => "AIA"
         ];
         $data[] = [
-            "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_Antarctica.svg/22px-Flag_of_Antarctica.svg.png",
+            "image" => "https://upload.wikimedia.org/wikipedia/commons/6/68/Flag_of_the_Antarctic_Treaty.svg?uselang=ru",
             "name_ru" => "Антарктида",
             "name_en" => "Antarctica",
             "iso_two" => "AQ",
@@ -234,7 +234,7 @@ class CountryTableSeeder extends Seeder
             "iso_three" => "BRA"
         ];
         $data[] = [
-            "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Flag_of_the_British_Indian_Ocean_Territory.svg/22px-Flag_of_the_British_Indian_Ocean_Territory.svg.png",
+            "image" => "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_the_Commissioner_of_the_British_Indian_Ocean_Territory.svg?uselang=ru",
             "name_ru" => "Британская территория в Индийском океане",
             "name_en" => "British Indian Ocean Territory",
             "iso_two" => "IO",
@@ -647,7 +647,7 @@ class CountryTableSeeder extends Seeder
             "iso_three" => "GRD"
         ];
         $data[] = [
-            "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/0/04/Flag_of_Guadeloupe_%28local%29.svg/22px-Flag_of_Guadeloupe_%28local%29.svg.png",
+            "image" => "https://upload.wikimedia.org/wikipedia/commons/8/8a/Flag_of_Guadeloupe_%28Local%29.svg?uselang=ru",
             "name_ru" => "Гваделупа",
             "name_en" => "Guadeloupe",
             "iso_two" => "GP",
@@ -1088,7 +1088,7 @@ class CountryTableSeeder extends Seeder
             "iso_three" => "NRU"
         ];
         $data[] = [
-            "image" => "",
+            "image" => "https://upload.wikimedia.org/wikipedia/commons/9/9b/Flag_of_Nepal.svg?uselang=ru",
             "name_ru" => "Непал",
             "name_en" => "Nepal",
             "iso_two" => "NP",
@@ -1102,7 +1102,7 @@ class CountryTableSeeder extends Seeder
             "iso_three" => "NLD"
         ];
         $data[] = [
-            "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/2/23/Flag_of_New_Caledonia.svg/22px-Flag_of_New_Caledonia.svg.png",
+            "image" => "https://upload.wikimedia.org/wikipedia/commons/2/26/Flags_of_New_Caledonia.svg?uselang=ru",
             "name_ru" => "Новая Каледония",
             "name_en" => "Newcaledonia",
             "iso_two" => "NC",
@@ -1158,7 +1158,7 @@ class CountryTableSeeder extends Seeder
             "iso_three" => "PRK"
         ];
         $data[] = [
-            "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Flag_of_Macedonia.svg/22px-Flag_of_Macedonia.svg.png",
+            "image" => "https://upload.wikimedia.org/wikipedia/commons/7/79/Flag_of_North_Macedonia.svg?uselang=ru",
             "name_ru" => "Македония",
             "name_en" => "Northmacedonia",
             "iso_two" => "MK",
@@ -1668,7 +1668,7 @@ class CountryTableSeeder extends Seeder
             "iso_three" => "ARE"
         ];
         $data[] = [
-            "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/22px-Flag_of_the_United_Kingdom.svg.png",
+            "image" => "https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg?uselang=ru",
             "name_ru" => "Великобритания",
             "name_en" => "United Kingdom",
             "iso_two" => "GB",
