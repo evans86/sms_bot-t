@@ -17,6 +17,13 @@ class CountryTableSeeder extends Seeder
             "iso_three" => "AFG"
         ];
         $data[] = [
+            "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Afghanistan.svg/22px-Flag_of_Afghanistan.svg.png",
+            "name_ru" => "Англия",
+            "name_en" => "England",
+            "iso_two" => "",
+            "iso_three" => ""
+        ];
+        $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/5/52/Flag_of_%C3%85land.svg/22px-Flag_of_%C3%85land.svg.png",
             "name_ru" => "Аландские острова",
             "name_en" => "Åland Islands",
@@ -75,7 +82,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/8/89/Flag_of_Antigua_and_Barbuda.svg/22px-Flag_of_Antigua_and_Barbuda.svg.png",
             "name_ru" => "Антигуа и Барбуда",
-            "name_en" => "Antigua & Barbuda",
+            "name_en" => "Antiguabarbuda",
             "iso_two" => "AG",
             "iso_three" => "ATG"
         ];
@@ -201,7 +208,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Flag_of_Bosnia_and_Herzegovina.svg/22px-Flag_of_Bosnia_and_Herzegovina.svg.png",
             "name_ru" => "Босния и Герцеговина",
-            "name_en" => "Bosnia & Herzegovina",
+            "name_en" => "Bosnia",
             "iso_two" => "BA",
             "iso_three" => "BIH"
         ];
@@ -257,7 +264,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/3/31/Flag_of_Burkina_Faso.svg/22px-Flag_of_Burkina_Faso.svg.png",
             "name_ru" => "Буркина-Фасо",
-            "name_en" => "Burkina Faso",
+            "name_en" => "Burkinafaso",
             "iso_two" => "BF",
             "iso_three" => "BFA"
         ];
@@ -292,7 +299,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/3/38/Flag_of_Cape_Verde.svg/22px-Flag_of_Cape_Verde.svg.png",
             "name_ru" => "Кабо-Верде",
-            "name_en" => "Cape Verde",
+            "name_en" => "Capeverde",
             "iso_two" => "CV",
             "iso_three" => "CPV"
         ];
@@ -306,14 +313,14 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Flag_of_the_Cayman_Islands.svg/22px-Flag_of_the_Cayman_Islands.svg.png",
             "name_ru" => "Острова Кайман",
-            "name_en" => "Cayman Islands",
+            "name_en" => "Caymanislands",
             "iso_two" => "KY",
             "iso_three" => "CYM"
         ];
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Flag_of_the_Central_African_Republic.svg/22px-Flag_of_the_Central_African_Republic.svg.png",
             "name_ru" => "ЦАР",
-            "name_en" => "Central African Republic",
+            "name_en" => "Caf",
             "iso_two" => "CF",
             "iso_three" => "CAF"
         ];
@@ -369,14 +376,14 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/9/92/Flag_of_the_Republic_of_the_Congo.svg/22px-Flag_of_the_Republic_of_the_Congo.svg.png",
             "name_ru" => "Республика Конго",
-            "name_en" => "Congo - Brazzaville",
+            "name_en" => "Congo",
             "iso_two" => "CG",
             "iso_three" => "COG"
         ];
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Flag_of_the_Democratic_Republic_of_the_Congo.svg/22px-Flag_of_the_Democratic_Republic_of_the_Congo.svg.png",
             "name_ru" => "Демократическая Республика Конго",
-            "name_en" => "Congo - Kinshasa",
+            "name_en" => "DCongo",
             "iso_two" => "CD",
             "iso_three" => "COD"
         ];
@@ -390,14 +397,14 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Costa_Rica_%28state%29.svg/22px-Flag_of_Costa_Rica_%28state%29.svg.png",
             "name_ru" => "Коста-Рика",
-            "name_en" => "Costa Rica",
+            "name_en" => "Costarica",
             "iso_two" => "CR",
             "iso_three" => "CRI"
         ];
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_C%C3%B4te_d%27Ivoire.svg/22px-Flag_of_C%C3%B4te_d%27Ivoire.svg.png",
             "name_ru" => "Кот-д’Ивуар",
-            "name_en" => "Côte d’Ivoire",
+            "name_en" => "Ivory",
             "iso_two" => "CI",
             "iso_three" => "CIV"
         ];
@@ -432,7 +439,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_Czech_Republic.svg/22px-Flag_of_the_Czech_Republic.svg.png",
             "name_ru" => "Чехия",
-            "name_en" => "Czechia",
+            "name_en" => "Czech",
             "iso_two" => "CZ",
             "iso_three" => "CZE"
         ];
@@ -460,7 +467,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Flag_of_the_Dominican_Republic.svg/22px-Flag_of_the_Dominican_Republic.svg.png",
             "name_ru" => "Доминиканская Республика",
-            "name_en" => "Dominican Republic",
+            "name_en" => "Dominican",
             "iso_two" => "DO",
             "iso_three" => "DOM"
         ];
@@ -481,14 +488,14 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/3/34/Flag_of_El_Salvador.svg/22px-Flag_of_El_Salvador.svg.png",
             "name_ru" => "Сальвадор",
-            "name_en" => "El Salvador",
+            "name_en" => "Salvador",
             "iso_two" => "SV",
             "iso_three" => "SLV"
         ];
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/3/31/Flag_of_Equatorial_Guinea.svg/22px-Flag_of_Equatorial_Guinea.svg.png",
             "name_ru" => "Экваториальная Гвинея",
-            "name_en" => "Equatorial Guinea",
+            "name_en" => "Equatorialguinea",
             "iso_two" => "GQ",
             "iso_three" => "GNQ"
         ];
@@ -509,7 +516,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Flag_of_Swaziland.svg/22px-Flag_of_Swaziland.svg.png",
             "name_ru" => "Свазиленд",
-            "name_en" => "Eswatini",
+            "name_en" => "Swaziland",
             "iso_two" => "SZ",
             "iso_three" => "SWZ"
         ];
@@ -558,7 +565,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/2/29/Flag_of_French_Guiana.svg/22px-Flag_of_French_Guiana.svg.png",
             "name_ru" => "Гвиана",
-            "name_en" => "French Guiana",
+            "name_en" => "Frenchguiana",
             "iso_two" => "GF",
             "iso_three" => "GUF"
         ];
@@ -677,7 +684,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/0/01/Flag_of_Guinea-Bissau.svg/22px-Flag_of_Guinea-Bissau.svg.png",
             "name_ru" => "Гвинея-Бисау",
-            "name_en" => "Guinea-Bissau",
+            "name_en" => "Guineabissau",
             "iso_two" => "GW",
             "iso_three" => "GNB"
         ];
@@ -712,7 +719,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Flag_of_Hong_Kong.svg/22px-Flag_of_Hong_Kong.svg.png",
             "name_ru" => "Гонконг",
-            "name_en" => "Hong Kong SAR China",
+            "name_en" => "HongKong",
             "iso_two" => "HK",
             "iso_three" => "HKG"
         ];
@@ -887,7 +894,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Libya.svg/22px-Flag_of_Libya.svg.png",
             "name_ru" => "Ливия",
-            "name_en" => "Libya",
+            "name_en" => "Libyan",
             "iso_two" => "LY",
             "iso_three" => "LBY"
         ];
@@ -915,7 +922,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/6/63/Flag_of_Macau.svg/22px-Flag_of_Macau.svg.png",
             "name_ru" => "Макао",
-            "name_en" => "Macao SAR China",
+            "name_en" => "Macao",
             "iso_two" => "MO",
             "iso_three" => "MAC"
         ];
@@ -1062,7 +1069,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/22px-Flag_of_Myanmar.svg.png",
             "name_ru" => "Мьянма",
-            "name_en" => "Myanmar (Burma)",
+            "name_en" => "Myanmar",
             "iso_two" => "MM",
             "iso_three" => "MMR"
         ];
@@ -1097,14 +1104,14 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/2/23/Flag_of_New_Caledonia.svg/22px-Flag_of_New_Caledonia.svg.png",
             "name_ru" => "Новая Каледония",
-            "name_en" => "New Caledonia",
+            "name_en" => "Newcaledonia",
             "iso_two" => "NC",
             "iso_three" => "NCL"
         ];
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Flag_of_New_Zealand.svg/22px-Flag_of_New_Zealand.svg.png",
             "name_ru" => "Новая Зеландия",
-            "name_en" => "New Zealand",
+            "name_en" => "Newzealand",
             "iso_two" => "NZ",
             "iso_three" => "NZL"
         ];
@@ -1146,14 +1153,14 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/5/51/Flag_of_North_Korea.svg/22px-Flag_of_North_Korea.svg.png",
             "name_ru" => "КНДР",
-            "name_en" => "North Korea",
+            "name_en" => "Northkorea",
             "iso_two" => "KP",
             "iso_three" => "PRK"
         ];
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Flag_of_Macedonia.svg/22px-Flag_of_Macedonia.svg.png",
             "name_ru" => "Македония",
-            "name_en" => "North Macedonia",
+            "name_en" => "Northmacedonia",
             "iso_two" => "MK",
             "iso_three" => "MKD"
         ];
@@ -1195,7 +1202,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_Palestine.svg/22px-Flag_of_Palestine.svg.png",
             "name_ru" => "Государство Палестина",
-            "name_en" => "Palestinian Territories",
+            "name_en" => "Palestine",
             "iso_two" => "PS",
             "iso_three" => "PSE"
         ];
@@ -1209,7 +1216,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Flag_of_Papua_New_Guinea.svg/22px-Flag_of_Papua_New_Guinea.svg.png",
             "name_ru" => "Папуа — Новая Гвинея",
-            "name_en" => "Papua New Guinea",
+            "name_en" => "Papua",
             "iso_two" => "PG",
             "iso_three" => "PNG"
         ];
@@ -1258,7 +1265,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/2/28/Flag_of_Puerto_Rico.svg/22px-Flag_of_Puerto_Rico.svg.png",
             "name_ru" => "Пуэрто-Рико",
-            "name_en" => "Puerto Rico",
+            "name_en" => "Puertorico",
             "iso_two" => "PR",
             "iso_three" => "PRI"
         ];
@@ -1314,14 +1321,14 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Flag_of_Sao_Tome_and_Principe.svg/22px-Flag_of_Sao_Tome_and_Principe.svg.png",
             "name_ru" => "Сан-Томе и Принсипи",
-            "name_en" => "São Tomé & Príncipe",
+            "name_en" => "Saotomeandprincipe",
             "iso_two" => "ST",
             "iso_three" => "STP"
         ];
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Flag_of_Saudi_Arabia.svg/22px-Flag_of_Saudi_Arabia.svg.png",
             "name_ru" => "Саудовская Аравия",
-            "name_en" => "Saudi Arabia",
+            "name_en" => "Saudiarabia",
             "iso_two" => "SA",
             "iso_three" => "SAU"
         ];
@@ -1349,7 +1356,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/1/17/Flag_of_Sierra_Leone.svg/22px-Flag_of_Sierra_Leone.svg.png",
             "name_ru" => "Сьерра-Леоне",
-            "name_en" => "Sierra Leone",
+            "name_en" => "Sierraleone",
             "iso_two" => "SL",
             "iso_three" => "SLE"
         ];
@@ -1384,7 +1391,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/7/74/Flag_of_the_Solomon_Islands.svg/22px-Flag_of_the_Solomon_Islands.svg.png",
             "name_ru" => "Соломоновы Острова",
-            "name_en" => "Solomon Islands",
+            "name_en" => "Solomonislands",
             "iso_two" => "SB",
             "iso_three" => "SLB"
         ];
@@ -1398,7 +1405,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/a/af/Flag_of_South_Africa.svg/22px-Flag_of_South_Africa.svg.png",
             "name_ru" => "ЮАР",
-            "name_en" => "South Africa",
+            "name_en" => "Southafrica",
             "iso_two" => "ZA",
             "iso_three" => "ZAF"
         ];
@@ -1412,14 +1419,14 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/22px-Flag_of_South_Korea.svg.png",
             "name_ru" => "Республика Корея",
-            "name_en" => "South Korea",
+            "name_en" => "Southkorea",
             "iso_two" => "KR",
             "iso_three" => "KOR"
         ];
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Flag_of_South_Sudan.svg/22px-Flag_of_South_Sudan.svg.png",
             "name_ru" => "Южный Судан",
-            "name_en" => "South Sudan",
+            "name_en" => "Southsudan",
             "iso_two" => "SS",
             "iso_three" => "SSD"
         ];
@@ -1432,7 +1439,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/1/11/Flag_of_Sri_Lanka.svg/22px-Flag_of_Sri_Lanka.svg.png",
             "name_ru" => "Шри-Ланка",
-            "name_en" => "Sri Lanka",
+            "name_en" => "Srilanka",
             "iso_two" => "LK",
             "iso_three" => "LKA"
         ];
@@ -1453,14 +1460,14 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Saint_Kitts_and_Nevis.svg/22px-Flag_of_Saint_Kitts_and_Nevis.svg.png",
             "name_ru" => "Сент-Китс и Невис",
-            "name_en" => "St. Kitts & Nevis",
+            "name_en" => "Saintkitts",
             "iso_two" => "KN",
             "iso_three" => "KNA"
         ];
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Flag_of_Saint_Lucia.svg/22px-Flag_of_Saint_Lucia.svg.png",
             "name_ru" => "Сент-Люсия",
-            "name_en" => "St. Lucia",
+            "name_en" => "Saintlucia",
             "iso_two" => "LC",
             "iso_three" => "LCA"
         ];
@@ -1481,7 +1488,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Flag_of_Saint_Vincent_and_the_Grenadines.svg/22px-Flag_of_Saint_Vincent_and_the_Grenadines.svg.png",
             "name_ru" => "Сент-Винсент и Гренадины",
-            "name_en" => "St. Vincent & Grenadines",
+            "name_en" => "Saintvincentgrenadines",
             "iso_two" => "VC",
             "iso_three" => "VCT"
         ];
@@ -1523,7 +1530,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/5/53/Flag_of_Syria.svg/22px-Flag_of_Syria.svg.png",
             "name_ru" => "Сирия",
-            "name_en" => "Syria",
+            "name_en" => "Syrian",
             "iso_two" => "SY",
             "iso_three" => "SYR"
         ];
@@ -1558,7 +1565,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/2/26/Flag_of_East_Timor.svg/22px-Flag_of_East_Timor.svg.png",
             "name_ru" => "Восточный Тимор",
-            "name_en" => "Timor-Leste",
+            "name_en" => "Timorleste",
             "iso_two" => "TL",
             "iso_three" => "TLS"
         ];
@@ -1586,7 +1593,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/6/64/Flag_of_Trinidad_and_Tobago.svg/22px-Flag_of_Trinidad_and_Tobago.svg.png",
             "name_ru" => "Тринидад и Тобаго",
-            "name_en" => "Trinidad & Tobago",
+            "name_en" => "Trinidad",
             "iso_two" => "TT",
             "iso_three" => "TTO"
         ];
@@ -1656,7 +1663,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/22px-Flag_of_the_United_Arab_Emirates.svg.png",
             "name_ru" => "ОАЭ",
-            "name_en" => "United Arab Emirates",
+            "name_en" => "Uae",
             "iso_two" => "AE",
             "iso_three" => "ARE"
         ];
@@ -1670,9 +1677,16 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/22px-Flag_of_the_United_States.svg.png",
             "name_ru" => "США",
-            "name_en" => "United States",
+            "name_en" => "USA",
             "iso_two" => "US",
             "iso_three" => "USA"
+        ];
+        $data[] = [
+            "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/22px-Flag_of_the_United_States.svg.png",
+            "name_ru" => "США (виртуальные)",
+            "name_en" => "USA (virtual)",
+            "iso_two" => "",
+            "iso_three" => ""
         ];
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Uruguay.svg/22px-Flag_of_Uruguay.svg.png",
@@ -1726,7 +1740,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/2/26/Flag_of_the_Sahrawi_Arab_Democratic_Republic.svg/22px-Flag_of_the_Sahrawi_Arab_Democratic_Republic.svg.png",
             "name_ru" => "САДР",
-            "name_en" => "Western Sahara",
+            "name_en" => "Westernsahara",
             "iso_two" => "EH",
             "iso_three" => "ESH"
         ];

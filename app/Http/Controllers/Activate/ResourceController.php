@@ -104,6 +104,10 @@ class ResourceController extends BaseController
         return redirect()->route('activate.resource.index');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
+     */
     public function country($id)
     {
         try {
@@ -121,6 +125,11 @@ class ResourceController extends BaseController
         ));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function countryReset($id)
     {
         try {
@@ -136,6 +145,10 @@ class ResourceController extends BaseController
         return redirect()->route('activate.resource.country', ['id' => $id]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
+     */
     public function services($id)
     {
         try {
@@ -153,6 +166,11 @@ class ResourceController extends BaseController
         ));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function servicesReset($id)
     {
         try {

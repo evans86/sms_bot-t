@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            ServiceSeeder::class,
-            ResourceTableSeeder::class,
+//            ServiceSeeder::class,
+//            ResourceTableSeeder::class,
             CountryTableSeeder::class,
         ]);
     }

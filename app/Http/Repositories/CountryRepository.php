@@ -35,6 +35,18 @@ class CountryRepository extends CoreRepository
     }
 
     /**
+     * @param string $name_en
+     * @return SmsCountry
+     */
+    public function getCountryByEngName(string $name_en): SmsCountry
+    {
+        $country = $this->startConditions()::query()->where('name_en', $name_en)->first();
+        if(empty($country))
+            throw new NotFoundException('Country not found');
+        return $country;
+    }
+
+    /**
      * @return Collection
      */
     public function getCountries(): Collection

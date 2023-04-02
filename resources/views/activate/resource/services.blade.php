@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <x-resource-top :resource="$resource"/>
+{{--    <x-resource-top :resource="$resource"/>--}}
 
     <form action="{{ route('activate.resource.servicesReset', $resource->id) }}" method="get">
         @method('servicesReset')
@@ -31,5 +31,8 @@
             @endforeach
             </tbody>
         </table>
+        <div class="d-flex">
+            {!! $resourceServices->links() !!}
+        </div>
     </div>
 @endsection
