@@ -22,6 +22,19 @@ class CountryRepository extends CoreRepository
     }
 
     /**
+     * @param string $iso
+     * @return SmsCountry
+     */
+    public function getCountryByIsoTwo(string $iso): SmsCountry
+    {
+        $iso = mb_strtoupper($iso);
+        $country = $this->startConditions()::query()->where('iso_two', $iso)->first();
+        if(empty($country))
+            throw new NotFoundException('Country not found');
+        return $country;
+    }
+
+    /**
      * @return Collection
      */
     public function getCountries(): Collection

@@ -9,7 +9,6 @@ class ServiceSeeder extends Seeder
 {
     public function run()
     {
-
         $services = [
             [
                 "title" => "Instagram",

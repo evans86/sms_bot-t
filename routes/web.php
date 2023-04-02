@@ -23,6 +23,11 @@ Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
     // Ресурсы:
     Route::resource('resources', ResourceController::class)
         ->only(['index', 'edit', 'update', 'destroy'])->names('activate.resource');
+    // Ресурсы генерация подтаблиц :
+    Route::get('country/{id}', 'ResourceController@country')->name('activate.resource.country');
+    Route::get('countryReset/{id}', 'ResourceController@countryReset')->name('activate.resource.countryReset');
+    Route::get('services/{id}', 'ResourceController@services')->name('activate.resource.services');
+    Route::get('servicesReset/{id}', 'ResourceController@servicesReset')->name('activate.resource.servicesReset');
 
     // Страны
     Route::resource('countries', CountryController::class)

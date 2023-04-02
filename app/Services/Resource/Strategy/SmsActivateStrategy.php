@@ -32,4 +32,9 @@ class SmsActivateStrategy extends MainStrategy implements ResourceInterface
         return $result;
 
     }
+
+    public function parseService(): array
+    {
+        // TODO: Implement parseService() method.
+    }
 }

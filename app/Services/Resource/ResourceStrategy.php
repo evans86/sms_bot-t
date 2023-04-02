@@ -2,6 +2,8 @@
 
 namespace App\Services\Resource;
 
+use App\Models\Dto\CountryDto;
+use App\Models\Dto\ServiceDto;
 use App\Models\Resource\SmsResource;
 use App\Services\Resource\Strategy\FiveSimStrategy;
 use App\Services\Resource\Strategy\SmsActivateStrategy;
@@ -37,8 +39,19 @@ class ResourceStrategy
         return $this->strategy->create($params);
     }
 
+    /**
+     * @return CountryDto[]
+     */
     public function parseCountry(): array
     {
         return $this->strategy->parseCountry();
+    }
+
+    /**
+     * @return ServiceDto[]
+     */
+    public function parseService(): array
+    {
+        return $this->strategy->parseService();
     }
 }

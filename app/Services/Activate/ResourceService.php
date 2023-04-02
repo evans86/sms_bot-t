@@ -2,42 +2,77 @@
 
 namespace App\Services\Activate;
 
-use App\Models\Activate\SmsCountry;
+use App\Http\Repositories\Resource\ResourceCountryRepository;
+use App\Http\Repositories\Resource\ResourceServicesRepository;
+use App\Http\Repositories\ResourceRepository;
+use App\Models\Dto\CountryDto;
+use App\Models\Dto\ServiceDto;
 use App\Models\Resource\ResourceCountry;
-use App\Models\Resource\SmsResource;
 use App\Services\MainService;
 use App\Services\Resource\ResourceStrategy;
 
 class ResourceService extends MainService
 {
-    public function addResourceCountry()
+    private ResourceRepository $resources;
+    private ResourceCountryRepository $resourceCountries;
+    private ResourceServicesRepository $resourceServices;
+
+    public function __construct()
     {
-        $resources = SmsResource::all();
+        $this->resources = new ResourceRepository();
+        $this->resourceCountries = new ResourceCountryRepository();
+        $this->resourceServices = new ResourceServicesRepository();
+    }
+
+    public function resetCountry(int $resource_id): void
+    {
+        $resource = $this->resources->getResource($resource_id);
+
+        $this->resourceCountries->deleteByResource($resource_id);
+        $strategy = new ResourceStrategy($resource);
+        $countriesDto = $strategy->parseCountry();
 
         try {
-            foreach ($resources as $resource) {
-                $strategy = new ResourceStrategy($resource);
-                $countries = $strategy->parseCountry();
-
-                foreach ($countries as $country){
-
-                    try {
-                        $default_country = SmsCountry::where('name_en', $country['name_en'])->firstOrFail();
-
-                        $data = [
-                            'resource_id' => $resource->id,
-                            'country_id' => $default_country->id,
-                            'org_id' => $country['org_id']
-                        ];
-                        $resourceCountry = ResourceCountry::updateOrCreate($data);
-                        $resourceCountry->save();
-                    }catch (\Exception $e){
-                        continue;
-                    }
-                }
+            foreach ($countriesDto as $countryDto) {
+                $this->createResourceCountry($countryDto, $resource->id);
             }
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
+    }
+
+    public function createResourceCountry(CountryDto $dto, int $resource_id): void
+    {
+        $resourceCountry = new ResourceCountry();
+        $resourceCountry->resource_id = $resource_id;
+        $resourceCountry->country_id = $dto->id;
+        $resourceCountry->org_id = $dto->org_id;
+        $resourceCountry->save();
+    }
+
+    public function resetService(int $resource_id): void
+    {
+        $resource = $this->resources->getResource($resource_id);
+
+        $this->resourceServices->deleteByResource($resource_id);
+        $strategy = new ResourceStrategy($resource);
+        $servicesDto = $strategy->parseService();
+
+        try {
+            foreach ($servicesDto as $serviceDto) {
+                $this->createResourceService($serviceDto, $resource->id);
+            }
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
+    public function createResourceService(ServiceDto $dto, int $resource_id): void
+    {
+        $resourceCountry = new \App\Models\Resource\ResourceService();
+        $resourceCountry->resource_id = $resource_id;
+        $resourceCountry->service_id = $dto->id;
+        $resourceCountry->org_id = $dto->org_id;
+        $resourceCountry->save();
     }
 }
