@@ -12,6 +12,9 @@
             </thead>
             <tbody>
             <tr>
+            @php
+                /** @var \App\Models\Resource\SmsResource[] $resources */
+            @endphp
             @foreach($resources as $resource)
                 <tr>
                     <td>{{ $resource->id }}</td>
@@ -22,6 +25,18 @@
                     <td>{{ $resource->created_at }}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <form action="{{ route('activate.resource.country', $resource->id) }}" method="get">
+                                @method('country')
+                                <input type="submit" class="btn btn-info" value="Посмотреть страны">
+                            </form>
+{{--                            <form action="{{ route('activate.resource.country', $resource->id) }}" method="get">--}}
+{{--                                @method('country')--}}
+{{--                                <input type="submit" class="btn btn-primary" value="Посмотреть сервисы">--}}
+{{--                            </form>--}}
+{{--                            <form action="{{ route('activate.resource.country', $resource->id) }}" method="get">--}}
+{{--                                @method('country')--}}
+{{--                                <input type="submit" class="btn btn-primary" value="Посмотреть ботов">--}}
+{{--                            </form>--}}
                             <form action="{{ route('activate.resource.edit', $resource->id) }}" method="get">
                                 @method('update')
                                 <input type="submit" class="btn btn-primary" value="Изменить">

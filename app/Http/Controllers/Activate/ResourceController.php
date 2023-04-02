@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Activate;
 
 use App\Exceptions\NotFoundException;
+use App\Http\Repositories\Resource\ResourceCountryRepository;
+use App\Http\Repositories\Resource\ResourceServicesRepository;
 use App\Http\Repositories\ResourceRepository;
 use App\Http\Requests\Resource\ResourceUpdateRequest;
 use App\Models\Resource\SmsResource;
 use App\Services\Activate\ResourceService;
 use App\Services\External\FiveSimApi;
+use App\Services\Resource\ResourceStrategy;
 use Illuminate\Http\Request;
 
 class ResourceController extends BaseController
@@ -20,12 +23,19 @@ class ResourceController extends BaseController
      * @var ResourceService
      */
     private ResourceService $resourceService;
+    /**
+     * @var ResourceCountryRepository
+     */
+    private ResourceCountryRepository $resourceCountries;
+    private ResourceServicesRepository $resourceServices;
 
     public function __construct()
     {
         parent::__construct();
-        $this->resources = app(ResourceRepository::class);
-        $this->resourceService = new ResourceService();
+        $this->resources = new ResourceRepository();
+        $this->resourceCountries = new ResourceCountryRepository();
+        $this->resourceServices = new ResourceServicesRepository();
+        $this->resourceService = app(ResourceService::class);
     }
 
     /**
@@ -94,10 +104,73 @@ class ResourceController extends BaseController
         return redirect()->route('activate.resource.index');
     }
 
+    public function country($id)
+    {
+        try {
+            $resource = $this->resources->getResource($id);
+        } catch (NotFoundException $e) {
+            return back(404)
+                ->withErrors(['msg' => 'Запись не найдена'])
+                ->withInput();
+        }
+
+        $resourceCountries = $this->resourceCountries->getByResource($id);
+
+        return view('activate.resource.country', compact(
+            'resource', 'resourceCountries'
+        ));
+    }
+
+    public function countryReset($id)
+    {
+        try {
+            $resource = $this->resources->getResource($id);
+        } catch (NotFoundException $e) {
+            return back(404)
+                ->withErrors(['msg' => 'Запись не найдена'])
+                ->withInput();
+        }
+
+        $this->resourceService->resetCountry($resource->id);
+
+        return redirect()->route('activate.resource.country', ['id' => $id]);
+    }
+
+    public function services($id)
+    {
+        try {
+            $resource = $this->resources->getResource($id);
+        } catch (NotFoundException $e) {
+            return back(404)
+                ->withErrors(['msg' => 'Запись не найдена'])
+                ->withInput();
+        }
+
+        $resourceServices = $this->resourceServices->getByResource($id);
+
+        return view('activate.resource.services', compact(
+            'resource', 'resourceServices'
+        ));
+    }
+
+    public function servicesReset($id)
+    {
+        try {
+            $resource = $this->resources->getResource($id);
+        } catch (NotFoundException $e) {
+            return back(404)
+                ->withErrors(['msg' => 'Запись не найдена'])
+                ->withInput();
+        }
+
+        $this->resourceService->resetService($resource->id);
+
+        return redirect()->route('activate.resource.services', ['id' => $id]);
+    }
+
     //для проверки
     public function resourceCountries()
     {
-//        $this->resourceService->addResourceCountry();
 
         $services = [
             "ig" => "Instagram",
