@@ -2673,7 +2673,61 @@ class ServiceSeeder extends Seeder
                 "first_key" => "zz",
                 "second_key" => "dent",
                 "image" => "https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/zz0.webp"
-            ]
+            ],
+            [
+                "title" => "MyLavash",
+                "first_key" => "iw",
+                "second_key" => "mylavash",
+                "image" => "https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/iw0.webp"
+            ],
+            [
+                "title" => "SticPay",
+                "first_key" => "jo",
+                "second_key" => "sticpay",
+                "image" => "https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/jo0.webp"
+            ],
+            [
+                "title" => "Rbt",
+                "first_key" => "jp",
+                "second_key" => "rbt",
+                "image" => "https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/jp0.webp"
+            ],
+            [
+                "title" => "Голос",
+                "first_key" => "js",
+                "second_key" => "голос",
+                "image" => "https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/js0.webp"
+            ],
+            [
+                "title" => "Consultant",
+                "first_key" => "jv",
+                "second_key" => "consultant",
+                "image" => "https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/jv0.webp"
+            ],
+            [
+                "title" => "Sorare",
+                "first_key" => "jy",
+                "second_key" => "sorare",
+                "image" => "https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/jy0.webp"
+            ],
+            [
+                "title" => "Author24",
+                "first_key" => "kd",
+                "second_key" => "author24",
+                "image" => "https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/kd0.webp"
+            ],
+            [
+                "title" => "Idealista",
+                "first_key" => "kk",
+                "second_key" => "Idealista",
+                "image" => "https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/kk0.webp"
+            ],
+            [
+                "title" => "FarPost",
+                "first_key" => "lm",
+                "second_key" => "farpost",
+                "image" => "https://smsactivate.s3.eu-central-1.amazonaws.com/assets/ico/lm0.webp"
+            ],
         ];
 
         foreach ($services as $service){

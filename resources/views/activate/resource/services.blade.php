@@ -13,6 +13,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Сервис</th>
                 <th scope="col">Org_id</th>
+                <th scope="col">Image</th>
                 <th scope="col">created_at</th>
             </tr>
             </thead>
@@ -26,6 +27,7 @@
                     <td>{{ $resourceService->id }}</td>
                     <td>{{ $resourceService->service_id }}</td>
                     <td>{{ $resourceService->org_id }}</td>
+                    <td><img src={{ $resourceService->service->image }} width="24"></td>
                     <td>{{ $resourceService->created_at }}</td>
                 </tr>
             @endforeach

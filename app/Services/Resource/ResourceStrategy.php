@@ -54,4 +54,17 @@ class ResourceStrategy
     {
         return $this->strategy->parseService();
     }
+
+    public function updateServiceCountry(): array
+    {
+        $this->strategy->updateServiceCountry();
+    }
+
+    /**
+     * @return string
+     */
+    public function getKey(): string
+    {
+        return $this->strategy->getKey();
+    }
 }

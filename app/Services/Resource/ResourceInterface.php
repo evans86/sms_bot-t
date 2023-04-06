@@ -27,4 +27,14 @@ interface ResourceInterface
      * @return array
      */
     public function parseService(): array;
+
+    /**
+     * Перезаписывает или создает значения в таблице ResourceServiceCountries
+     */
+    public function updateServiceCountry(): array;
+
+    /**
+     * ключ для апи
+     */
+    public function getKey(): string;
 }

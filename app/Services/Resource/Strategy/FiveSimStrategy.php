@@ -12,6 +12,7 @@ use App\Services\Resource\ResourceInterface;
 
 class FiveSimStrategy extends MainStrategy implements ResourceInterface
 {
+
     public function create(array $params): SmsResource
     {
         // TODO: Implement create() method.
@@ -96,5 +97,15 @@ class FiveSimStrategy extends MainStrategy implements ResourceInterface
             'mvideo' => 'мвидео',
             'yandex' => 'яндекс',
         ];
+    }
+
+    public function updateServiceCountry(): array
+    {
+        // TODO: Implement updateServiceCountry() method.
+    }
+
+    public function getKey(): string
+    {
+        return '5sim';
     }
 }

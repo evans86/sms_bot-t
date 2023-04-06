@@ -28,7 +28,7 @@
                     <td>{{ $resourceCountry->id }}</td>
                     <td>{{ $resourceCountry->country->name_ru }}</td>
                     <td>{{ $resourceCountry->org_id }}</td>
-                    <td><img src={{ $resourceCountry->country->image }} width="24">
+                    <td><img src={{ $resourceCountry->country->image }} width="24"></td>
                     <td>{{ $resourceCountry->created_at }}</td>
                 </tr>
             @endforeach

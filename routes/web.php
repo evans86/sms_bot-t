@@ -28,6 +28,8 @@ Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
     Route::get('countryReset/{id}', 'ResourceController@countryReset')->name('activate.resource.countryReset');
     Route::get('services/{id}', 'ResourceController@services')->name('activate.resource.services');
     Route::get('servicesReset/{id}', 'ResourceController@servicesReset')->name('activate.resource.servicesReset');
+    Route::get('resourceServicesCountries/{id}', 'ResourceController@resourceServicesCountries')->name('activate.resource.resourceServicesCountries');
+    Route::get('updateServicesCountries', 'ResourceController@updateServicesCountries')->name('activate.resource.updateServicesCountries');
 
     // Страны
     Route::resource('countries', CountryController::class)

@@ -22,6 +22,18 @@ class ProductRepository extends CoreRepository
     }
 
     /**
+     * @param string $first_key
+     * @return SmsService
+     */
+    public function getServiceByFirstKey(string $first_key): SmsService
+    {
+        $service = $this->startConditions()::query()->where('first_key', $first_key)->first();
+        if(empty($service))
+            throw new NotFoundException('Service not found');
+        return $service;
+    }
+
+    /**
      * @return Collection
      */
     public function getServices(): Collection

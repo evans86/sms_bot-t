@@ -24,6 +24,11 @@ class ResourceService extends MainService
         $this->resourceServices = new ResourceServicesRepository();
     }
 
+    /**
+     * Сброс стран у ресурса и перегенерация
+     * @param int $resource_id
+     * @throws \Exception
+     */
     public function resetCountry(int $resource_id): void
     {
         $resource = $this->resources->getResource($resource_id);
@@ -41,6 +46,11 @@ class ResourceService extends MainService
         }
     }
 
+    /**
+     * Связывание страны и ресурса
+     * @param CountryDto $dto
+     * @param int $resource_id
+     */
     public function createResourceCountry(CountryDto $dto, int $resource_id): void
     {
         $resourceCountry = new ResourceCountry();
@@ -50,6 +60,11 @@ class ResourceService extends MainService
         $resourceCountry->save();
     }
 
+    /**
+     * Сброс сервисов и перегенерация
+     * @param int $resource_id
+     * @throws \Exception
+     */
     public function resetService(int $resource_id): void
     {
         $resource = $this->resources->getResource($resource_id);
@@ -67,6 +82,11 @@ class ResourceService extends MainService
         }
     }
 
+    /**
+     * Связывает сервис и страну
+     * @param ServiceDto $dto
+     * @param int $resource_id
+     */
     public function createResourceService(ServiceDto $dto, int $resource_id): void
     {
         $resourceCountry = new \App\Models\Resource\ResourceService();
@@ -74,5 +94,19 @@ class ResourceService extends MainService
         $resourceCountry->service_id = $dto->id;
         $resourceCountry->org_id = $dto->org_id;
         $resourceCountry->save();
+    }
+
+    /**
+     * Вызывается в крон и выполняется раз в минуту
+     */
+    public function updateResourceServiceCountry()
+    {
+//        dd('Hello');
+        $resources = $this->resources->getResources();
+        foreach ($resources as $resource)
+        {
+            $strategy = new ResourceStrategy($resource);
+            $servicesDto = $strategy->updateServiceCountry();
+        }
     }
 }
