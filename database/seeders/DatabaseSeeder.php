@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
 //            ResourceTableSeeder::class,
-            ServiceSeeder::class,
-//            CountryTableSeeder::class,
+//            ServiceSeeder::class,
+            CountryTableSeeder::class,
         ]);
     }
 }

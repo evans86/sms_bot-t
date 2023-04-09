@@ -55,7 +55,7 @@ class ResourceStrategy
         return $this->strategy->parseService();
     }
 
-    public function updateServiceCountry(): array
+    public function updateServiceCountry(): void
     {
         $this->strategy->updateServiceCountry();
     }

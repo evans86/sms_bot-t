@@ -82,7 +82,7 @@ class CountryTableSeeder extends Seeder
         $data[] = [
             "image" => "//upload.wikimedia.org/wikipedia/commons/thumb/8/89/Flag_of_Antigua_and_Barbuda.svg/22px-Flag_of_Antigua_and_Barbuda.svg.png",
             "name_ru" => "Антигуа и Барбуда",
-            "name_en" => "Antiguabarbuda",
+            "name_en" => "Аntiguaandbarbuda",
             "iso_two" => "AG",
             "iso_three" => "ATG"
         ];

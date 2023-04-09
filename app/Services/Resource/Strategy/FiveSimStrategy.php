@@ -3,9 +3,12 @@
 namespace App\Services\Resource\Strategy;
 
 use App\Http\Repositories\CountryRepository;
+use App\Http\Repositories\Resource\ResourceCountryRepository;
+use App\Http\Repositories\Resource\ResourceServicesRepository;
 use App\Http\Repositories\ServiceRepository;
 use App\Models\Dto\CountryDto;
 use App\Models\Dto\ServiceDto;
+use App\Models\Resource\ResourceServiceCountry;
 use App\Models\Resource\SmsResource;
 use App\Services\External\FiveSimApi;
 use App\Services\Resource\ResourceInterface;
@@ -26,12 +29,14 @@ class FiveSimStrategy extends MainStrategy implements ResourceInterface
         $countriesRep = new CountryRepository();
 
         $result = [];
-        foreach ($countries as $key => $country){
+        foreach ($countries as $key => $country) {
             $iso = array_key_first($country['iso']);
-            $org_id = $country['text_en'];
+            $iso = strtoupper($iso);
+            $org_id = $key;
             $country = $countriesRep->getCountryByIsoTwo($iso);
             $dto = new CountryDto();
             $dto->setCountry($country);
+            $org_id = preg_replace('/\s+/', '', $org_id);
             $dto->org_id = strtolower($org_id);
             array_push($result, $dto);
         }
@@ -55,14 +60,14 @@ class FiveSimStrategy extends MainStrategy implements ResourceInterface
         // Ненайденные
         $resultNotFind = [];
         foreach ($services as $service) {
-            if(array_key_exists($service['second_key'], $products)) {
+            if (array_key_exists($service['second_key'], $products)) {
                 // Найден
                 $dto = new ServiceDto();
                 $dto->setService($service);
                 $dto->org_id = $service['second_key'];
                 array_push($resultFind, $dto);
             } else {
-                if(in_array($service['second_key'], $this->getConnection())) {
+                if (in_array($service['second_key'], $this->getConnection())) {
                     // Найден
                     $dto = new ServiceDto();
                     $dto->setService($service);
@@ -99,12 +104,64 @@ class FiveSimStrategy extends MainStrategy implements ResourceInterface
         ];
     }
 
-    public function updateServiceCountry(): array
+    public function updateServiceCountry(): void
     {
-        // TODO: Implement updateServiceCountry() method.
+        $fiveSim = new FiveSimApi(config('services.key_activate.key_5sim'));
+        $priceResultServices = $fiveSim->getPrices();
+//        dd($priceResultServices);
+
+        $servicesRep = new ResourceServicesRepository();
+        $countriesRep = new ResourceCountryRepository();
+
+        $errorService = [];
+        $errorCountry = [];
+        foreach ($priceResultServices as $key => $priceServices) {
+//            dd($key);
+
+            //ранее парсили страны, однако некоторые страны, для которых доступна покупка активации, почему то не были
+            // спаршены, проеб 5sim, хз
+            try {
+//                $resourceCountry = $countriesRep->getCountryOrgId($key);
+
+//            dd($priceServices);
+
+                foreach ($priceServices as $org => $priceService) {
+
+                    try {
+                        $priceService = current($priceService);
+
+                        $resourceService = $servicesRep->getServiceOrgId($org);
+
+                        $data = [
+                            'resource_id' => $this->resource->id,
+                            'country_id' => '$resourceCountry->id',
+                            'service_id' => $resourceService->id,
+                            'price' => $priceService['cost'],
+                            'count' => $priceService['count'],
+                        ];
+
+                        $matchThese = [
+                            'resource_id' => $this->resource->id,
+//                            'country_id' => $resourceCountry->id,
+                            'service_id' => $resourceService->id,
+                        ];
+
+                        ResourceServiceCountry::updateOrCreate($matchThese, $data);
+
+                    } catch (\Exception $e) {
+                        array_push($errorService, $org);
+                    }
+
+                }
+            } catch (\Exception $e) {
+                array_push($errorCountry, $key);
+            }
+        }
+        dd($errorService, $errorCountry);
     }
 
-    public function getKey(): string
+    public
+    function getKey(): string
     {
         return '5sim';
     }

@@ -101,12 +101,11 @@ class ResourceService extends MainService
      */
     public function updateResourceServiceCountry()
     {
-//        dd('Hello');
         $resources = $this->resources->getResources();
         foreach ($resources as $resource)
         {
             $strategy = new ResourceStrategy($resource);
-            $servicesDto = $strategy->updateServiceCountry();
+            $strategy->updateServiceCountry();
         }
     }
 }

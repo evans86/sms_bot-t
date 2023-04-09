@@ -2,6 +2,7 @@
 
 namespace App\Http\Repositories\Resource;
 
+use App\Exceptions\NotFoundException;
 use App\Http\Repositories\CoreRepository;
 use App\Models\Resource\ResourceService;
 use Illuminate\Database\Eloquent\Collection;
@@ -24,9 +25,12 @@ class ResourceServicesRepository extends CoreRepository
         return $this->startConditions()::query()->where('resource_id', $resource_id)->get();
     }
 
-    public function getByResourceOrg(int $resource_id, string $org_id): Collection
+    public function getServiceOrgId(string $org_id): ResourceService
     {
-        return $this->startConditions()::query()->where('resource_id', $resource_id)->where('org_id', $org_id)->get();
+        $service = $this->startConditions()::query()->where('org_id', $org_id)->first();
+        if(empty($service))
+            throw new NotFoundException('Service not found');
+        return $service;
     }
 
     public function deleteByResource(int $resource_id): void

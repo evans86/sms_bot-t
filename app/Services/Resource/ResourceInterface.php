@@ -31,7 +31,7 @@ interface ResourceInterface
     /**
      * Перезаписывает или создает значения в таблице ResourceServiceCountries
      */
-    public function updateServiceCountry(): array;
+    public function updateServiceCountry(): void;
 
     /**
      * ключ для апи

@@ -52,7 +52,12 @@ class FiveSimApi
     {
         $result = $this->requestGet("/v1/guest/products/$country/$operator");
         return $result;
+    }
 
+    public function getPrices(): array
+    {
+        $result = $this->requestGet("/v1/guest/prices");
+        return $result;
     }
 
 }
