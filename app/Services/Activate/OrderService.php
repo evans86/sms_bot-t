@@ -53,18 +53,6 @@ class OrderService extends MainService
 
             $country = SmsCountry::query()->where(['org_id' => $country_id])->first();
 
-            $result = [
-                'id' => $id,
-                'phone' => $serviceResult['phoneNumber'],
-                'time' => $dateTime,
-                'status' => $this->getStatus($id, $bot), //4
-                'codes' => null,
-                'country' => $country->org_id,
-                'operator' => $serviceResult['activationOperator'],
-                'service' => $service,
-                'cost' => $pricePercent
-            ];
-
             $data = [
                 'bot_id' => $bot->id,
                 'user_id' => $user_id,
@@ -85,11 +73,28 @@ class OrderService extends MainService
             ];
 
             $order = SmsOrder::create($data);
-            $order->save();
 
             //списание баланса
-            $this->changeBalance($order, $bot, 'subtract-balance', $user_secret_key);
+            try {
+                $change_balance = $this->changeBalance($order, $bot, 'subtract-balance', $user_secret_key);
+            } catch (\Exception $e) {
+                throw new \Exception($e->getMessage());
+            }
 //            $this->createBotOrder($order, $bot, 'order-create', $user_secret_key);
+
+            $order->save();
+
+            $result = [
+                'id' => $id,
+                'phone' => $serviceResult['phoneNumber'],
+                'time' => $dateTime,
+                'status' => $this->getStatus($id, $bot), //4
+                'codes' => null,
+                'country' => $country->org_id,
+                'operator' => $serviceResult['activationOperator'],
+                'service' => $service,
+                'cost' => $pricePercent
+            ];
 
             return $result;
         } catch (\Exception $e) {

@@ -17,7 +17,7 @@ class ResourceTableSeeder extends Seeder
     {
         $data[] = [
             'id' => SmsResource::ACTIVATE_ID,
-            'title' => 'sms-activate',
+            'title' => 'activate',
             'image' => '/img/resource/sms-activate.svg',
             'ref' => ''
         ];
