@@ -8,7 +8,7 @@
                 <th scope="col">Ключи</th>
                 <th scope="col">Bot-t ID</th>
                 <th scope="col">Версия</th>
-                <th scope="col">API ключ</th>
+                <th scope="col">Ресурсы бота</th>
                 <th scope="col">ID категории</th>
                 <th scope="col">Процент</th>
                 <th scope="col">Баланс</th>
@@ -23,7 +23,12 @@
                     <td>Private: {{ $bot->public_key }}<br>Public: {{ $bot->private_key }}</td>
                     <td>{{ $bot->bot_id }}</td>
                     <td>{{ $bot->version }}</td>
-                    <td>{{ $bot->api_key }}</td>
+                    <td>
+                        <form action="{{ route('activate.bot.resource', $bot->id) }}" method="get">
+                            @method('resource')
+                            <input type="submit" class="btn btn-info" value="Ресурсы">
+                        </form>
+                    </td>
                     <td>{{ $bot->category_id }}</td>
                     <td>{{ $bot->percent }} %</td>
                     <td>{{ \App\Helpers\BotHelpers::balance($bot) }} руб.</td>

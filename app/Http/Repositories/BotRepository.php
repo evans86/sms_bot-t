@@ -14,6 +14,14 @@ class BotRepository extends CoreRepository
         return SmsBot::class;
     }
 
+    public function getBot(int $id): SmsBot
+    {
+        $bot = $this->startConditions()::query()->where('id', $id)->first();
+        if(empty($bot))
+            throw new NotFoundException('Bot not found');
+        return $bot;
+    }
+
     public function save(SmsBot $bot): SmsBot
     {
         try {

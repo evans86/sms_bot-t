@@ -23,6 +23,14 @@ class ResourceRepository extends CoreRepository
         return $resource;
     }
 
+    public function getByTitle(string $title): SmsResource
+    {
+        $resource = $this->startConditions()::query()->where('title', $title)->first();
+        if(empty($resource))
+            throw new NotFoundException('Resource not found');
+        return $resource;
+    }
+
     /**
      * @return Collection
      */

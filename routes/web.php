@@ -42,6 +42,7 @@ Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
     Route::get('order', 'OrderController@index')->name('activate.order.index');
 
     Route::get('bot', 'BotController@index')->name('activate.bot.index');
+    Route::get('bot/{id}', 'BotController@resource')->name('activate.bot.resource');
 });
 
 /**

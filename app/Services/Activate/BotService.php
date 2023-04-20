@@ -2,6 +2,7 @@
 
 namespace App\Services\Activate;
 
+use App\Exceptions\NotFoundException;
 use App\Helpers\ApiHelpers;
 use App\Http\Repositories\BotRepository;
 use App\Http\Repositories\Resource\ResourceBotRepository;
@@ -60,13 +61,12 @@ class BotService extends MainService
 
             $bot->version = $request->version;
             $bot->percent = $request->percent;
-            $bot->api_key = $request->api_key;
+//            $bot->api_key = $request->api_key;
             $bot->category_id = $request->category_id;
 
             $bot = $this->botRepository->save($bot);
 
-            //надо передать только api_key и обработать для каждого ресурса из ключей
-            $this->createResourceBot($bot->id, 1, $request->api_key);
+            $this->createResourceBot($bot->id, $request->api_key);
 
             return $bot;
         } catch (\Exception $e) {
@@ -76,23 +76,31 @@ class BotService extends MainService
 
     /**
      * @param int $bot_id
-     * @param int $resource_id
      * @param string $api_key
      * @return void
      * @throws \Exception
      */
-    public function createResourceBot(int $bot_id, int $resource_id, string $api_key)
+    public function createResourceBot(int $bot_id, string $api_key)
     {
         try {
-            $resource_bot = new ResourceBot();
-            $resource_bot->resource_id = $resource_id;
-            $resource_bot->bot_id = $bot_id;
-            $resource_bot->api_key = $api_key;
+            $api_keys = explode(" ", $api_key);
 
-            $this->resourceBotRepository->save($resource_bot);
+            foreach ($api_keys as $api_key) {
+                $title = explode('_', $api_key);
+                $resource = $this->resourceRepository->getByTitle($title[0]);
+
+                $resource_bot = $this->resourceBotRepository->getByBotResource($bot_id, $resource->id);
+
+                if (empty($resource_bot))
+                    $resource_bot = new ResourceBot();
+
+                $resource_bot->bot_id = $bot_id;
+                $resource_bot->resource_id = $resource->id;
+                $resource_bot->api_key = $title[1];
+                $this->resourceBotRepository->save($resource_bot);
+            }
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
-
     }
 }

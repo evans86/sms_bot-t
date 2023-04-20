@@ -24,4 +24,15 @@ class ResourceBotRepository extends CoreRepository
             throw new NotFoundException('Resource Bot not save');
         }
     }
+
+    public function getByBot(int $bot_id): LengthAwarePaginator
+    {
+        return $this->startConditions()::query()->where('bot_id', $bot_id)->paginate(20);
+    }
+
+    public function getByBotResource(int $bot_id, string $resource_id): ?ResourceBot
+    {
+        return $this->startConditions()::query()->where('bot_id', $bot_id)
+            ->where('resource_id', $resource_id)->first();
+    }
 }
