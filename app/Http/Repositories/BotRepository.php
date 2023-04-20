@@ -37,7 +37,7 @@ class BotRepository extends CoreRepository
         $bot = $this->startConditions()::query()->where('public_key', $public_key)
             ->where('private_key', $private_key)->first();
         if(empty($bot))
-            throw new NotFoundException('Bot not found');
+            throw new NotFoundException('Not found module.');
         return $bot;
     }
 }

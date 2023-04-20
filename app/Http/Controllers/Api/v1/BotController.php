@@ -4,21 +4,29 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Helpers\ApiHelpers;
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\BotRepository;
 use App\Http\Requests\Bot\BotCreateRequest;
 use App\Http\Requests\Bot\BotGetRequest;
 use App\Http\Requests\Bot\BotUpdateRequest;
 use App\Models\Bot\SmsBot;
-use App\Models\Resource\ResourceBot;
 use App\Services\Activate\BotService;
 use Illuminate\Http\Request;
 
 class BotController extends Controller
 {
+    /**
+     * @var BotService
+     */
     private BotService $botService;
+    /**
+     * @var BotRepository
+     */
+    private BotRepository $botRepository;
 
     public function __construct()
     {
         $this->botService = new BotService();
+        $this->botRepository = new BotRepository();
     }
 
     /**
@@ -56,11 +64,7 @@ class BotController extends Controller
     public function get(BotGetRequest $request)
     {
         try {
-            $bot = SmsBot::query()->
-            where('public_key', $request->public_key)->
-            where('private_key', $request->private_key)->first();
-            if (empty($bot))
-                return ApiHelpers::error('Not found module.');
+            $bot = $this->botRepository->getByKeys($request->public_key, $request->private_key);
             return ApiHelpers::success($bot->toArray());
         } catch (\Exception $e) {
             return ApiHelpers::error($e->getMessage());
@@ -92,9 +96,7 @@ class BotController extends Controller
     public function delete(Request $request)
     {
         try {
-            $bot = SmsBot::query()->where('public_key', $request->public_key)->where('private_key', $request->private_key)->first();
-            if (empty($bot))
-                return ApiHelpers::error('Not found module.');
+            $bot = $this->botRepository->getByKeys($request->public_key, $request->private_key);
             $bot->delete();
             if (empty($bot))
                 return ApiHelpers::success('OK');
