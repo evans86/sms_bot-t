@@ -9,11 +9,18 @@ use Illuminate\Database\Eloquent\Collection;
 
 class BotRepository extends CoreRepository
 {
+    /**
+     * @return string
+     */
     public function getModelClass(): string
     {
         return SmsBot::class;
     }
 
+    /**
+     * @param int $id
+     * @return SmsBot
+     */
     public function getBot(int $id): SmsBot
     {
         $bot = $this->startConditions()::query()->where('id', $id)->first();
@@ -22,6 +29,10 @@ class BotRepository extends CoreRepository
         return $bot;
     }
 
+    /**
+     * @param SmsBot $bot
+     * @return SmsBot
+     */
     public function save(SmsBot $bot): SmsBot
     {
         try {
@@ -32,6 +43,11 @@ class BotRepository extends CoreRepository
         }
     }
 
+    /**
+     * @param string $public_key
+     * @param string $private_key
+     * @return SmsBot
+     */
     public function getByKeys(string $public_key, string $private_key): SmsBot
     {
         $bot = $this->startConditions()::query()->where('public_key', $public_key)

@@ -39,8 +39,10 @@ Route::group(['namespace' => 'Activate', 'prefix' => 'activate'], function () {
     Route::resource('product', ProductController::class)
         ->only(['index', 'edit', 'update', 'destroy'])->names('activate.service');
 
+    //Заказы
     Route::get('order', 'OrderController@index')->name('activate.order.index');
 
+    //Боты
     Route::get('bot', 'BotController@index')->name('activate.bot.index');
     Route::get('bot/{id}', 'BotController@resource')->name('activate.bot.resource');
 });

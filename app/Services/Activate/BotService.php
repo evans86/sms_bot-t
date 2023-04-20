@@ -15,8 +15,17 @@ use App\Services\MainService;
 
 class BotService extends MainService
 {
+    /**
+     * @var BotRepository
+     */
     private BotRepository $botRepository;
+    /**
+     * @var ResourceBotRepository
+     */
     private ResourceBotRepository $resourceBotRepository;
+    /**
+     * @var ResourceRepository
+     */
     private ResourceRepository $resourceRepository;
 
     public function __construct()

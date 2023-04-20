@@ -8,11 +8,18 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ProductRepository extends CoreRepository
 {
+    /**
+     * @return string
+     */
     public function getModelClass(): string
     {
         return SmsService::class;
     }
 
+    /**
+     * @param int $id
+     * @return SmsService
+     */
     public function getService(int $id): SmsService
     {
         $service = $this->startConditions()::query()->where('id', $id)->first();

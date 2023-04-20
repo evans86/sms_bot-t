@@ -10,8 +10,13 @@ use App\Services\Activate\ProductService;
 
 class ProductController extends BaseController
 {
+    /**
+     * @var ProductService
+     */
     private ProductService $productService;
-
+    /**
+     * @var ProductRepository|ProductRepository&\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Foundation\Application|mixed
+     */
     private ProductRepository $productRepository;
 
     public function __construct()

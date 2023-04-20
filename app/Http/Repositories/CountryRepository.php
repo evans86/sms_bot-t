@@ -8,11 +8,18 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CountryRepository extends CoreRepository
 {
+    /**
+     * @return string
+     */
     public function getModelClass(): string
     {
         return SmsCountry::class;
     }
 
+    /**
+     * @param int $id
+     * @return SmsCountry
+     */
     public function getCountry(int $id): SmsCountry
     {
         $country = $this->startConditions()::query()->where('id', $id)->first();

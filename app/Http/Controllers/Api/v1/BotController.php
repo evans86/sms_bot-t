@@ -8,7 +8,6 @@ use App\Http\Repositories\BotRepository;
 use App\Http\Requests\Bot\BotCreateRequest;
 use App\Http\Requests\Bot\BotGetRequest;
 use App\Http\Requests\Bot\BotUpdateRequest;
-use App\Models\Bot\SmsBot;
 use App\Services\Activate\BotService;
 use Illuminate\Http\Request;
 

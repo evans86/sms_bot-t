@@ -9,11 +9,18 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ServiceRepository extends CoreRepository
 {
+    /**
+     * @return string
+     */
     public function getModelClass(): string
     {
         return SmsService::class;
     }
 
+    /**
+     * @param int $id
+     * @return SmsService
+     */
     public function get(int $id): SmsService
     {
         $service = $this->startConditions()::query()->where('id', $id)->first();
@@ -22,6 +29,9 @@ class ServiceRepository extends CoreRepository
         return $service;
     }
 
+    /**
+     * @return Collection
+     */
     public function getAll(): Collection
     {
         return $this->startConditions()::all();

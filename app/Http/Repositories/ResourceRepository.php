@@ -10,11 +10,18 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ResourceRepository extends CoreRepository
 {
+    /**
+     * @return string
+     */
     public function getModelClass(): string
     {
         return SmsResource::class;
     }
 
+    /**
+     * @param int $id
+     * @return SmsResource
+     */
     public function getResource(int $id): SmsResource
     {
         $resource = $this->startConditions()::query()->where('id', $id)->first();
@@ -23,6 +30,10 @@ class ResourceRepository extends CoreRepository
         return $resource;
     }
 
+    /**
+     * @param string $title
+     * @return SmsResource
+     */
     public function getByTitle(string $title): SmsResource
     {
         $resource = $this->startConditions()::query()->where('title', $title)->first();

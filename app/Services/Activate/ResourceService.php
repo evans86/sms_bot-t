@@ -13,8 +13,17 @@ use App\Services\Resource\ResourceStrategy;
 
 class ResourceService extends MainService
 {
+    /**
+     * @var ResourceRepository
+     */
     private ResourceRepository $resources;
+    /**
+     * @var ResourceCountryRepository
+     */
     private ResourceCountryRepository $resourceCountries;
+    /**
+     * @var ResourceServicesRepository
+     */
     private ResourceServicesRepository $resourceServices;
 
     public function __construct()
