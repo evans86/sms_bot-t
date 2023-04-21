@@ -3,7 +3,6 @@
 namespace App\Http\Resources\api;
 
 use App\Models\Activate\SmsCountry;
-use App\Models\Activate\SmsOperator;
 use App\Models\User\SmsUser;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -13,7 +12,7 @@ class CountryResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param \Illuminate\Http\Request $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @return array|\Illuminate\Contracts\Support\Arrayable
      */
     public function toArray($request)
     {

@@ -5,7 +5,6 @@ namespace App\Http\Repositories\Resource;
 use App\Exceptions\NotFoundException;
 use App\Http\Repositories\CoreRepository;
 use App\Models\Resource\ResourceBot;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ResourceBotRepository extends CoreRepository

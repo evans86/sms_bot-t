@@ -3,9 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Exceptions\NotFoundException;
-use App\Helpers\ApiHelpers;
 use App\Models\Bot\SmsBot;
-use Illuminate\Database\Eloquent\Collection;
 
 class BotRepository extends CoreRepository
 {

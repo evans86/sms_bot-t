@@ -3,7 +3,6 @@
 namespace App\Http\Resources\api;
 
 use App\Models\Activate\SmsCountry;
-use App\Models\Activate\SmsOperator;
 use App\Models\User\SmsUser;
 
 class UserResource
@@ -17,7 +16,7 @@ class UserResource
     {
         return [
             'id' => (integer)$user->telegram_id,
-            'country' => $country->org_id,
+            'country' => $country->id,
             'language' => $user->language,
             'service' => $user->service
         ];

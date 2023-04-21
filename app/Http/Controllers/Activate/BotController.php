@@ -6,8 +6,6 @@ use App\Exceptions\NotFoundException;
 use App\Http\Repositories\BotRepository;
 use App\Http\Repositories\Resource\ResourceBotRepository;
 use App\Models\Bot\SmsBot;
-use App\Models\Resource\ResourceBot;
-use App\Services\Activate\UserService;
 
 class BotController extends BaseController
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Bot;
+namespace App\Http\Requests\User;
 
 use App\Helpers\ApiHelpers;
 use Illuminate\Foundation\Http\FormRequest;
 use \Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class BotCreateRequest extends FormRequest
+class UserGetRequest extends FormRequest
 {
     /**
      * @return string[]
@@ -15,9 +15,7 @@ class BotCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'bot_id' => 'required|integer|unique:bot',
-            'public_key' => 'required|string|unique:bot',
-            'private_key' => 'required|string|unique:bot',
+            'user_id' => 'required'
         ];
     }
 
@@ -33,5 +31,4 @@ class BotCreateRequest extends FormRequest
             ->errorBag($this->errorBag)
             ->redirectTo($this->getRedirectUrl());
     }
-
 }

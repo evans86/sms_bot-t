@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Exceptions\NotFoundException;
 use App\Helpers\ApiHelpers;
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\CountryRepository;
+use App\Http\Requests\User\UserGetRequest;
+use App\Http\Requests\User\UserLanguageRequest;
 use App\Http\Resources\api\UserResource;
-use App\Models\Activate\SmsCountry;
-use App\Models\User\SmsUser;
 use App\Services\Activate\UserService;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -16,10 +17,15 @@ class UserController extends Controller
      * @var UserService
      */
     private UserService $userService;
+    /**
+     * @var CountryRepository
+     */
+    private CountryRepository $countryRepository;
 
     public function __construct()
     {
         $this->userService = new UserService();
+        $this->countryRepository = new CountryRepository();
     }
 
     /**
@@ -35,32 +41,25 @@ class UserController extends Controller
     }
 
     /**
-     * Полусение значений пользователя
+     * Получение значений пользователя
      *
      * Request[
      *  'user_id'
      * ]
      *
-     * @param Request $request
+     * @param UserGetRequest $request
      * @return array|string
      */
-    public function getUser(Request $request)
+    public function getUser(UserGetRequest $request)
     {
-        if (is_null($request->user_id))
-            return ApiHelpers::error('Not found params: user_id');
-        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
-        if (is_null($user)) {
-            $user = new SmsUser();
-            $country = SmsCountry::query()->first();
-            $user->telegram_id = $request->user_id;
-            $user->country_id = $country->id;
-            $user->language = SmsUser::LANGUAGE_RU;
-            $user->service = null;
-            $user->save();
-        } else {
-            $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
+        try {
+            $user = $this->userService->getUser($request);
+            $country = $this->countryRepository->getCountry($user->country_id);
+
+            return ApiHelpers::success(UserResource::generateUserArray($user, $country));
+        } catch (\Exception $e) {
+            return ApiHelpers::error($e->getMessage());
         }
-        return ApiHelpers::success(UserResource::generateUserArray($user, $country));
     }
 
     /**
@@ -71,23 +70,20 @@ class UserController extends Controller
      *  'language'
      * ]
      *
-     * @param Request $request
+     * @param UserLanguageRequest $request
      * @return array|string
      */
-    public function setLanguage(Request $request)
+    public function setLanguage(UserLanguageRequest $request)
     {
-        if (is_null($request->user_id))
-            return ApiHelpers::error('Not found params: user_id');
-        if (is_null($request->language))
-            return ApiHelpers::error('Not found params: language');
-        $user = SmsUser::query()->where(['telegram_id' => $request->user_id])->first();
-        if (is_null($user))
-            return ApiHelpers::error('Not found: user');
-        if ($request->language != 'ru' && $request->language != 'eng')
-            return ApiHelpers::error('Not found: language');
-        $user->language = $request->language;
-        $user->save();
-        $country = SmsCountry::query()->where(['id' => $user->country_id])->first();
-        return ApiHelpers::success(UserResource::generateUserArray($user, $country));
+        try {
+            if ($request->language != 'ru' && $request->language != 'eng')
+                throw new NotFoundException('Not found: language');
+            $user = $this->userService->setLanguage($request);
+            $country = $this->countryRepository->getCountry($user->country_id);
+
+            return ApiHelpers::success(UserResource::generateUserArray($user, $country));
+        } catch (\Exception $e) {
+            return ApiHelpers::error($e->getMessage());
+        }
     }
 }

@@ -2,8 +2,6 @@
 
 namespace App\Services\Activate;
 
-use App\Exceptions\NotFoundException;
-use App\Helpers\ApiHelpers;
 use App\Http\Repositories\BotRepository;
 use App\Http\Repositories\Resource\ResourceBotRepository;
 use App\Http\Repositories\ResourceRepository;

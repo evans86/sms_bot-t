@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\Repositories;
-
 
 use App\Exceptions\NotFoundException;
 use App\Models\Resource\SmsResource;

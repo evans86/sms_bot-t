@@ -10,9 +10,6 @@ use App\Http\Repositories\ResourceRepository;
 use App\Http\Requests\Resource\ResourceUpdateRequest;
 use App\Models\Resource\SmsResource;
 use App\Services\Activate\ResourceService;
-use App\Services\External\FiveSimApi;
-use App\Services\Resource\ResourceStrategy;
-use Illuminate\Http\Request;
 
 class ResourceController extends BaseController
 {
