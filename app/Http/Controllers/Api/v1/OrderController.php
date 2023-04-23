@@ -134,6 +134,7 @@ class OrderController extends Controller
      * Request[
      *  'user_id'
      *  'order_id'
+     *  'user_secret_key'
      *  'public_key'
      * ]
      *
