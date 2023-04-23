@@ -5,9 +5,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ url('css/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css' )}}">
     <link rel="stylesheet" href="{{ asset('css/flag-icon.css' )}}"/>
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <title>Activate</title>
 </head>
 <body class="d-flex flex-column min-vh-100" style="background-image: url('{{ asset('img/bg.svg')}}');">
@@ -15,7 +19,7 @@
     <div class="row">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ route('welcome') }}">Главная</a>
+                <a class="navbar-brand" href="{{ route('home') }}">Главная</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                         aria-label="Переключатель навигации">
@@ -23,6 +27,36 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
+                        @guest
+                            @if (Route::has('login'))
+
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+
+                            @endif
+
+                            @if (Route::has('register'))
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
                         <a class="nav-link" href="{{ route('activate.resource.index') }}">Ресурсы</a>
                         <a class="nav-link" href="{{ route('activate.country.index') }}">Cтраны</a>
                         <a class="nav-link" href="{{ route('activate.service.index') }}">Сервисы</a>
@@ -30,7 +64,7 @@
                         <a class="nav-link" href="{{ route('activate.order.index') }}">Заказы</a>
                         <a class="nav-link" href="{{ route('activate.bot.index') }}">Боты</a>
                     </div>
-                </div>
+
             </div>
         </nav>
     </div>
