@@ -75,11 +75,15 @@ class OrderService extends MainService
             $order = SmsOrder::create($data);
 
             //списание баланса
-            try {
-                $change_balance = $this->changeBalance($order, $bot, 'subtract-balance', $user_secret_key);
-            } catch (\Exception $e) {
-                throw new \Exception($e->getMessage());
+
+            $change_balance = $this->changeBalance($order, $bot, 'subtract-balance', $user_secret_key);
+
+            if ($change_balance['result'] == false){
+                $this->setStatus($order, 8, $bot);
+                throw new \Exception($change_balance['message']);
             }
+
+
 //            $this->createBotOrder($order, $bot, 'order-create', $user_secret_key);
 
             $order->save();
@@ -300,6 +304,9 @@ class OrderService extends MainService
             'form_params' => $requestParam,
         ]);
 
-        return $response->getBody();
+        $result = $response->getBody()->getContents();
+        $result = json_decode($result, true);
+
+        return $result;
     }
 }
