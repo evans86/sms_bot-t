@@ -78,7 +78,7 @@ class OrderService extends MainService
 
             $change_balance = $this->changeBalance($order, $bot, 'subtract-balance', $user_secret_key);
 
-            if ($change_balance['result'] == false){
+            if ($change_balance['result'] == false) {
                 $this->setStatus($order, 8, $bot);
                 throw new \Exception($change_balance['message']);
             }
@@ -146,6 +146,8 @@ class OrderService extends MainService
         $smsActivate = new SmsActivateApi($bot->api_key);
 
         $serviceResults = $smsActivate->getActiveActivations();
+
+
 
         if ($order->status == 6) {
             $order->status = 6;
