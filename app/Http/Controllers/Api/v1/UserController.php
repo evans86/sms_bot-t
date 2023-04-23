@@ -78,6 +78,8 @@ class UserController extends Controller
         try {
             if ($request->language != 'ru' && $request->language != 'eng')
                 throw new NotFoundException('Not found: language');
+            if(is_null($request->user_secret_key))
+                return ApiHelpers::error('Not found params: user_secret_key');
             $user = $this->userService->setLanguage($request);
             $country = $this->countryRepository->getCountry($user->country_id);
 
